@@ -1,0 +1,534 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage[numbers]{natbib}
+\usepackage[english]{babel}
+\usepackage[X2,T1]{fontenc}
+\usepackage{libertine}
+\usepackage{libertinust1math}
+\usepackage[utf8]{inputenc} %'utf8' instead of 'latin1'
+% \usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+\usepackage{stmaryrd}
+\usepackage{appendix}
+\usepackage{mathtools}
+\usepackage{cleveref}
+\usepackage{quiver}
+
+\tikzcdset{pullback/.style = {"\lrcorner"{anchor = center, pos = 0.125}, draw = none}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{observation}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Open Question}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{qquestion}[theorem]{Question}
+\newtheorem*{axiom}{Axiom}
+\newtheorem{construction}{Construction}
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\T}{\mbb T}
+\newcommand{\I}{\mbb I}
+\newcommand{\hy}{\uv{\Sigma}}
+\newcommand{\gn}[1]{\ulcorner\! #1 \!\urcorner}
+\newcommand{\mr}[1]{\mathrm{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\ms}[1]{\mathsf{#1}}
+\newcommand{\Ind}{\mathbf{Ind}}
+\newcommand{\Pro}{\mathbf{Pro}}
+\newcommand{\Set}{\mb{Set}}
+\newcommand{\Prop}{\mb{Prop}}
+\newcommand{\sSet}{\mb{sSet}}
+\newcommand{\sSeto}{\mb{sSet}_{\le 1}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Fin}{\mb{Fin}}
+\newcommand{\Cnt}{\mb{Cnt}}
+\newcommand{\Enm}{\mb{Enm}}
+\newcommand{\Grp}{\mb{Grp}}
+\newcommand{\sub}{\mr{Sub}}
+\newcommand{\Lex}{\mb{Lex}}
+\newcommand{\Pos}{\mb{Pos}}
+\newcommand{\Kp}{\mb{Kp}}
+\newcommand{\IKp}{\mb{IKp}}
+\newcommand{\Ep}{\mb{Ep}}
+\newcommand{\Kpp}{\Kp_{*}}
+\newcommand{\alg}{\text{-}\mb{Alg}}
+\newcommand{\Var}{\mb{Var}}
+\newcommand{\Aff}{\mb{Aff}}
+\newcommand{\Vect}{\mb{Vect}}
+\newcommand{\CRing}{\mb{CRing}}
+\newcommand{\DL}{\mb{DL}}
+\newcommand{\BA}{\mb{BA}}
+\newcommand{\HA}{\mb{HA}}
+\newcommand{\JL}{\mb{JL}}
+\newcommand{\ML}{\mb{ML}}
+\newcommand{\ProMon}{\mb{ProMod}}
+\newcommand{\CTopoi}{\mb{CTopoi}}
+\newcommand{\PTc}{\mb{PT}_c}
+\newcommand{\Topoi}{\mb{Topoi}}
+\newcommand{\sh}{\mb{Sh}}
+\newcommand{\psh}{\mb{Psh}}
+\newcommand{\Cont}{\mb{Cont}}
+\newcommand{\Cart}[1]{#1^\to_{\text{cart}}}
+\newcommand{\Str}{\mb{Str}}
+\newcommand{\op}{^{\mathrm{op}}}
+\newcommand{\inv}{^{\mathrm{-1}}}
+\newcommand{\pf}[1]{\widehat{#1}}
+\newcommand{\qsi}[1]{\widetilde{#1}}
+\newcommand{\cob}{\vartriangleleft}
+\newcommand{\other}{\mathrm{otherwise}}
+\newcommand{\geo}[1]{\left|#1\right|}
+\newcommand{\ov}[1]{\overline{#1}}
+\newcommand{\set}[1]{\{\,#1\,\}}
+\newcommand{\eff}{\Leftrightarrow}
+\newcommand{\conjt}{\;\&\;}
+\newcommand{\pair}[1]{\left\langle#1\right\rangle}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\ev}{\mathrm{ev}}
+\newcommand{\elem}{\int\!\!}
+\newcommand{\nt}{\Rightarrow}
+\newcommand{\scomp}[2]{\{\,#1\mid#2\,\}}
+\newcommand{\yon}{\mathtt{y}}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\inj}{\rightarrowtail}
+\newcommand{\hook}{\hookrightarrow}
+\newcommand{\cg}{\operatorname{\sim}}
+\newcommand{\im}{\operatorname{img}}
+\newcommand{\cgf}[2]{\leftindex_{#1}{\cg}_{#2}}
+\newcommand{\coten}{\pitchfork}
+\newcommand{\ppr}{\operatorname{\hat\times}}
+\newcommand{\rl}{^{\perp}}
+\newcommand{\llo}[1]{\leftindex_{}^{\perp} {#1}}
+\newcommand{\dl}{^{\circ}}
+\newcommand{\prth}[1]{\left(#1\right)}
+\newcommand{\fn}{_{\mr{f.}}}
+\newcommand{\lf}{_{\mr{l.f.}}}
+\newcommand{\fp}{_{\mr{f.p.}}}
+\newcommand{\fpp}{_{\mr{f.p.,+}}}
+\newcommand{\cp}{_{\mr{c.p.}}}
+\newcommand{\cpp}{_{\mr{c.p.,+}}}
+\newcommand{\can}{_{\mr{can}}}
+\newcommand{\pls}{^+}
+\newcommand{\mns}{^-}
+\newcommand{\dv}{\operatorname{\uparrow}}
+\newcommand{\cv}{\operatorname{\downarrow}}
+\newcommand{\et}{_{\text{\'et}}}
+\newcommand{\rg}[1]{\mc O_{#1}}
+\newcommand{\res}[1]{|_{#1}}
+\newcommand{\N}{\mb N}
+\newcommand{\Q}{\mbb Q}
+\newcommand{\Z}{\mbb Z}
+\newcommand{\Deltao}{\Delta_{\le 1}}
+\newcommand{\Deltaw}{\Delta_{\omega}}
+\newcommand{\sk}{\ms{sk}}
+\newcommand{\csk}{\ms{csk}}
+\newcommand{\sInt}{\mb{sInt}}
+\newcommand{\jcan}{J_{\mr{can}}}
+\newcommand{\wCPO}{\omega\mb{CPO}}
+\newcommand{\shape}{\operatorname{\smallint}}
+\newcommand{\dneg}{\neg\neg}
+\newcommand{\prt}{_{\bot}}
+\newcommand{\cprt}{_{\top}}
+\newcommand{\fa}[2]{\forall #1\in #2.\ }
+\newcommand{\ex}[2]{\exists #1\in #2.\ }
+\newcommand{\exu}[2]{\exists_! #1\!\colon\!\!#2.\ }
+\newcommand{\ld}[2]{\lambda #1\!\colon\!\!#2.\ }
+\newcommand{\subopen}{\subseteq_{\mbb \I}}
+\newcommand{\emp}{\emptyset}
+\newcommand{\eq}{\leftrightarrow}
+\newcommand{\ass}[1]{\llbracket#1\rrbracket} %\usepackage{stmaryrd}
+\newcommand{\pss}[1]{||#1||} %\usepackage{stmaryrd}
+\newcommand{\pt}{\ms{pt}}
+\newcommand{\tp}{\ms{Type}}
+\newcommand{\pp}{\ms{Prop}}
+\newcommand{\st}{\ms{Set}}
+\newcommand{\cnt}{\ms{Cnt}}
+\newcommand{\gp}{\ms{Grpd}}
+\newcommand{\pcat}{\ms{PCat}}
+\newcommand{\cat}{\ms{Cat}}
+\newcommand{\pcatt}{\ms{PCAT}}
+\newcommand{\catt}{\ms{CAT}}
+\newcommand{\PCat}{\mb{PCat}}
+\newcommand{\Cat}{\mb{Cat}}
+\newcommand{\sFrm}{\sigma\mb{Frm}}
+\newcommand{\Frm}{\mb{Frm}}
+\newcommand{\Loc}{\mb{Loc}}
+\newcommand{\PCAT}{\mb{PCAT}}
+\newcommand{\CAT}{\mb{CAT}}
+\newcommand{\Catt}{\mf{Cat}}
+\newcommand{\CATT}{\mf{CAT}}
+\newcommand{\Topp}{\mb{Top}}
+\newcommand{\Top}{\mf{Top}}
+\newcommand{\wTop}{\omega\mb{Top}}
+\newcommand{\Tp}{\ms{TYPE}}
+\newcommand{\Pp}{\ms{PROP}}
+\newcommand{\St}{\ms{SET}}
+\newcommand{\Gp}{\ms{GRPD}}
+\newcommand{\fst}{\ms{Fin}}
+\newcommand{\Mod}{\mb{Mod}}
+\newcommand{\Quot}{\mr{Quot}}
+\newcommand{\Fil}{\mr{Fil}}
+\newcommand{\SFil}{\mr{SFil}}
+\newcommand{\quot}[1]{/_{\pair{#1}}}
+\newcommand{\List}{\ms{List}}
+\newcommand{\hp}{\text{-}}
+\newcommand{\PG}{\ms{PG}}
+\newcommand{\uv}[1]{\underline{#1}}
+\newcommand{\mmod}[1]{#1\text{-}\mathbf{Mod}}
+\newcommand{\func}{\mb{Func}}
+\newcommand{\tm}[1]{#1\text{-}\mathrm{Term}}
+\newcommand{\eqn}[1]{#1\text{-}\mathrm{Eqn}}
+\newcommand{\horn}[1]{#1\text{-}\mathrm{Horn}}
+\newcommand{\gr}[2]{[#1|#2]}
+\newcommand{\VT}{\mbb V_\T}
+\newcommand{\spec}{\operatorname{Spec}}
+\newcommand{\El}{\mr{El}}
+\newcommand{\lan}{\ms{lan}}
+\newcommand{\ran}{\ms{ran}}
+\newcommand{\upp}{_{\ms U}}
+\newcommand{\dsg}[1]{\!\pair{#1}}
+\newcommand{\subN}{\sub_{\N}}
+\newcommand{\pw}{\mbb P_\omega}
+\newcommand{\um}{\mbb w}
+\newcommand{\prev}{\triangleleft}
+\newcommand{\latt}{\triangleright}
+
+\DeclareFontFamily{U}{dmjhira}{}
+\DeclareFontShape{U}{dmjhira}{m}{n}{ <-> dmjhira }{}
+\DeclareRobustCommand{\yon}{\text{\usefont{U}{dmjhira}{m}{n}\symbol{"48}}}
+\DeclareRobustCommand{\noy}{\text{\reflectbox{\yon}}\!}
+
+
+\makeatletter
+\newcommand{\ct@}[2]{%
+  \vtop{\m@th\ialign{##\cr
+    \hfil$#1\operator@font lim$\hfil\cr
+    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
+}
+\newcommand{\ct}{%
+  \mathop{\mathpalette\ct@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+\makeatletter
+\newcommand{\lt@}[2]{%
+  \vtop{\m@th\ialign{##\cr
+    \hfil$#1\operator@font lim$\hfil\cr
+    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
+}
+\newcommand{\lt}{%
+  \mathop{\mathpalette\lt@{\leftarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+\title{Synthetic guarded domain theory and classifying topoi}
+\author{Lingyuan Ye}
+\address{
+Lingyuan \textsc{Ye} \newline
+Department of Computer Science and Technology\newline
+University of Cambridge\newline
+Cambridge, UK\newline
+\href{mailto:ye.lingyuan.ac@gmail.com}{\sf ye.lingyuan.ac@gmail.com}
+}
+
+\begin{document}
+%
+
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+
+%
+% \Endhorrunning{L. Ye}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+% \institute{New College\\
+% \begin{abstract}
+
+% \end{abstract}
+%
+\maketitle              % typeset the header of the contribution
+%
+
+\section{Introduction}
+
+This is an internal analysis on synthetic guarded domain theory~\cite{birkedal2012first}.
+
+\section{The theory of sequential propositions}
+
+Let $\ov\omega$ be the poset of extended natural numbers $\N \cup \set{\infty}$. As a poset it is a meet-semi-lattice, thus corresponds to an essentially algebraic theory, which we call $\mbb P$. Since it is a lattice, it is also localic, and can be presented as a theory with infinitely many propositional letters $p_0,p_1,\cdots$, with infinitely many sequents as axioms
+\[ p_0 \vdash p_1 \vdash p_2 \vdash \cdots \]
+We also consider a geometric quotient $\pw$ of $\mbb P$, which is obtained by adding an additional geometric sequent
+\[ \top \vdash \bigvee_{n:\N}p_n. \]
+
+The classifying topos $\Set[\mbb P]$ is given by the presheaf category
+\[ \Set[\mbb P] \simeq \psh(\ov\omega). \]
+Inside, the universal model $\um$ is given by the sequence of representables,
+\[ \um := \yon_0 \hook \yon_1 \hook \cdots \]
+The classifying topos for $\pw$ is again of presheaf type, given by
+\[ \Set[\pw] \simeq \psh(\omega). \]
+As a subtopos $\psh(\omega) \hook \psh(\ov\omega)$, since $\bigvee_{n:\N}n = \infty$ is a universal effective colimit in $\ov\omega$, all representables are still sheaves in $\psh(\omega)$. Thus, the universal model $\um$ is again the generic model in $\psh(\omega)$. Below we will mainly work with the sheaf subtopos $\psh(\omega)$, and we will denote it as $\mc S$.
+
+\begin{proposition}\label{endoposet}
+  Let $\ov\omega\prt$ be the poset $\ov\omega$ with a bottom element added, and $\mb{Inf}(\omega,\ov\omega\prt)$ denote the poset of unbounded monotone functions from $\omega$ to $\ov\omega\prt$. Then we have
+  \[ \Topoi(\mc S,\mc S) \simeq \mmod{\pw}(\mc S) \simeq \mb{Inf}(\omega,\omega\prt). \]
+\end{proposition}
+\begin{proof}
+  The first equivalence is due to the universal property of the classifying topos. We note that a model of $\pw$ in $\mc S$ is a sequence of increasing propositions whose union is $1$. Furthermore, we know that in $\mc S$ we have $\sub(1) \cong \ov\omega\prt$, since a proposition can either be $\yon_k$ for some $k$, or $0,1$. This explains the second equivalence.
+\end{proof}
+
+We can describe the correspondence more concretely: For any $\mf F \in \mmod{\pw}(\mc S)$, it is a sequence of propositions in $\mc S$
+\[ \mf F_0 \hook \mf F_1 \hook \cdots \]
+such that $\bigvee_{n:\N}\mf F_n = 1$. It induces a geometric morphism
+\[\begin{tikzcd}
+  {\psh(\omega)} & {\psh(\omega)}
+  \arrow[""{name=0, anchor=center, inner sep=0}, "\prev", curve={height=-12pt}, from=1-1, to=1-2]
+  \arrow[""{name=1, anchor=center, inner sep=0}, "\latt", curve={height=-12pt}, from=1-2, to=1-1]
+  \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+\end{tikzcd}\]
+The right adjoint is easy to define, which is given by
+\[ \latt X(k) \cong \mc S(\mf F_k,X) \cong X(f(k)), \]
+where here we view $f : \omega \to \ov\omega\prt$ as $\mf F$ under the equivalence in \Cref{endoposet}, and we define the value of $X$ on $\bot,\infty$ to be
+\[ X(\bot) := 1, \quad X(\infty) := \lt_{n:\N}X(n). \]
+
+The left adjoint $\prev$ is a left Kan extension,
+\[ \prev X \cong \ct_{x\in X(n)}\mf F_n. \]
+However, we also have a more concrete description of $\prev$: For any $k\in\N$, we define
+\[ k^p := \min\scomp{n:\N}{k \le f(n)}. \]
+This is well-defined exactly because $\bigvee_{n:\N}\mf F_n = 1$. 
+
+\begin{lemma}\label{prevpointwise}
+  For any presheaf $X \in\mc S$,
+  \[ \prev X(k) \cong X(k^p). \]
+\end{lemma}
+\begin{proof}
+  By construction, since colimits in $\mc S$ are computed pointwise,
+  \[ \prev X(k) \cong \ct_{x\in X(n)}\mc S(\yon_k,\mf F_n). \]
+  Notice that $\mc S(\yon_k,\mf F_n) \cong 1$ when $k \le f(n)$, and is empty otherwise. This makes $X(k^p)$ terminal in the above colimit.
+\end{proof}
+
+\begin{example}
+  The universal model $\um$ induces the identity on $\mc S$.
+\end{example}
+
+\begin{example}
+  Consider the model $\um[-1]$ defined by 
+  \[ \um[-1] := 0 \hook \yon_0 \hook \yon_1 \hook \cdots \]
+  The adjoint pair $\prev \dashv \latt$ induced by $\um[-1]$ is the usual modalities used in synthetic guarded domain theory~\cite{birkedal2012first}.
+\end{example}
+
+\section{Guarded recursion externally}
+
+\begin{definition}
+  We say a model $\mf F$ is \emph{subgeneric} if $\mf F \le \um$.
+\end{definition}
+
+Under the equivalence in \Cref{endoposet}, a subgeneric model $\mf F$ induces the following natural transformations,
+\[ \sigma : \prev \nt \id, \quad \eta : \id \nt \latt. \]
+Using $\eta$, we can in fact turn $\latt$ into an $\mc S$-indexed functor:
+
+\begin{proposition}
+  Let $\latt_X : \mc S/X \to \mc S/X$ sends $f : Y \to X$ to the following pullback,
+  \[ 
+  \begin{tikzcd}
+    \latt_XY \ar[d, "\latt_Xf"'] \ar[dr, pullback] \ar[r] & \latt Y \ar[d, "\latt f"] \\ 
+    X \ar[r, "\eta"'] & \latt X 
+  \end{tikzcd}
+  \]
+  This gives a well-defined $\mc S$-indexed functor.
+\end{proposition}
+\begin{proof}
+  See~\cite{birkedal2012first}.
+\end{proof}
+
+\begin{definition}
+  We say a model $\mf F$ is \emph{inductive}, if $f(n) < n$ for all $n \in \omega$.
+\end{definition}
+
+\begin{theorem}
+  For any inductive model $\mf F$, L\"ob's induction holds in $\mc S$, 
+  \[ \fa\varphi\Omega (\latt\varphi \to \varphi) \to \varphi. \]
+\end{theorem}
+\begin{proof}
+  Using the Kripke-Joyal semantics, suppose we have $\varphi \in \Omega(n)$ such that
+  \[ n \models \latt\varphi \to \varphi. \]
+  Now we have 
+  \[ n \models \varphi \eff n \models \latt\varphi \eff f(n) \models \varphi \eff f(f(n)) \models \varphi \cdots \eff \bot \models \varphi. \]
+  which then implies that $n \models \varphi$ since $\bot \models \varphi$ always holds.
+\end{proof}
+
+\section{Guarded recursion internally}
+
+Equivalently, the geometric theory $\pw$ is the theory of \emph{filters} on $\omega$, and for any filter $\mf F$, the proposition $\mf F_n$ can be identified as $n \in \mf F$. In this section we will solely use the latter notation. 
+
+\begin{definition}
+  We say a filter $\mf F$ is \emph{sup-generic}, if $\um \subseteq \mf F$. The \emph{spectrum} of a sup-generic filter $\mf F$ is simply 
+  \[ \spec \mf F := \mf F \subseteq \um \eq \mf F = \um. \]
+\end{definition}
+
+\begin{proposition}\label{qc}
+  For any sup-generic filter $\mf F$, we have
+  \[ \mf F = \um^{\spec\mf F}. \]
+  In other words for any $n : \omega$,
+  \[ n \in \mf F \eff \mf F = \um \to n \in \um. \]
+\end{proposition}
+\begin{proof}
+  This is exactly quasi-coherence for the theory $\mbb P$.
+\end{proof}
+
+\begin{theorem}\label{filandprop}
+  There is an adjunction between $\Omega$ and $\SFil(\omega)$ of sup-generic filters on $\omega$,
+  \[\begin{tikzcd}
+    {\SFil(\omega)\op} & \Omega
+    \arrow[""{name=0, anchor=center, inner sep=0}, "\spec"', curve={height=18pt}, from=1-1, to=1-2]
+    \arrow[""{name=1, anchor=center, inner sep=0}, "{\um^-}"', curve={height=18pt}, from=1-2, to=1-1]
+    \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+  \end{tikzcd}\]
+  which identifies $\SFil(\omega)\op$ as a reflective sub-poset of $\Omega$.
+\end{theorem}
+\begin{proof}
+  For any proposition $\varphi : \Omega$ and sup-generic filter $\mf F$, if $\varphi \to \spec\mf F$, then 
+  \begin{align*}
+    n \in \mf F 
+    &\eff \spec\mf F \to n \in \um \\
+    &\nt \varphi \to n \in \um \\
+    &\eff n \in \um^\varphi
+  \end{align*}
+  which implies $\mf F \subseteq \um^\varphi$. On the other hand, suppose $\mf F \subseteq \um^\varphi$. If $\varphi$ holds, then $\um^\varphi = \um$, which implies $\mf F = \um$ since $\mf F$ is sup-generic. Hence, $\spec\mf F$ also holds.
+\end{proof}
+
+\begin{definition}
+  We say a proposition is \emph{affine} if it belongs to the image of $\spec$. By \Cref{filandprop}, affine propositions are 
+\end{definition}
+
+\begin{example}
+  
+\end{example}
+
+\begin{proposition}
+  Affine propositions are closed under arbitrary meets.
+\end{proposition}
+\begin{proof}
+  
+\end{proof}
+
+
+
+\begin{remark}
+  The above explains perfectly what it means for $\um$ to be the \emph{generic filter}.
+\end{remark}
+
+\begin{proposition}
+  For any $n : \omega$, $\neg\neg n \in \um$.
+\end{proposition}
+\begin{proof}
+  Suppose $n \not\in \um$. Then consider the filter $\mf P_n$ defined by
+  \[ \mf P_n := \scomp{k : \omega}{n \le k}. \]
+  For any $k \in \um$ we know that $n \le k$, since if $k < n$ and $k \in \um$ then $n \in \um$, contradictory. Hence, $n \le k$, since this proposition is decidable. It follows that $\mf P_n$ is sup-generic, which by \Cref{qc} implies for any $k : \omega$
+  \[ k \in \mf P_n \eff n \le k \eff \mf P_n = \um \to k \in \um. \]
+\end{proof}
+
+
+Furthermore, the topos $\mc S$ can be viewed as an internal way to doing \emph{forcing} on $\omega$: 
+
+\begin{definition}
+  For any $n : \omega$ and $\varphi : \Omega$, we define the forcing relation
+  \[ n \Vdash \varphi := \um_n \to \varphi. \]
+\end{definition}
+
+\begin{lemma}
+  For any $n : \omega$, the forcing relation $n \Vdash (-) : \Omega \to \Omega$ has a right adjoint.
+\end{lemma}
+\begin{proof}
+  Given a family $\varphi : I \to \Omega$ of propositions, consider the sup-generic filter $\Phi$,
+  \[ n \in \Phi := n \in \um \vee \bigvee_{i:I}\varphi_i. \]
+  This way, we have
+  \[ \Phi = \um \eff \prth{\bigvee_{i:I}\varphi_i} \to \um_n = \bigwedge_{i:I} \varphi_i \to \um_n. \]
+  By \Cref{qc}, we have that
+  \[ n \in \Phi \eff \um_n \vee \bigvee_{i:I}\varphi_i \eff \prth{\bigwedge_{i:I}\varphi_i \to \um_n} \to \um_n. \]
+  \[ n \Vdash \bigvee_{i:I}\varphi_i \eff \um_n \to \bigvee_{i:I}\varphi_i. \]
+\end{proof}
+
+
+This inspires the following construction:
+
+\begin{construction}
+  Any $\pw$-model $\mf F$ induces two modalities on $\Omega$, where for $\varphi : \Omega$
+  \[ \prev\varphi := \bigvee_{\um_n \to \varphi} \mf F_n, \quad \latt\varphi := . \]
+\end{construction}
+
+\begin{lemma}
+  For all $n : \omega$, $\prev\um_n = \mf F_n$.
+\end{lemma}
+\begin{proof}
+  Notice that $\um_n \to \um_n$, thus $\mf F_n \to \bigvee_{\um_m\to\um_m}\mf F_m = \prev\um_n$. On the other hand, for any $m$ that $\um_m \to \um_n$, we have $m \le n$. Thus, $\mf F_m \to \mf F_n$, and $\prev\um_n = \bigvee_{\um_m \to \um_n}\mf F_m \to \mf F_n$.
+\end{proof}
+
+\begin{proposition}
+  The two modalities are adjoint to each other $\prev \dashv \latt$.
+\end{proposition}
+\begin{proof}
+  For any $\varphi,\psi : \Omega$, we have 
+  \begin{align*}
+    \prev\varphi \le \psi 
+    &\eff \fa k\N (\um_n \to \varphi) \to (\mf F_n \to \psi). \\
+    &\eff \fa k\N (\um_n \to \varphi) \wedge \mf F_n \to \psi
+  \end{align*}
+  On the other hand,
+  \[ \varphi \le \latt\psi \eff \fa k\N p_k \subseteq \psi \to k \in \varphi. \]
+\end{proof}
+
+\begin{lemma}
+  For any 
+  \[ p \eq \um^{\spec p}. \]
+\end{lemma}
+\begin{proof}
+  This holds by quasi-coherence.
+\end{proof}
+
+\begin{theorem}
+  For any $\varphi : \Omega$, we have 
+  \[ \varphi \vee \neg\varphi \vee \ex n\N \varphi = \um_n. \]
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+
+
+
+\begin{definition}
+  By an $\um$-algebra we mean an increasing proposition $p : \N \to \Omega$ such that $\um \le p$. The \emph{spectrum} of $p$ is defined to be
+  \[ \spec p := \fa n\N p_n \le \um_n \eq p = \um. \]
+\end{definition}
+
+
+
+
+\begin{example}
+  For $\um_n$, we have 
+  \[ \prev\um_n = \bigvee_{\um_n \le p_k} \um_k \]
+\end{example}
+
+\bibliographystyle{apalike} 
+\bibliography{mybib}
+
+\end{document}
