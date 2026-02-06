@@ -14,29 +14,34 @@
 \usepackage{stmaryrd}
 \usepackage{appendix}
 \usepackage{mathtools}
-\usepackage{cleveref}
+\usepackage[capitalise]{cleveref}
+\usepackage{ebproof}
 \usepackage{quiver}
 
+\usetikzlibrary{spath3}
 \tikzcdset{pullback/.style = {"\lrcorner"{anchor = center, pos = 0.125}, draw = none}}
+\tikzset{between/.style n args={2}{/tikz/spath/at end path construction={
+    \tikzset{spath/split at keep middle={current}{#1}{#2}}
+}}}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{fact}[theorem]{Fact}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{claim}[theorem]{Claim}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{observation}[theorem]{Observation}
+\newtheorem{fact}{Fact}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{claim}{Claim}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{observation}{Observation}[section]
 
 \theoremstyle{definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{question}[theorem]{Open Question}
-\newtheorem{assumption}[theorem]{Assumption}
-\newtheorem{qquestion}[theorem]{Question}
+\newtheorem{example}{Example}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{question}{Open Question}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{qquestion}{Question}[section]
 \newtheorem*{axiom}{Axiom}
-\newtheorem{construction}{Construction}
+\newtheorem{construction}{Construction}[section]
 
 \newcommand{\mc}[1]{\mathcal{#1}}
 \newcommand{\mb}[1]{\mathbf{#1}}
@@ -51,7 +56,6 @@
 \newcommand{\Ind}{\mathbf{Ind}}
 \newcommand{\Pro}{\mathbf{Pro}}
 \newcommand{\Set}{\mb{Set}}
-\newcommand{\Prop}{\mb{Prop}}
 \newcommand{\sSet}{\mb{sSet}}
 \newcommand{\sSeto}{\mb{sSet}_{\le 1}}
 \newcommand{\End}{\operatorname{End}}
@@ -144,8 +148,8 @@
 \newcommand{\dneg}{\neg\neg}
 \newcommand{\prt}{_{\bot}}
 \newcommand{\cprt}{_{\top}}
-\newcommand{\fa}[2]{\forall #1\in #2.\ }
-\newcommand{\ex}[2]{\exists #1\in #2.\ }
+\newcommand{\fa}[2]{\forall #1 \!:\! #2.\ }
+\newcommand{\ex}[2]{\exists #1 \!:\! #2.\ }
 \newcommand{\exu}[2]{\exists_! #1\!\colon\!\!#2.\ }
 \newcommand{\ld}[2]{\lambda #1\!\colon\!\!#2.\ }
 \newcommand{\subopen}{\subseteq_{\mbb \I}}
@@ -182,7 +186,7 @@
 \newcommand{\fst}{\ms{Fin}}
 \newcommand{\Mod}{\mb{Mod}}
 \newcommand{\Quot}{\mr{Quot}}
-\newcommand{\Fil}{\mr{Fil}}
+\newcommand{\Fil}{\mb{Fil}}
 \newcommand{\SFil}{\mr{SFil}}
 \newcommand{\quot}[1]{/_{\pair{#1}}}
 \newcommand{\List}{\ms{List}}
@@ -204,14 +208,23 @@
 \newcommand{\dsg}[1]{\!\pair{#1}}
 \newcommand{\subN}{\sub_{\N}}
 \newcommand{\pw}{\mbb P_\omega}
-\newcommand{\um}{\mbb w}
+\newcommand{\um}[1]{U_{#1}}
+\newcommand{\ut}[1]{\mbb U_{#1}}
 \newcommand{\prev}{\triangleleft}
 \newcommand{\latt}{\triangleright}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\Diag}{\mb{Diag}}
+\newcommand{\W}{\mathbb W}
+\newcommand{\ovob}{\omega_\bot}
+\newcommand{\bx}{\Box}
+\newcommand{\Type}{\ms{Type}}
+\newcommand{\Prop}{\ms{Prop}}
+\newcommand{\Inj}{\mb{Inj}}
 
-\DeclareFontFamily{U}{dmjhira}{}
-\DeclareFontShape{U}{dmjhira}{m}{n}{ <-> dmjhira }{}
-\DeclareRobustCommand{\yon}{\text{\usefont{U}{dmjhira}{m}{n}\symbol{"48}}}
-\DeclareRobustCommand{\noy}{\text{\reflectbox{\yon}}\!}
+\DeclareFontFamily{U}{min}{}
+\DeclareFontShape{U}{min}{m}{n}{ <-> udmj30 }{}
+\DeclareRobustCommand{\yon}{\text{\usefont{U}{min}{m}{n}\symbol{'207}}\!}
+\DeclareRobustCommand{\noy}{\text{\usefont{U}{min}{m}{n}\symbol{'347}}\!}
 
 
 \makeatletter
@@ -271,262 +284,703 @@ Cambridge, UK\newline
 
 \section{Introduction}
 
-This is an internal analysis on synthetic guarded domain theory~\cite{birkedal2012first}.
+This is an internal analysis on synthetic guarded domain theory~\cite{birkedal2012first}. Let $\W$ be the theory of filters on the poset $\omega = (\N,\le) = \set{0 < 1 < \cdots}$. For convenience, we will in fact use the poset $\ovob = \set{\bot < 0 < 1 < \cdots}$. Explicitly, $\W$ has propositional constants $\ms p_\bot,\ms p_0,\ms p_1,\cdots$, with axioms:
+\begin{enumerate}
+  \item $\ms p_\bot \vdash \bot$;
+  \item For all $n\le m\in\ovob$, $\ms p_n \vdash \ms p_m$;
+  \item $\top \vdash \bigvee_{n\in\omega} \ms p_n$.
+\end{enumerate}
+We work internally in the classifying topos $\Set[\W] \simeq \psh(\omega)$. We will use $\Prop$ to denote the type of propositions. We will also assume a univalent type universe $\Type$. We will use $\ovob$ to denote the poset internalised in $\Set[\W]$ as well. For any $n:\ovob$, we use $\ass{n}$ to denote the representable proposition.
 
-\section{The theory of sequential propositions}
-
-Let $\ov\omega$ be the poset of extended natural numbers $\N \cup \set{\infty}$. As a poset it is a meet-semi-lattice, thus corresponds to an essentially algebraic theory, which we call $\mbb P$. Since it is a lattice, it is also localic, and can be presented as a theory with infinitely many propositional letters $p_0,p_1,\cdots$, with infinitely many sequents as axioms
-\[ p_0 \vdash p_1 \vdash p_2 \vdash \cdots \]
-We also consider a geometric quotient $\pw$ of $\mbb P$, which is obtained by adding an additional geometric sequent
-\[ \top \vdash \bigvee_{n:\N}p_n. \]
-
-The classifying topos $\Set[\mbb P]$ is given by the presheaf category
-\[ \Set[\mbb P] \simeq \psh(\ov\omega). \]
-Inside, the universal model $\um$ is given by the sequence of representables,
-\[ \um := \yon_0 \hook \yon_1 \hook \cdots \]
-The classifying topos for $\pw$ is again of presheaf type, given by
-\[ \Set[\pw] \simeq \psh(\omega). \]
-As a subtopos $\psh(\omega) \hook \psh(\ov\omega)$, since $\bigvee_{n:\N}n = \infty$ is a universal effective colimit in $\ov\omega$, all representables are still sheaves in $\psh(\omega)$. Thus, the universal model $\um$ is again the generic model in $\psh(\omega)$. Below we will mainly work with the sheaf subtopos $\psh(\omega)$, and we will denote it as $\mc S$.
-
-\begin{proposition}\label{endoposet}
-  Let $\ov\omega\prt$ be the poset $\ov\omega$ with a bottom element added, and $\mb{Inf}(\omega,\ov\omega\prt)$ denote the poset of unbounded monotone functions from $\omega$ to $\ov\omega\prt$. Then we have
-  \[ \Topoi(\mc S,\mc S) \simeq \mmod{\pw}(\mc S) \simeq \mb{Inf}(\omega,\omega\prt). \]
-\end{proposition}
-\begin{proof}
-  The first equivalence is due to the universal property of the classifying topos. We note that a model of $\pw$ in $\mc S$ is a sequence of increasing propositions whose union is $1$. Furthermore, we know that in $\mc S$ we have $\sub(1) \cong \ov\omega\prt$, since a proposition can either be $\yon_k$ for some $k$, or $0,1$. This explains the second equivalence.
-\end{proof}
-
-We can describe the correspondence more concretely: For any $\mf F \in \mmod{\pw}(\mc S)$, it is a sequence of propositions in $\mc S$
-\[ \mf F_0 \hook \mf F_1 \hook \cdots \]
-such that $\bigvee_{n:\N}\mf F_n = 1$. It induces a geometric morphism
-\[\begin{tikzcd}
-  {\psh(\omega)} & {\psh(\omega)}
-  \arrow[""{name=0, anchor=center, inner sep=0}, "\prev", curve={height=-12pt}, from=1-1, to=1-2]
-  \arrow[""{name=1, anchor=center, inner sep=0}, "\latt", curve={height=-12pt}, from=1-2, to=1-1]
-  \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
-\end{tikzcd}\]
-The right adjoint is easy to define, which is given by
-\[ \latt X(k) \cong \mc S(\mf F_k,X) \cong X(f(k)), \]
-where here we view $f : \omega \to \ov\omega\prt$ as $\mf F$ under the equivalence in \Cref{endoposet}, and we define the value of $X$ on $\bot,\infty$ to be
-\[ X(\bot) := 1, \quad X(\infty) := \lt_{n:\N}X(n). \]
-
-The left adjoint $\prev$ is a left Kan extension,
-\[ \prev X \cong \ct_{x\in X(n)}\mf F_n. \]
-However, we also have a more concrete description of $\prev$: For any $k\in\N$, we define
-\[ k^p := \min\scomp{n:\N}{k \le f(n)}. \]
-This is well-defined exactly because $\bigvee_{n:\N}\mf F_n = 1$. 
-
-\begin{lemma}\label{prevpointwise}
-  For any presheaf $X \in\mc S$,
-  \[ \prev X(k) \cong X(k^p). \]
-\end{lemma}
-\begin{proof}
-  By construction, since colimits in $\mc S$ are computed pointwise,
-  \[ \prev X(k) \cong \ct_{x\in X(n)}\mc S(\yon_k,\mf F_n). \]
-  Notice that $\mc S(\yon_k,\mf F_n) \cong 1$ when $k \le f(n)$, and is empty otherwise. This makes $X(k^p)$ terminal in the above colimit.
-\end{proof}
-
-\begin{example}
-  The universal model $\um$ induces the identity on $\mc S$.
-\end{example}
-
-\begin{example}
-  Consider the model $\um[-1]$ defined by 
-  \[ \um[-1] := 0 \hook \yon_0 \hook \yon_1 \hook \cdots \]
-  The adjoint pair $\prev \dashv \latt$ induced by $\um[-1]$ is the usual modalities used in synthetic guarded domain theory~\cite{birkedal2012first}.
-\end{example}
-
-\section{Guarded recursion externally}
-
-\begin{definition}
-  We say a model $\mf F$ is \emph{subgeneric} if $\mf F \le \um$.
-\end{definition}
-
-Under the equivalence in \Cref{endoposet}, a subgeneric model $\mf F$ induces the following natural transformations,
-\[ \sigma : \prev \nt \id, \quad \eta : \id \nt \latt. \]
-Using $\eta$, we can in fact turn $\latt$ into an $\mc S$-indexed functor:
-
-\begin{proposition}
-  Let $\latt_X : \mc S/X \to \mc S/X$ sends $f : Y \to X$ to the following pullback,
-  \[ 
-  \begin{tikzcd}
-    \latt_XY \ar[d, "\latt_Xf"'] \ar[dr, pullback] \ar[r] & \latt Y \ar[d, "\latt f"] \\ 
-    X \ar[r, "\eta"'] & \latt X 
-  \end{tikzcd}
+\begin{axiom}[QC]\label{sgdqc}
+  For any $n,m:\ovob$, 
+  \[
+  \ass n \to \ass m =
+  \begin{cases}
+    \ass m & m < n \\ 
+    1 & \other
+  \end{cases}
   \]
-  This gives a well-defined $\mc S$-indexed functor.
-\end{proposition}
-\begin{proof}
-  See~\cite{birkedal2012first}.
-\end{proof}
+\end{axiom}
 
-\begin{definition}
-  We say a model $\mf F$ is \emph{inductive}, if $f(n) < n$ for all $n \in \omega$.
-\end{definition}
-
-\begin{theorem}
-  For any inductive model $\mf F$, L\"ob's induction holds in $\mc S$, 
-  \[ \fa\varphi\Omega (\latt\varphi \to \varphi) \to \varphi. \]
-\end{theorem}
-\begin{proof}
-  Using the Kripke-Joyal semantics, suppose we have $\varphi \in \Omega(n)$ such that
-  \[ n \models \latt\varphi \to \varphi. \]
-  Now we have 
-  \[ n \models \varphi \eff n \models \latt\varphi \eff f(n) \models \varphi \eff f(f(n)) \models \varphi \cdots \eff \bot \models \varphi. \]
-  which then implies that $n \models \varphi$ since $\bot \models \varphi$ always holds.
-\end{proof}
-
-\section{Guarded recursion internally}
-
-Equivalently, the geometric theory $\pw$ is the theory of \emph{filters} on $\omega$, and for any filter $\mf F$, the proposition $\mf F_n$ can be identified as $n \in \mf F$. In this section we will solely use the latter notation. 
-
-\begin{definition}
-  We say a filter $\mf F$ is \emph{sup-generic}, if $\um \subseteq \mf F$. The \emph{spectrum} of a sup-generic filter $\mf F$ is simply 
-  \[ \spec \mf F := \mf F \subseteq \um \eq \mf F = \um. \]
-\end{definition}
-
-\begin{proposition}\label{qc}
-  For any sup-generic filter $\mf F$, we have
-  \[ \mf F = \um^{\spec\mf F}. \]
-  In other words for any $n : \omega$,
-  \[ n \in \mf F \eff \mf F = \um \to n \in \um. \]
-\end{proposition}
-\begin{proof}
-  This is exactly quasi-coherence for the theory $\mbb P$.
-\end{proof}
-
-\begin{theorem}\label{filandprop}
-  There is an adjunction between $\Omega$ and $\SFil(\omega)$ of sup-generic filters on $\omega$,
-  \[\begin{tikzcd}
-    {\SFil(\omega)\op} & \Omega
-    \arrow[""{name=0, anchor=center, inner sep=0}, "\spec"', curve={height=18pt}, from=1-1, to=1-2]
-    \arrow[""{name=1, anchor=center, inner sep=0}, "{\um^-}"', curve={height=18pt}, from=1-2, to=1-1]
-    \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
-  \end{tikzcd}\]
-  which identifies $\SFil(\omega)\op$ as a reflective sub-poset of $\Omega$.
-\end{theorem}
-\begin{proof}
-  For any proposition $\varphi : \Omega$ and sup-generic filter $\mf F$, if $\varphi \to \spec\mf F$, then 
-  \begin{align*}
-    n \in \mf F 
-    &\eff \spec\mf F \to n \in \um \\
-    &\nt \varphi \to n \in \um \\
-    &\eff n \in \um^\varphi
-  \end{align*}
-  which implies $\mf F \subseteq \um^\varphi$. On the other hand, suppose $\mf F \subseteq \um^\varphi$. If $\varphi$ holds, then $\um^\varphi = \um$, which implies $\mf F = \um$ since $\mf F$ is sup-generic. Hence, $\spec\mf F$ also holds.
-\end{proof}
-
-\begin{definition}
-  We say a proposition is \emph{affine} if it belongs to the image of $\spec$. By \Cref{filandprop}, affine propositions are 
-\end{definition}
-
-\begin{example}
-  
-\end{example}
-
-\begin{proposition}
-  Affine propositions are closed under arbitrary meets.
-\end{proposition}
-\begin{proof}
-  
-\end{proof}
-
-
+\begin{axiom}[GR]\label{sgdqcc}
+  Every proposition is definable: $\fa p\Prop \ex n{\ovob} p = \ass{n}$.
+\end{axiom}
 
 \begin{remark}
-  The above explains perfectly what it means for $\um$ to be the \emph{generic filter}.
+  Notice that (GR) plus (QC) implies the sequence of propositions is a model of $\W$. By (GR), $\emp = \ass n$ for some $n : \ov\omega$, and by (QC) $\ass\bot \to \ass n = 1$, which implies $\ass\bot \to \emp$, thus $\ass\bot = \emp$. By (GR) again, $\ex n{\ovob} 1 = \ass n$, while $1 = \ass n$ is equivalent to $\ass n$, thus this implies $\bigvee_{n:\ovob}\ass n$.
 \end{remark}
 
-\begin{proposition}
-  For any $n : \omega$, $\neg\neg n \in \um$.
-\end{proposition}
-\begin{proof}
-  Suppose $n \not\in \um$. Then consider the filter $\mf P_n$ defined by
-  \[ \mf P_n := \scomp{k : \omega}{n \le k}. \]
-  For any $k \in \um$ we know that $n \le k$, since if $k < n$ and $k \in \um$ then $n \in \um$, contradictory. Hence, $n \le k$, since this proposition is decidable. It follows that $\mf P_n$ is sup-generic, which by \Cref{qc} implies for any $k : \omega$
-  \[ k \in \mf P_n \eff n \le k \eff \mf P_n = \um \to k \in \um. \]
-\end{proof}
+As an easy consequence, we can show the generic model is indeed generic in the following sense:
 
-
-Furthermore, the topos $\mc S$ can be viewed as an internal way to doing \emph{forcing} on $\omega$: 
-
-\begin{definition}
-  For any $n : \omega$ and $\varphi : \Omega$, we define the forcing relation
-  \[ n \Vdash \varphi := \um_n \to \varphi. \]
-\end{definition}
-
-\begin{lemma}
-  For any $n : \omega$, the forcing relation $n \Vdash (-) : \Omega \to \Omega$ has a right adjoint.
+\begin{lemma}\label{dnegclose}
+  For any $n : \omega$, $\neg\neg\ass n$.
 \end{lemma}
 \begin{proof}
-  Given a family $\varphi : I \to \Omega$ of propositions, consider the sup-generic filter $\Phi$,
-  \[ n \in \Phi := n \in \um \vee \bigvee_{i:I}\varphi_i. \]
-  This way, we have
-  \[ \Phi = \um \eff \prth{\bigvee_{i:I}\varphi_i} \to \um_n = \bigwedge_{i:I} \varphi_i \to \um_n. \]
-  By \Cref{qc}, we have that
-  \[ n \in \Phi \eff \um_n \vee \bigvee_{i:I}\varphi_i \eff \prth{\bigwedge_{i:I}\varphi_i \to \um_n} \to \um_n. \]
-  \[ n \Vdash \bigvee_{i:I}\varphi_i \eff \um_n \to \bigvee_{i:I}\varphi_i. \]
+  By (QC), given $n:\omega$, $\ass n \to \ass\bot = \ass\bot = \emp$. Equivalently, $\neg\neg\ass n$.
 \end{proof}
 
+\section{Internal later modality on propositions}
 
-This inspires the following construction:
+We can construct an internal later modality from the data of a certain endo-function on $\ovob$:
 
-\begin{construction}
-  Any $\pw$-model $\mf F$ induces two modalities on $\Omega$, where for $\varphi : \Omega$
-  \[ \prev\varphi := \bigvee_{\um_n \to \varphi} \mf F_n, \quad \latt\varphi := . \]
+\begin{construction}[Later modality on propositions]\label{consprop}
+  Let $\theta \colon \ovob \to \ovob$ be a montone, non-decreasing function. Then the \emph{$\theta$-later modality} $\bx_\theta \colon \Prop \to \Prop$ takes $p:\Prop$ to $\ass{\theta n}$, where $p = \ass n$ by (GR).
 \end{construction}
 
-\begin{lemma}
-  For all $n : \omega$, $\prev\um_n = \mf F_n$.
-\end{lemma}
-\begin{proof}
-  Notice that $\um_n \to \um_n$, thus $\mf F_n \to \bigvee_{\um_m\to\um_m}\mf F_m = \prev\um_n$. On the other hand, for any $m$ that $\um_m \to \um_n$, we have $m \le n$. Thus, $\mf F_m \to \mf F_n$, and $\prev\um_n = \bigvee_{\um_m \to \um_n}\mf F_m \to \mf F_n$.
-\end{proof}
+We first show this construction is well-defined.
 
 \begin{proposition}
-  The two modalities are adjoint to each other $\prev \dashv \latt$.
+  $\bx_\theta \colon \Prop \to \Prop$ is well-defined, i.e. we have a diagram 
+  \[ 
+  \begin{tikzcd}
+    \ovob \ar[d, two heads] \ar[r, "\theta"] & \ovob \ar[d, two heads] \\
+    \Prop \ar[r, dashed, "\bx_\theta"'] & \Prop
+  \end{tikzcd}
+  \]
 \end{proposition}
 \begin{proof}
-  For any $\varphi,\psi : \Omega$, we have 
-  \begin{align*}
-    \prev\varphi \le \psi 
-    &\eff \fa k\N (\um_n \to \varphi) \to (\mf F_n \to \psi). \\
-    &\eff \fa k\N (\um_n \to \varphi) \wedge \mf F_n \to \psi
-  \end{align*}
-  On the other hand,
-  \[ \varphi \le \latt\psi \eff \fa k\N p_k \subseteq \psi \to k \in \varphi. \]
+  Suppose $p = \ass n = \ass m$ for some $n,m : \ovob$, and we need to show $\ass{\theta n} = \ass{\theta m}$ as well. We may assume $m < n$, since the case $m = n$ is trivial. By (QC), $\ass n \to \ass m$ is equivalent to $\ass m$, thus $\ass m$ holds. Since $\theta$ is non-decreasing, by (QC) $\ass{\theta m}$ holds as well, which by monotonicity of $\theta$, $\ass{\theta n}$ holds as well. Thus shis shows $\ass{\theta n} = \ass{\theta m}$. 
 \end{proof}
 
-\begin{lemma}
-  For any 
-  \[ p \eq \um^{\spec p}. \]
-\end{lemma}
+From now on, fix a monotone and non-decreasing function $\theta \colon \ovob \to \ovob$. 
+
+\begin{proposition}
+  $\bx_\theta$ is pointed.
+\end{proposition}
 \begin{proof}
-  This holds by quasi-coherence.
+  For any $p:\Prop$, by (GR) let $p = \ass n$. By construction, $\bx_\theta p = \ass{\theta n}$, which by $\theta$ being non-decreasing we have $p \to \bx_\theta p$.
+\end{proof}
+
+\begin{proposition}\label{proplex}
+  $\bx_\theta$ is left exact.
+\end{proposition}
+\begin{proof}
+  For $1$, by (GR) let $1 = \ass n$. Then since $\theta$ is non-decreasing, $\bx_\theta 1 = \ass{\theta n}$ holds as well. Preserving binary meets is easy.
 \end{proof}
 
 \begin{theorem}
-  For any $\varphi : \Omega$, we have 
-  \[ \varphi \vee \neg\varphi \vee \ex n\N \varphi = \um_n. \]
+  If $\theta$ is strictly increasing, then $\bx_\theta$ satisfies L\"ob induction,
+  \[ \fa p{\Prop} (\bx_\theta p \to p) \to p. \]
 \end{theorem}
 \begin{proof}
-  
+  Take $p:\Prop$, and by (GR) let $p = \ass n$. Assume $\bx_\theta p \to p$, viz. $\ass{\theta n} \to \ass{n}$. Since $\theta$ is strictly increasing, by (QC) this implication is equivalent to $\ass n$, viz. $p$, holds.
 \end{proof}
 
+\section{Internal later modality on types}
+
+For any type $X : \Type$, we need a way to relate the function spaces $X^{\ass n}$ for $n:\ovob$ to $X$ itself. It turns out we can write any type as a \emph{coend}:
+
+\begin{theorem}
+  For any $X:\Type$, it is isomorphic to the coend 
+  \[ X \cong \int^{n:\ovob} \ass n \times X^{\ass n}. \]
+\end{theorem}
+\begin{proof}
+  This is a consequence of (GR), where we can assume $1 = \ass n$ for some $n:\ovob$. This way, the coend becomes constant, thus is isomorphic to $X$.
+\end{proof}
+
+\begin{construction}[Later modality on types]\label{constype}
+  Let $\theta \colon \ovob \to \ovob$ be a monotone, non-decreasing map on $\ovob$. The \emph{$\theta$-later modality} $\bx_\theta \colon \Type \to \Type$ is constructed as follows: For any $X : \Type$, 
+  \[ \bx_\theta X \coloneq \int^{n:\ovob}\ass{\theta n} \times X^{\ass n}. \]
+\end{construction}
+
+Again, let us fix a monotone and non-decreasing map $\theta \colon \ovob \to \ovob$.
+
+\begin{proposition}\label{twoconscoin}
+  The modality $\bx_\theta \colon \Type \to \Type$ given in~\cref{constype} restricts to the modality $\bx_\theta \colon \Prop \to \Prop$ on propositions given in~\cref{consprop}.
+\end{proposition}
+\begin{proof}
+  By (GR), it suffices to show $\bx_\theta\ass n$, according to~\cref{constype}, will be equal to $\ass{\theta n}$ for all $n:\ovob$. By construction and (QC), we have
+  \begin{align*}
+    \bx_\theta\ass n 
+    &\equiv \int^{m:\ovob}\ass{\theta m} \times \ass n^{\ass m} \\ 
+    &= \bigvee_{m:\ovob}\ass{\theta m} \wedge (\ass m \to \ass n) \\
+    &= \bigvee_{m\le n}\ass{\theta m} \vee \bigvee_{m > n} \ass{\theta m} \wedge \ass n \\
+    &= \ass{\theta n}
+  \end{align*}
+  The last step holds by the fact that $\theta$ is monotone and non-decreasing, thus $\ass{\theta m} \wedge \ass n = \ass n$ for all $m > n$. 
+\end{proof}
+
+\begin{proposition}
+  $\bx_\theta$ is left exact.
+\end{proposition}
+\begin{proof}
+  $\bx_\theta$ preserves $1$ by~\cref{twoconscoin} and~\cref{proplex}. For pullback, suppose we have $f \colon Y \to X$ and $g \colon Z \to X$. We then have 
+  \begin{align*}
+    \bx_\theta(Y \times_X Y) 
+    &\equiv \int^{n:\ovob}\ass{\theta n} \times (Y \times_X Z)^{\ass n} \\
+    &\cong \int^{n:\ovob} \ass{\theta n} \times Y^{\ass n} \times_{X^{\ass n}} Z^{\ass n} \\ 
+    &\cong \bx_\theta Y \times_{\bx_\theta X} \bx_\theta Z
+  \end{align*}
+  The final step uses the fact that finite limits commutes with the filtered colimit.
+\end{proof}
+
+\begin{proposition}\label{typewellpoint}
+  $\bx_\theta$ is well-pointed.
+\end{proposition}
+\begin{proof}
+  To construct the unit, by (GR) we may assume $1 = \ass n$, thus by the universal property there is a comparison map 
+  \[ 
+  \begin{tikzcd}
+    X \ar[r, "\cong"] & \ass n \times X^{\ass n} \ar[r] & \ass{\theta n} \times X^{\ass n} \ar[r] & \bx_\theta X.
+  \end{tikzcd}
+  \]
+  This is well-defined due to the fact that $\bx_\theta X$ is a coend, and naturality is evident. Checking well-pointedness is routine.
+\end{proof}
+
+\begin{corollary}
+  If $\theta$ is strictly increasing, then $\bx_\theta \colon \Type \to \Type$ supports guarded recursion fixed-point construction.
+\end{corollary}
+\begin{proof}
+  This follows from~\cref{typewellpoint},~\cref{twoconscoin}, and~\cite{RN839}.
+\end{proof}
+
+\section{A non-localic model of guarded recursion}
+
+Consider $\Inj$, the category of finite sets with injections between them. Notice that this category has pullback but not a terminal object. There is an evident functor 
+\[ 1 + - \colon \Inj \to \Inj, \]
+which induces an adjunction
+\[\begin{tikzcd}
+	{\psh(\Inj)} & {\psh(\Inj)}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "R"', curve={height=12pt}, from=1-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "L"', curve={height=12pt}, from=1-2, to=1-1]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+\end{tikzcd}\]
+where $L$ is given by precomposition with $1+-$ and $R$ is obtained via right Kan extension. Since $L$ is also continuous, this gives us a geometric morphism 
+\[ R \colon \psh(\Inj) \to \psh(\Inj). \]
+
+\begin{proposition}\label{self-indexing}
+  We have a self-indexed path family 
+  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHBzaChcXEluaikiXSxbMSwwLCJcXHBzaChcXEluaikiXSxbMCwxLCJSIiwwLHsiY3VydmUiOi0yfV0sWzAsMSwiIiwyLHsiY3VydmUiOjIsImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMywiXFx0aGV0YSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XV0=
+  \[\begin{tikzcd}
+    {\psh(\Inj)} & {\psh(\Inj)}
+    \arrow[""{name=0, anchor=center, inner sep=0}, "R", curve={height=-12pt}, from=1-1, to=1-2]
+    \arrow[""{name=1, anchor=center, inner sep=0}, curve={height=12pt}, equals, from=1-1, to=1-2]
+    \arrow["\theta", between={0.2}{0.8}, Rightarrow, from=0, to=1]
+  \end{tikzcd}\]
+\end{proposition}
+\begin{proof}
+  It suffices to provide a natural transformation $\theta \colon L \nt \id$. But such a natural transformation is induced by the natural inclusion $\id \nt 1 + -$. 
+\end{proof}
+
+\begin{theorem}
+  The self-indexing family in~\cref{self-indexing} is contractive, which means the internal modality associated to this self-indexing family satisfies L\"ob induction.
+\end{theorem}
+\begin{proof}
+  To show contractivity, it suffices to observe that for any representable $\yon_n$, there exists some $k$ that $L^k\yon_n \cong \emp$. Now we first show that 
+  \[ L\yon_n \cong n \cdot \yon_{n-1}. \]
+  For any $i\in n$, let $\hat n^i$ denote $n - \set i$. By construction we have 
+  \[ L\yon_n(m) \cong \Inj(m+1,n) \cong \sum_{i:n}\Inj(m,\hat n^i) \cong n \cdot \yon_{n-1}(m). \]
+  It is worth explicitly specifying the last isomorphism: given a pair $(i,f\colon m \inj n-1)$, the induced injection $(i,f) \colon m+1 \inj n$ is given by
+  \[
+  (i,f)(j) =
+  \begin{cases} 
+    f(j) & j < m \wedge f(j) < i \\ 
+    f(j)+1 & j < m \wedge f(j) \ge i \\
+    i & j = m 
+  \end{cases}
+  \]
+  This isomorphism is natural: Given any $f \colon l \inj m$, we verify
+  % https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXEluaihtKzEsbikiXSxbMSwxLCJcXEluaihsKzEsbikiXSxbMCwxLCJsIFxcdGltZXMgXFxJbmoobCxuLTEpIl0sWzAsMCwibSBcXHRpbWVzIFxcSW5qKG0sbi0xKSJdLFswLDEsIi0gXFxjaXJjIChmKzEpIl0sWzIsMSwiXFxjb25nIiwyXSxbMywyLCJmIFxcdGltZXMgKC1cXGNpcmMgZikiLDJdLFszLDAsIlxcY29uZyJdXQ==
+  \[\begin{tikzcd}
+    {n \times \Inj(m,n-1)} & {\Inj(m+1,n)} \\
+    {n \times \Inj(l,n-1)} & {\Inj(l+1,n)}
+    \arrow["\cong", from=1-1, to=1-2]
+    \arrow["{n \times (-\circ f)}"', from=1-1, to=2-1]
+    \arrow["{- \circ (f+1)}", from=1-2, to=2-2]
+    \arrow["\cong"', from=2-1, to=2-2]
+  \end{tikzcd}\]
+  For any pair $(i,g)$ with $i\in m$ and $g\colon m \inj n-1$, and for $j\in l+1$ we have 
+  \begin{align*}
+    (i,g)((f+1)(j)) 
+    &= 
+    \begin{cases}
+      gf(j) & j < l \wedge gf(j) < i \\
+      gf(j) + 1  & j < l \wedge gf(j) \ge i \\
+      i & j = l 
+    \end{cases} \\ 
+    &= (i,gf)(j)
+  \end{align*}
+  This shows that the isomorphism is natural, thus $L\yon_n \cong n \cdot \yon_{n-1}$. This way, since $L$ preserves colimits, it follows that 
+  \[ L^{n+1}\yon_n \cong \emp, \]
+  which completes the proof.
+\end{proof}
+
+\section{Another interesting example}
+
+Consider $\psh(\Fin)$, where $\Fin$ is the category of finite sets, and consider the functor 
+\[ 1 + - \colon \Fin \to \Fin, \]
+and consider the functor $L \colon \psh(\Fin) \to \psh(\Fin)$ given by
+\[ LX(n) \cong X(n+1). \]
+$L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin) \to \psh(\Fin)$. To compute the right adjoint, it suffices to compute what $L$ does on representables. 
+
+\begin{lemma}\label{LFinonrep}
+  For any $n\in\Fin$, we have 
+  \[ L\yon_n \cong n \cdot \yon_n, \]
+  where $n\cdot-$ denotes the tensor of the finite set $n$ with the presheaf $\yon_n$. 
+\end{lemma}
+\begin{proof}
+  By construction, for any $m\in\Fin$,
+  \[ (L\yon_n)(m) \cong n^{m+1} \cong n \times n^m \cong n \times \yon_n(m). \]
+  This shows that $L\yon_n \cong n \cdot \yon_n$.
+\end{proof}
+
+\begin{proposition}
+  For any $X\in\psh(\Fin)$, we have 
+  \[ (R X)(n) \cong X(n)^n, \]
+  where for any $f \colon n \to m$, the action on $f$ takes $a\in X(m)^m$ to the following composite,
+  \[
+  \begin{tikzcd}
+    n \ar[d, "f"'] \ar[r, dashed, "a \cdot f"] & X(n) \\ 
+    m \ar[r, "a"'] & X(m) \ar[u, "-\cdot f"'] 
+  \end{tikzcd}
+  \]
+\end{proposition}
+\begin{proof}
+  This follows from~\cref{LFinonrep}, where by construction 
+  \[ (R X)(n) \cong \psh(\Fin)(L\yon n,X) \cong \psh(\Fin)(n\cdot\yon_n,X) \cong X(n)^n. \]
+  The action on morphisms in $\Fin$ follows from routine computation.
+\end{proof}
+
+\begin{proposition}
+  $R$ is well-pointed.
+\end{proposition}
+\begin{proof}
+  The point is easy to provide, where for any $X\in\psh(\Fin)$, the unit $\eta_X \colon X \to R X$ is given by the constant function for any $n\in\Fin$,
+  \[ \eta_X \coloneq c_- \colon X(n) \to X(n)^n. \]
+  Naturality is evident. For well-pointedness, this is routine to check.
+\end{proof}
+
+\begin{theorem}
+  $R \colon \psh(\Fin) \to \psh(\Fin)$ restricts to identity $\id \colon \Omega \to \Omega$ on propositions.
+\end{theorem}
+\begin{proof}
+  For any $n\in\Fin$, let $p\in\Omega(n)$ be a sieve on $n$ in $\Fin$. Over $\yon_n$, the fibred modality $R$ acting on $p$ is given by the pullback 
+  \[
+  \begin{tikzcd}
+    \bx_{\yon_n} p \ar[d, hook] \ar[r] & R p \ar[d, hook] \\ 
+    \yon_n \ar[r, "\eta"'] & R\yon_n
+    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+  \end{tikzcd}
+  \]
+  By construction, for any $f \colon m \to n$, $f\in\bx_{\yon_n}p$ iff 
+\end{proof}
+
+% \section{The theory of sequential propositions}
+
+% Let $\ov\omega$ be the poset of extended natural numbers $\N \cup \set{\infty}$. As a poset it is a meet-semi-lattice, thus corresponds to an essentially algebraic theory, which we call $\mbb P$. Since it is a lattice, it is also localic, and can be presented as a theory with infinitely many propositional letters $p_0,p_1,\cdots$, with infinitely many sequents as axioms
+% \[ p_0 \vdash p_1 \vdash p_2 \vdash \cdots \]
+% We also consider a geometric quotient $\pw$ of $\mbb P$, which is obtained by adding an additional geometric sequent
+% \[ \top \vdash \bigvee_{n:\N}p_n. \]
+
+% The classifying topos $\Set[\mbb P]$ is given by the presheaf category
+% \[ \Set[\mbb P] \simeq \psh(\ov\omega). \]
+% Inside, the universal model $\um{\omega}$ is given by the sequence of representables,
+% \[ \um{\omega} := \yon_0 \hook \yon_1 \hook \cdots \]
+% The classifying topos for $\pw$ is again of presheaf type, given by
+% \[ \Set[\pw] \simeq \psh(\omega). \]
+% As a subtopos $\psh(\omega) \hook \psh(\ov\omega)$, since $\bigvee_{n:\N}n = \infty$ is a universal effective colimit in $\ov\omega$, all representables are still sheaves in $\psh(\omega)$. Thus, the universal model $\um{\omega}$ is again the generic model in $\psh(\omega)$. Below we will mainly work with the sheaf subtopos $\psh(\omega)$, and we will denote it as $\mc S$.
+
+% \begin{proposition}\label{endoposet}
+%   Let $\ov\omega\prt$ be the poset $\ov\omega$ with a bottom element added, and $\mb{Inf}(\omega,\ov\omega\prt)$ denote the poset of unbounded monotone functions from $\omega$ to $\ov\omega\prt$. Then we have
+%   \[ \Topoi(\mc S,\mc S) \simeq \mmod{\pw}(\mc S) \simeq \mb{Inf}(\omega,\omega\prt). \]
+% \end{proposition}
+% \begin{proof}
+%   The first equivalence is due to the universal property of the classifying topos. We note that a model of $\pw$ in $\mc S$ is a sequence of increasing propositions whose union is $1$. Furthermore, we know that in $\mc S$ we have $\sub(1) \cong \ov\omega\prt$, since a proposition can either be $\yon_k$ for some $k$, or $0,1$. This explains the second equivalence.
+% \end{proof}
+
+% We can describe the correspondence more concretely: For any $\mf F \in \mmod{\pw}(\mc S)$, it is a sequence of propositions in $\mc S$
+% \[ \mf F_0 \hook \mf F_1 \hook \cdots \]
+% such that $\bigvee_{n:\N}\mf F_n = 1$. It induces a geometric morphism
+% \[\begin{tikzcd}
+%   {\psh(\omega)} & {\psh(\omega)}
+%   \arrow[""{name=0, anchor=center, inner sep=0}, "\prev", curve={height=-12pt}, from=1-1, to=1-2]
+%   \arrow[""{name=1, anchor=center, inner sep=0}, "\latt", curve={height=-12pt}, from=1-2, to=1-1]
+%   \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+% \end{tikzcd}\]
+% The right adjoint is easy to define, which is given by
+% \[ \latt X(k) \cong \mc S(\mf F_k,X) \cong X(f(k)), \]
+% where here we view $f : \omega \to \ov\omega\prt$ as $\mf F$ under the equivalence in \Cref{endoposet}, and we define the value of $X$ on $\bot,\infty$ to be
+% \[ X(\bot) := 1, \quad X(\infty) := \lt_{n:\N}X(n). \]
+
+% The left adjoint $\prev$ is a left Kan extension,
+% \[ \prev X \cong \ct_{x\in X(n)}\mf F_n. \]
+% However, we also have a more concrete description of $\prev$: For any $k\in\N$, we define
+% \[ k^p := \min\scomp{n:\N}{k \le f(n)}. \]
+% This is well-defined exactly because $\bigvee_{n:\N}\mf F_n = 1$. 
+
+% \begin{lemma}\label{prevpointwise}
+%   For any presheaf $X \in\mc S$,
+%   \[ \prev X(k) \cong X(k^p). \]
+% \end{lemma}
+% \begin{proof}
+%   By construction, since colimits in $\mc S$ are computed pointwise,
+%   \[ \prev X(k) \cong \ct_{x\in X(n)}\mc S(\yon_k,\mf F_n). \]
+%   Notice that $\mc S(\yon_k,\mf F_n) \cong 1$ when $k \le f(n)$, and is empty otherwise. This makes $X(k^p)$ terminal in the above colimit.
+% \end{proof}
+
+% \begin{example}
+%   The universal model $\um{\omega}$ induces the identity on $\mc S$.
+% \end{example}
+
+% \begin{example}
+%   Consider the model $\um{\omega}[-1]$ defined by 
+%   \[ \um{\omega}[-1] := 0 \hook \yon_0 \hook \yon_1 \hook \cdots \]
+%   The adjoint pair $\prev \dashv \latt$ induced by $\um{\omega}[-1]$ is the usual modalities used in synthetic guarded domain theory~\cite{birkedal2012first}.
+% \end{example}
+
+% \begin{definition}
+%   We say a model $\mf F$ is \emph{subgeneric} if $\mf F \le \um{\omega}$.
+% \end{definition}
+
+% Under the equivalence in \Cref{endoposet}, a subgeneric model $\mf F$ induces the following natural transformations,
+% \[ \sigma : \prev \nt \id, \quad \eta : \id \nt \latt. \]
+% Using $\eta$, we can in fact turn $\latt$ into an $\mc S$-indexed functor:
+
+% \begin{proposition}
+%   Let $\latt_X : \mc S/X \to \mc S/X$ sends $f : Y \to X$ to the following pullback,
+%   \[ 
+%   \begin{tikzcd}
+%     \latt_XY \ar[d, "\latt_Xf"'] \ar[dr, pullback] \ar[r] & \latt Y \ar[d, "\latt f"] \\ 
+%     X \ar[r, "\eta"'] & \latt X 
+%   \end{tikzcd}
+%   \]
+%   This gives a well-defined $\mc S$-indexed functor.
+% \end{proposition}
+% \begin{proof}
+%   See~\cite{birkedal2012first}.
+% \end{proof}
+
+% \begin{definition}
+%   We say a model $\mf F$ is \emph{inductive}, if $f(n) < n$ for all $n \in \omega$.
+% \end{definition}
+
+% \begin{theorem}
+%   For any inductive model $\mf F$, L\"ob's induction holds in $\mc S$, 
+%   \[ \fa\varphi\Prop (\latt\varphi \to \varphi) \to \varphi. \]
+% \end{theorem}
+% \begin{proof}
+%   Using the Kripke-Joyal semantics, suppose we have $\varphi \in \Prop(n)$ such that
+%   \[ n \models \latt\varphi \to \varphi. \]
+%   Now we have 
+%   \[ n \models \varphi \eff n \models \latt\varphi \eff f(n) \models \varphi \eff f(f(n)) \models \varphi \cdots \eff \bot \models \varphi. \]
+%   which then implies that $n \models \varphi$ since $\bot \models \varphi$ always holds.
+% \end{proof}
+
+% \section{Quasi-coherence}
+
+% Let $\mc C$ be a category. We write $\wh{\mc C}$ as the category of pro-functors on $\mc C$,
+% \[ \wh{\mc C} :=  \]
+% Let $\mbb C$ denote the theory of flat functors on $\mc C$. The classifying topos for $\mbb C$ is simply the presheaf category $\psh(\mc C)$. $\mbb C$-models are simply
+% \[ \mmod{\mbb C} \simeq \mb{Flat}(\mc C,\Set) \simeq \mb{Ind}(\mc C\op). \]
+% It is also interesting to look at $\mbb C$-models in $\psh(\mc C)$,
+% \[ \mmod{\mbb C}(\psh(\mc C)) \simeq \mb{Flat}(\mc C,\psh(\mc C)) \simeq [\mc C\op,\mmod{\mbb C}]. \]
+% There is in fact a generic $\mbb C$-model in $\psh(\mc C)$, which is nothing but the Yoneda embedding, 
+% \[ \yon : \mc C \to \psh(\mc C). \]
+
+% \begin{remark}
+%   We adopt the convention that subscripts will be \emph{covariant}, and superscripts will be \emph{contravariant}. This way, $\yon_c$ will be $\mc C(-,c)$, and $\yon^c$ will be $\mc C(c,-)$. We can either view $\yon$ as a flat functor $\yon_- : \mc C \to \psh(\mc C)$, or a $\mc C\op$-indexed family of flat functors $\yon^- : \mc C\op \to \mb{Flat}(\mc C,\Set)$.
+% \end{remark}
 
 
-\begin{definition}
-  By an $\um$-algebra we mean an increasing proposition $p : \N \to \Omega$ such that $\um \le p$. The \emph{spectrum} of $p$ is defined to be
-  \[ \spec p := \fa n\N p_n \le \um_n \eq p = \um. \]
-\end{definition}
+% We also have an internal perspective. A $\mbb C$-model in $\psh(\mc C)$ is a flat diagram over the constant internal category $\Delta\mc C$. Since $\Delta\mc C$ is constant, there is a bijective correspondence between internal diagrams over $\Delta\mc C$ and functors $\mc C \to \psh(\mc C)$. We organise the internal perspective into a $\psh(\mc C)$-enriched category $\Diag_{\Delta\mc C}$ of internal diagrams over $\Delta\mc C$. Given two diagrams $F,G : \mc C \to \psh(\mc C)$, we define
+% \[ \Diag_{\Delta\mc C}(F,G) := \int_{c\in\mc C}G_c^{F_c}. \]
+% In other words, for any $d\in\mc D$ we have 
+% \begin{align*}
+%   \Diag_{\Delta\mc C}(F,G)(d) 
+%   &\cong \psh(\mc C)(\yon_d,\int_{c\in\mc C}G_c^{F_c}) \\ 
+%   &\cong \int_{c\in\mc C}\psh(\mc C)(F_c,G_c^{\yon_d}) \\
+%   &\cong [\mc C,\psh(\mc C)](F,G^{\yon_d})
+% \end{align*}
+% Here $G^{\yon_d}$ is the constant power of the diagram $G$. In this case, we know that the underlying category of $\Diag_{\Delta\mc C}$ are the usual presheaves,
+% \[ \geo{\Diag_{\Delta\mc C}} \simeq [\mc C,\psh(\mc C)]. \]
+
+% More generally, we have:
+
+% \begin{proposition}
+%   $\Diag_{\Delta\mc C}$ is both tensored and powered over $\psh(\mc C)$.
+% \end{proposition}
+% \begin{proof}
+%   For any $X\in\psh(\mc C)$, we define $X \times F$ to be the constant tensor,
+%   \[ (X \times F)(c) \cong X \times F(c). \]
+%   This way, we have
+%   \begin{align*}
+%     \Diag_{\Delta\mc C}(X \times F,G)
+%     &\cong \int_{c\in\mc C}G(c)^{X \times F(c)} \\
+%     &\cong \int_{c\in\mc C}(G(c)^{F(c)})^X \\
+%     &\cong \prth{\int_{c\in\mc C}G(c)^{F(c)}}^X \\
+%     &\cong \Diag_{\Delta\mc C}(F,G)^X
+%   \end{align*}
+%   The third equivalence has used the fact that $(-)^X$ is a right adjoint, hence preserves end. Completely similarly, we may define the power $G^X$ to be the constant power.
+% \end{proof}
+
+% This way, we may further consider a theory $\ut{\mbb C}$ internal to $\psh(\mc C)$, which is the theory of $\um{\mbb C}$-algebras. For this first recall the $\psh(\mc C)$-enriched slice category $\um{\mbb C}/\Diag_{\Delta\mc C}$, where for two diagrams $F,G$ with $f : \um{\mbb C} \to F$ and $g : \um{\mbb C} \to G$,
+% \[
+% \begin{tikzcd}
+%   \um{\mbb C}/\Diag_{\Delta\mc C}(F,G) \ar[r] \ar[d] \ar[dr, pullback] & \Diag_{\Delta\mc C}(F,G) \ar[d, "{\Diag_{\Delta\mc C}(f,G)}"] \\ 
+%   1 \ar[r, "g"'] & \Diag_{\Delta\mc C}(\um{\mbb C},G)
+% \end{tikzcd}
+% \]
+
+% We use $\mmod{\ut{\mbb C}}$ to denote the $\psh(\mc C)$-enriched category of $\ut{\mbb C}$-models in $\psh(\mc C)$. A $\ut{\mbb C}$-model is simply a flat diagram $F$ over $\Delta\mc C$ equipped with an internal transformation $\um{\mbb C} \to F$. Given two $\ut{\mbb C}$-models $F,G$, the enriched hom is given by
+% \[ \mmod{\ut{\mbb C}}(F,G)(c) \cong  \]
+
+% and write $\geo{\mmod{\ut{\mbb C}}}$ as its underlying category. By construction,
+% \[ \geo{\mmod{\ut{\mbb C}}} \simeq \um{\mbb C}/[\mc C\op,\mmod{\mbb C}]. \]
+% For $V,W \in \mmod{\ut{\mbb C}}$, the enriched hom is given by
+% \[ \mmod{\ut{\mbb C}}(V,W)(c) \cong \psh(\mc C)(\yon_c,\mmod{\ut{\mbb C}}(V,W)) \cong  \]
+
+
+% When $\mc C$ is left exact, $\mmod{\mc C}$ is locally finitely presentable, thus in particular complete and cocomplete. From now on we assume $\mc C$ is left exact. 
+
+% \begin{lemma}\label{genpresfincolimi}
+%   The generic model $\um{\mbb C}$ as a functor 
+%   \[ \um{\mbb C} : \mc C\op \to \mmod{\mbb C} \]
+%   takes finite limits in $\mc C$ to finite colimits in $\mmod{\mbb C}$.
+% \end{lemma}
+% \begin{proof}
+%   Suppose we have a finite limit $c \cong \lt_{i\in I}c_i$ in $\mc C$. For any $F\in\mmod{\mbb C}$, by Yoneda
+%   \begin{align*}
+%     \mmod{\mbb C}(\noy^{c},F)
+%     &\cong F(c) \\
+%     &\cong \lt_{i\in I}F(c_i) \\ 
+%     &\cong \lt_{i\in I}\mmod{\mbb C}(\noy^{c_i},F) \\ 
+%     &\cong \mmod{\mbb C}(\ct_{i\in I}\noy^{c_i},F) \qedhere
+%   \end{align*}
+% \end{proof}
+
+% If $\mc C$ is left exact, then since $\mmod{\mbb C}$ is cocomplete, we can define a functor
+% \[ \qsi - : \mmod{\mbb C} \to \geo{\mmod{\ut{\mbb C}}}, \]
+% sending each flat functor $F \in \Lex(\mc C,\Set)$ to the $\um{\mbb C}$-algebra
+% \[ \qsi{F} := \ut{\mbb C} \sqcup \Delta F. \]
+% here $\sqcup$ is the coproduct in $\mmod{\mbb C}(\psh(\mc C)) \simeq [\mc C\op,\mmod{\mbb C}]$, which is induced by the pointwise coproduct in $\mmod{\mbb C}$. In other words, for any $c\in\mc C$,
+% \[ \qsi F(c) \cong \noy^c \sqcup F. \]
+% We have the following result:
+
+% \begin{proposition}
+%   For a left exact category $\mc C$, there is a reflective adjunction
+%   \[ \qsi- \dashv (-)(1) : \mmod{\mbb C} \to \geo{\mmod{\ut{\mbb C}}}, \]
+% \end{proposition}
+% \begin{proof}
+%   For any $F\in\mmod{\mbb C}$ and $G \in \geo{\mmod{\ut{\mbb C}}}$, we have 
+%   \begin{align*}
+%     \geo{\mmod{\ut{\mbb C}}}(\qsi F,G) 
+%     &\cong [\mc C\op,\mmod{\mbb C}](\Delta F,G) \\ 
+%     &\cong \int_{c\in\mc C}\mmod{\mbb C}(F,G(c)) \\ 
+%     &\cong \mmod{\mbb C}(F,G(1))
+%   \end{align*}
+%   The first isomorphism holds by our construction of $\qsi F$; the second holds by the end-formula for natural transformation; the last one holds since the end is mute on $F$, hence is equivalent to a limit indexed by $\mc C\op$, which is equivalently evaluation on $1$ since $1$ is initial in $\mc C\op$. Now we know that $\qsi F(1) \cong \noy^1 \sqcup F \cong F$, since by \Cref{genpresfincolimi} $\noy^1$ is initial in $\mmod{\mbb C}$. This implies the adjunction is reflective.
+% \end{proof}
+
+% \begin{proposition}
+%   The internal category $\mmod{\ut{\mbb C}}$ has power in $\psh(\mc C)$.
+% \end{proposition}
+% \begin{proof}
+%   Given any $\um{\mbb C}$-algebra $G$ and $X\in\psh(\mc C)$, define the power $G^X$ as
+%   \[ G^X := \]
+% \end{proof}
+
+% \begin{definition}
+%   For any $\ut{\mbb C}$-model $G$ in $\psh(\mc C)$, we define its \emph{spectrum} as the internal set of $\um{\mbb C}$-algebra homomorphisms,
+%   \[ \spec G := \mmod{\ut{\mbb C}}(G,\ut{\mbb C}). \]
+% \end{definition}
+
+% \begin{lemma}
+%   For any $c\in\mc C$, we have 
+%   \[ \spec\qsi{\noy^c} \cong \yon_c. \]
+% \end{lemma}
+% \begin{proof}
+%   For any $d\in\mc C$, we have the following natural isomorphisms,
+%   \begin{align*}
+%     \spec\qsi{\noy^c}(d)
+%     &\cong \psh(\mc C)(\yon_d,\mmod{\ut{\mbb C}}(\qsi{\noy^c},\um{\mbb C})) \\ 
+%     &\cong \geo{\mmod{\ut{\mbb C}}}(\qsi{\noy^c},\um{\mbb C}^{\yon_d}) \\
+%     &\cong \mmod{\mbb C}(\noy^c,\um{\mbb C}^{\yon_d}(1)) \\
+%     &\cong \um{\mbb C}(d)(c) \\ 
+%     &\cong \mc C(d,c)
+%   \end{align*}
+%   It follows that $\spec\qsi{\noy^c} \cong \yon_c$.
+% \end{proof}
+
+% \begin{theorem}
+%   For any $c\in\mc C$, the canonical map is an isomorphism in $\geo{\mmod{\ut{\mbb C}}}$,
+%   \[ \qsi{\noy^c} \to \um{\mbb C}^{\spec\qsi{\noy^c}} \cong \um{\mbb C}^{\yon_c}. \]
+% \end{theorem}
+% \begin{proof}
+%   For any $d\in\mc C$, we have 
+%   \[ \um{\mbb C}^{\yon_c}(d) \cong  \]
+% \end{proof}
+
+% \section{Guarded recursion internally}
+
+% Equivalently, the geometric theory $\pw$ is the theory of \emph{filters} on $\omega$. For a filter $\mf F$, the proposition $\mf F_n$ can be identified as $n \in \mf F$. In this section we will use the latter perspective.
+
+% \begin{definition}
+%   We say a filter $\mf F$ is \emph{sup-generic}, if $\um{\omega} \subseteq \mf F$. The \emph{spectrum} of a sup-generic filter $\mf F$ is simply given by
+%   \[ \spec \mf F := \mf F \subseteq \um{\omega}. \]
+%   Equivalently, since $\mf F$ is sup-generic, this is $\mf F = \um{\omega}$.
+% \end{definition}
+
+% \begin{proposition}\label{qc}
+%   For any sup-generic filter $\mf F$, we have
+%   \[ \mf F = \um{\omega}^{\spec\mf F}. \]
+%   In other words for any $n : \omega$,
+%   \[ n \in \mf F \eff \mf F = \um{\omega} \to n \in \um{\omega}. \]
+% \end{proposition}
+% \begin{proof}
+%   This is exactly quasi-coherence for the theory $\mbb P$.
+% \end{proof}
+
+% \begin{remark}
+%   The above explains perfectly what it means for $\um{\omega}$ to be the \emph{generic filter}.
+% \end{remark}
+
+% \begin{theorem}\label{filandprop}
+%   There is an adjunction between $\Prop$ and $\SFil(\omega)$ of sup-generic filters on $\omega$,
+%   \[\begin{tikzcd}
+%     {\SFil(\omega)\op} & \Prop
+%     \arrow[""{name=0, anchor=center, inner sep=0}, "\spec"', curve={height=18pt}, from=1-1, to=1-2]
+%     \arrow[""{name=1, anchor=center, inner sep=0}, "{\um{\omega}^-}"', curve={height=18pt}, from=1-2, to=1-1]
+%     \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+%   \end{tikzcd}\]
+%   which identifies $\SFil(\omega)\op$ as a reflective sub-poset of $\Prop$.
+% \end{theorem}
+% \begin{proof}
+%   For any proposition $\varphi : \Prop$ and sup-generic filter $\mf F$, if $\varphi \to \spec\mf F$, then 
+%   \begin{align*}
+%     n \in \mf F 
+%     &\eff \spec\mf F \to n \in \um{\omega} \\
+%     &\nt \varphi \to n \in \um{\omega} \\
+%     &\eff n \in \um{\omega}^\varphi
+%   \end{align*}
+%   which implies $\mf F \subseteq \um{\omega}^\varphi$. On the other hand, suppose $\mf F \subseteq \um{\omega}^\varphi$. If $\varphi$ holds, then $\um{\omega}^\varphi = \um{\omega}$, which implies $\mf F = \um{\omega}$ since $\mf F$ is sup-generic. Hence, $\spec\mf F$ also holds.
+% \end{proof}
+
+% \begin{definition}
+%   We say a proposition is \emph{affine} if it belongs to the image of $\spec$. \Cref{filandprop} shows affine propositions are closed under arbitrary meets.
+% \end{definition}
+
+% \begin{lemma}\label{affineprop}
+%   For any filter $\mf F$, the proposition $\mf F \subseteq \um{\omega}$ is affine.
+% \end{lemma}
+% \begin{proof}
+%   This is because $\mf F \cup \um{\omega}$ is sup-generic, and we have 
+%   \[ \spec(\mf F \cup \um{\omega}) \eff \mf F \cup \um{\omega} \subseteq \um{\omega} \eff \mf F \subseteq \um{\omega}. \]
+%   Hence $\mf F \subseteq \um{\omega}$ is affine.
+% \end{proof}
+
+% \begin{example}
+%   For any $n : \omega$, the proposition $n \in \um{\omega}$ is affine, because
+%   \[ n \in \um{\omega} \eff \mf P_n \subseteq \um{\omega}, \]
+%   where $\mf P_n$ is the principle filter defined by
+%   \[ \mf P_n := \scomp{k : \omega}{n \le k}. \]
+% \end{example}
+
+% \begin{example}
+%   For any $k : \omega$, we can define a new sup-generic filter $\um{\omega}[k]$: For $n : \omega$,
+%   \[ n \in \um{\omega}[k] := n+k \in \um{\omega}. \]
+%   Now if $n \in \um{\omega}$, then $n + k \in \um{\omega}$ which implies $n \in \um{\omega}[k]$, thus $\um{\omega} \subseteq \um{\omega}[k]$. This way,
+%   \[ \spec\um{\omega}[k] \eff \um{\omega}[k] \subseteq \um{\omega} \eff \fa n\omega n+k \in \um{\omega} \to n \in \um{\omega}. \]
+% \end{example}
+
+% \begin{lemma}
+%   For any $n > 0$, $\neg\neg n \in \um{\omega}$.
+% \end{lemma}
+% \begin{proof}
+%   Suppose for $n>0$ we have $\neg n \in \um{\omega}$. This way, $\mf P_n \not\subseteq \um{\omega}$, which implies $\mf P_n = \omega$ by \Cref{umdense}, contradictory.
+% \end{proof}
+
+% \begin{proposition}\label{umdense}
+%   Any affine proposition is $\neg\neg$-closed.
+% \end{proposition}
+% \begin{proof}
+%   Suppose we have a sup-generic filter $\mf F$ and $\mf F \not\subseteq \um{\omega}$. By \Cref{qc}, we know that for any $n :\omega$,
+%   \[ n \in \mf F \eff \mf F \subseteq \um{\omega} \to n \in \um{\omega}, \]
+%   which by assumption implies that $n\in\mf F$ for all $n:\omega$, i.e. $\mf F = \omega$. This way, $\omega \not\subseteq \um{\omega}$. 
+% \end{proof}
+
+
+
+% \begin{lemma}
+%   For any $n,m : \omega$, $n \in \um{\omega} \to m \in \um{\omega}$ iff $m \in \um{\omega} \vee n \le m$.
+% \end{lemma}
+% \begin{proof}
+%   The if direction is trivial. For the only if direction, since $n\in\um{\omega}$ and $m \in \um{\omega}$ are both affine by \Cref{affineprop}, due to the adjunction in \Cref{filandprop} we have
+%   \begin{align*}
+%     n \in \um{\omega} \to m \in \um{\omega} 
+%     &\eff \mf P_m \cup \um{\omega} \subseteq \mf P_n \cup \um{\omega} \\
+%     &\eff \mf P_m \subseteq \mf P_n \cup \um{\omega} \\
+%     &\eff m \in \mf P_n \cup \um{\omega} \\ 
+%     &\eff n \le m \vee m \in \um{\omega}. \qedhere
+%   \end{align*}
+% \end{proof}
+
+
+% Furthermore, the topos $\mc S$ can be viewed as an internal way to doing \emph{forcing} on $\omega$: 
+
+% \begin{definition}
+%   For any $n : \omega$ and $\varphi : \Prop$, we define the forcing relation
+%   \[ n \Vdash \varphi := n\in\um{\omega} \to \varphi. \]
+% \end{definition}
+
+% This inspires the following construction:
+
+% \begin{construction}
+%   Any filter $\mf F$ induces two modalities on $\Prop$, where for $\varphi : \Prop$
+%   \[ \prev\varphi := \bigvee_{n \Vdash \varphi} n \in \mf F, \quad \latt\varphi := . \]
+% \end{construction}
+
+% \begin{lemma}
+%   For all $n : \omega$, $\prev\um_n = \mf F_n$.
+% \end{lemma}
+% \begin{proof}
+%   Notice that $\um_n \to \um_n$, thus $\mf F_n \to \bigvee_{\um_m\to\um_m}\mf F_m = \prev\um_n$. On the other hand, for any $m$ that $\um_m \to \um_n$, we have $m \le n$. Thus, $\mf F_m \to \mf F_n$, and $\prev\um_n = \bigvee_{\um_m \to \um_n}\mf F_m \to \mf F_n$.
+% \end{proof}
+
+% \begin{proposition}
+%   The two modalities are adjoint to each other $\prev \dashv \latt$.
+% \end{proposition}
+% \begin{proof}
+%   For any $\varphi,\psi : \Prop$, we have 
+%   \begin{align*}
+%     \prev\varphi \le \psi 
+%     &\eff \fa k\N (\um_n \to \varphi) \to (\mf F_n \to \psi). \\
+%     &\eff \fa k\N (\um_n \to \varphi) \wedge \mf F_n \to \psi
+%   \end{align*}
+%   On the other hand,
+%   \[ \varphi \le \latt\psi \eff \fa k\N p_k \subseteq \psi \to k \in \varphi. \]
+% \end{proof}
+
+% \begin{lemma}
+%   For any 
+%   \[ p \eq \um{\omega}^{\spec p}. \]
+% \end{lemma}
+% \begin{proof}
+%   This holds by quasi-coherence.
+% \end{proof}
+
+% \begin{theorem}
+%   For any $\varphi : \Prop$, we have 
+%   \[ \varphi \vee \neg\varphi \vee \ex n\N \varphi = \um_n. \]
+% \end{theorem}
+% \begin{proof}
+  
+% \end{proof}
+
+
+
+% \begin{definition}
+%   By an $\um{\omega}$-algebra we mean an increasing proposition $p : \N \to \Prop$ such that $\um{\omega} \le p$. The \emph{spectrum} of $p$ is defined to be
+%   \[ \spec p := \fa n\N p_n \le \um_n \eq p = \um{\omega}. \]
+% \end{definition}
 
 
 
 
-\begin{example}
-  For $\um_n$, we have 
-  \[ \prev\um_n = \bigvee_{\um_n \le p_k} \um_k \]
-\end{example}
+% \begin{example}
+%   For $\um_n$, we have 
+%   \[ \prev\um_n = \bigvee_{\um_n \le p_k} \um_k \]
+% \end{example}
 
 \bibliographystyle{apalike} 
 \bibliography{mybib}
