@@ -5,18 +5,20 @@
 \usepackage[english]{babel}
 \usepackage[X2,T1]{fontenc}
 \usepackage{libertine}
-\usepackage{libertinust1math}
-\usepackage[utf8]{inputenc} %'utf8' instead of 'latin1'
-% \usepackage{enumitem}
-\usepackage{enumerate}
+\usepackage{enumitem}
 \usepackage{tikz-cd}
 \usepackage{hyperref}
-\usepackage{stmaryrd}
 \usepackage{appendix}
 \usepackage{mathtools}
 \usepackage[capitalise]{cleveref}
 \usepackage{ebproof}
 \usepackage{quiver}
+\usepackage{array} % Optional, only if otherwise required.
+\usepackage{logix}
+% \setmainfont{STIX Two Text}
+\setmathfont{STIX Two Math}
+\setlist[itemize]{leftmargin=12pt}
+
 
 \usetikzlibrary{spath3}
 \tikzcdset{pullback/.style = {"\lrcorner"{anchor = center, pos = 0.125}, draw = none}}
@@ -48,46 +50,18 @@
 \newcommand{\mbb}[1]{\mathbb{#1}}
 \newcommand{\T}{\mbb T}
 \newcommand{\I}{\mbb I}
-\newcommand{\hy}{\uv{\Sigma}}
 \newcommand{\gn}[1]{\ulcorner\! #1 \!\urcorner}
 \newcommand{\mr}[1]{\mathrm{#1}}
 \newcommand{\mf}[1]{\mathfrak{#1}}
 \newcommand{\ms}[1]{\mathsf{#1}}
-\newcommand{\Ind}{\mathbf{Ind}}
-\newcommand{\Pro}{\mathbf{Pro}}
 \newcommand{\Set}{\mb{Set}}
-\newcommand{\sSet}{\mb{sSet}}
-\newcommand{\sSeto}{\mb{sSet}_{\le 1}}
-\newcommand{\End}{\operatorname{End}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\Fin}{\mb{Fin}}
-\newcommand{\Cnt}{\mb{Cnt}}
-\newcommand{\Enm}{\mb{Enm}}
-\newcommand{\Grp}{\mb{Grp}}
-\newcommand{\sub}{\mr{Sub}}
-\newcommand{\Lex}{\mb{Lex}}
-\newcommand{\Pos}{\mb{Pos}}
-\newcommand{\Kp}{\mb{Kp}}
-\newcommand{\IKp}{\mb{IKp}}
-\newcommand{\Ep}{\mb{Ep}}
-\newcommand{\Kpp}{\Kp_{*}}
-\newcommand{\alg}{\text{-}\mb{Alg}}
-\newcommand{\Var}{\mb{Var}}
-\newcommand{\Aff}{\mb{Aff}}
-\newcommand{\Vect}{\mb{Vect}}
-\newcommand{\CRing}{\mb{CRing}}
-\newcommand{\DL}{\mb{DL}}
-\newcommand{\BA}{\mb{BA}}
-\newcommand{\HA}{\mb{HA}}
-\newcommand{\JL}{\mb{JL}}
-\newcommand{\ML}{\mb{ML}}
+\newcommand{\Cat}{\mb{Cat}}
 \newcommand{\ProMon}{\mb{ProMod}}
 \newcommand{\CTopoi}{\mb{CTopoi}}
 \newcommand{\PTc}{\mb{PT}_c}
 \newcommand{\Topoi}{\mb{Topoi}}
 \newcommand{\sh}{\mb{Sh}}
 \newcommand{\psh}{\mb{Psh}}
-\newcommand{\Cont}{\mb{Cont}}
 \newcommand{\Cart}[1]{#1^\to_{\text{cart}}}
 \newcommand{\Str}{\mb{Str}}
 \newcommand{\op}{^{\mathrm{op}}}
@@ -102,8 +76,8 @@
 \newcommand{\eff}{\Leftrightarrow}
 \newcommand{\conjt}{\;\&\;}
 \newcommand{\pair}[1]{\left\langle#1\right\rangle}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\ev}{\mathrm{ev}}
+\newcommand{\id}{\mathsf{id}}
+\newcommand{\ev}{\mathsf{ev}}
 \newcommand{\elem}{\int\!\!}
 \newcommand{\nt}{\Rightarrow}
 \newcommand{\scomp}[2]{\{\,#1\mid#2\,\}}
@@ -134,7 +108,7 @@
 \newcommand{\et}{_{\text{\'et}}}
 \newcommand{\rg}[1]{\mc O_{#1}}
 \newcommand{\res}[1]{|_{#1}}
-\newcommand{\N}{\mb N}
+\newcommand{\N}{\mbb N}
 \newcommand{\Q}{\mbb Q}
 \newcommand{\Z}{\mbb Z}
 \newcommand{\Deltao}{\Delta_{\le 1}}
@@ -150,48 +124,13 @@
 \newcommand{\cprt}{_{\top}}
 \newcommand{\fa}[2]{\forall #1 \!:\! #2.\ }
 \newcommand{\ex}[2]{\exists #1 \!:\! #2.\ }
-\newcommand{\exu}[2]{\exists_! #1\!\colon\!\!#2.\ }
-\newcommand{\ld}[2]{\lambda #1\!\colon\!\!#2.\ }
+\newcommand{\exu}[2]{\exists_! #1\!:\!#2.\ }
+\newcommand{\ld}[2]{\lambda #1\!:\!#2.\ }
 \newcommand{\subopen}{\subseteq_{\mbb \I}}
 \newcommand{\emp}{\emptyset}
 \newcommand{\eq}{\leftrightarrow}
-\newcommand{\ass}[1]{\llbracket#1\rrbracket} %\usepackage{stmaryrd}
-\newcommand{\pss}[1]{||#1||} %\usepackage{stmaryrd}
-\newcommand{\pt}{\ms{pt}}
-\newcommand{\tp}{\ms{Type}}
-\newcommand{\pp}{\ms{Prop}}
-\newcommand{\st}{\ms{Set}}
-\newcommand{\cnt}{\ms{Cnt}}
-\newcommand{\gp}{\ms{Grpd}}
-\newcommand{\pcat}{\ms{PCat}}
-\newcommand{\cat}{\ms{Cat}}
-\newcommand{\pcatt}{\ms{PCAT}}
-\newcommand{\catt}{\ms{CAT}}
-\newcommand{\PCat}{\mb{PCat}}
-\newcommand{\Cat}{\mb{Cat}}
-\newcommand{\sFrm}{\sigma\mb{Frm}}
-\newcommand{\Frm}{\mb{Frm}}
-\newcommand{\Loc}{\mb{Loc}}
-\newcommand{\PCAT}{\mb{PCAT}}
-\newcommand{\CAT}{\mb{CAT}}
-\newcommand{\Catt}{\mf{Cat}}
-\newcommand{\CATT}{\mf{CAT}}
-\newcommand{\Topp}{\mb{Top}}
-\newcommand{\Top}{\mf{Top}}
-\newcommand{\wTop}{\omega\mb{Top}}
-\newcommand{\Tp}{\ms{TYPE}}
-\newcommand{\Pp}{\ms{PROP}}
-\newcommand{\St}{\ms{SET}}
-\newcommand{\Gp}{\ms{GRPD}}
-\newcommand{\fst}{\ms{Fin}}
-\newcommand{\Mod}{\mb{Mod}}
-\newcommand{\Quot}{\mr{Quot}}
-\newcommand{\Fil}{\mb{Fil}}
-\newcommand{\SFil}{\mr{SFil}}
-\newcommand{\quot}[1]{/_{\pair{#1}}}
-\newcommand{\List}{\ms{List}}
-\newcommand{\hp}{\text{-}}
-\newcommand{\PG}{\ms{PG}}
+\newcommand{\ass}[1]{\OpnBrktBar#1\ClsBrktBar} 
+\newcommand{\pss}[1]{\OpnDblBar#1\ClsDblBar} 
 \newcommand{\uv}[1]{\underline{#1}}
 \newcommand{\mmod}[1]{#1\text{-}\mathbf{Mod}}
 \newcommand{\func}{\mb{Func}}
@@ -216,10 +155,25 @@
 \newcommand{\Diag}{\mb{Diag}}
 \newcommand{\W}{\mathbb W}
 \newcommand{\ovob}{\omega_\bot}
-\newcommand{\bx}{\Box}
-\newcommand{\Type}{\ms{Type}}
-\newcommand{\Prop}{\ms{Prop}}
+\newcommand{\bx}{\FacNec}
+\newcommand{\bbx}{\Nec}
+\newcommand{\Type}{\ms U}
+\newcommand{\Prop}{\Omega}
 \newcommand{\Inj}{\mb{Inj}}
+\newcommand{\const}{\ms{cst}}
+\newcommand{\ind}{\ms{ind}}
+\newcommand{\rec}{\ms{rec}}
+\newcommand{\apd}{\ms{apd}}
+\newcommand{\plo}{\!+\!1}
+\newcommand{\opm}[1]{\FacNext_{#1}}
+\newcommand{\upm}[1]{\FacNext^{#1}}
+\newcommand{\clm}[1]{\Next_{#1}}
+\newcommand{\opmm}{\FacNext}
+\newcommand{\later}{\FacFutr}
+\newcommand{\clmm}{\Next}
+\newcommand{\suc}{\mr{succ}}
+\newcommand{\ap}{\ms{ap}}
+\newcommand{\fix}{\ms{fix}}
 
 \DeclareFontFamily{U}{min}{}
 \DeclareFontShape{U}{min}{m}{n}{ <-> udmj30 }{}
@@ -250,7 +204,7 @@
 }
 \makeatother
 
-\title{Synthetic guarded domain theory and classifying topoi}
+\title{A purely internal approach towards synthetic guarded domain theory}
 \author{Lingyuan Ye}
 \address{
 Lingyuan \textsc{Ye} \newline
@@ -284,13 +238,17 @@ Cambridge, UK\newline
 
 \section{Introduction}
 
-This is an internal analysis on synthetic guarded domain theory~\cite{birkedal2012first}. Let $\W$ be the theory of filters on the poset $\omega = (\N,\le) = \set{0 < 1 < \cdots}$. For convenience, we will in fact use the poset $\ovob = \set{\bot < 0 < 1 < \cdots}$. Explicitly, $\W$ has propositional constants $\ms p_\bot,\ms p_0,\ms p_1,\cdots$, with axioms:
+\subsection{Axiomatisation}
+
+This is an internal analysis on synthetic guarded domain theory~\cite{birkedal2012first}. Let $\W$ be the theory of filters on the poset $\omega = (\N,\le) = \set{0 < 1 < \cdots}$. For convenience, we also introduce the following related poests, 
+\[ \ovob = \set{\bot < 0 < 1 < \cdots}, \quad \omega^\infty = \set{0<1<\cdots<\infty}. \]
+Explicitly, $\W$ has countably many propositional constants $\ms p_\bot,\ms p_0,\ms p_1,\cdots$, with axioms:
 \begin{enumerate}
-  \item $\ms p_\bot \vdash \bot$;
-  \item For all $n\le m\in\ovob$, $\ms p_n \vdash \ms p_m$;
-  \item $\top \vdash \bigvee_{n\in\omega} \ms p_n$.
+  \item[(w1)] $\ms p_\bot \vdash \bot$;
+  \item[(w2)] For all $n\le m\in\ovob$, $\ms p_n \vdash \ms p_m$;
+  \item[(w3)] $\top \vdash \bigvee_{n\in\omega} \ms p_n$.
 \end{enumerate}
-We work internally in the classifying topos $\Set[\W] \simeq \psh(\omega)$. We will use $\Prop$ to denote the type of propositions. We will also assume a univalent type universe $\Type$. We will use $\ovob$ to denote the poset internalised in $\Set[\W]$ as well. For any $n:\ovob$, we use $\ass{n}$ to denote the representable proposition.
+We work internally in the classifying topos $\Set[\W] \simeq \psh(\omega)$. We will use $\Prop$ to denote the type of propositions. We will also assume an increasing sequence of univalent type universes $\Type$. We will use $\ovob$ to denote the poset internalised in $\Set[\W]$ as well. For any $n:\ovob$, we use $\ass{n}$ to denote the representable proposition.
 
 \begin{axiom}[QC]\label{sgdqc}
   For any $n,m:\ovob$, 
@@ -307,125 +265,622 @@ We work internally in the classifying topos $\Set[\W] \simeq \psh(\omega)$. We w
   Every proposition is definable: $\fa p\Prop \ex n{\ovob} p = \ass{n}$.
 \end{axiom}
 
+\begin{axiom}[PG]\label{projective}
+  For any $n:\omega$, $\ass n$ is projective.
+\end{axiom}
+
 \begin{remark}
-  Notice that (GR) plus (QC) implies the sequence of propositions is a model of $\W$. By (GR), $\emp = \ass n$ for some $n : \ov\omega$, and by (QC) $\ass\bot \to \ass n = 1$, which implies $\ass\bot \to \emp$, thus $\ass\bot = \emp$. By (GR) again, $\ex n{\ovob} 1 = \ass n$, while $1 = \ass n$ is equivalent to $\ass n$, thus this implies $\bigvee_{n:\ovob}\ass n$.
+  The three axioms above are of different nature: 
+  \begin{itemize}
+    \item (QC) is an ``algebraic'' axiom, in the sense that it is an axiom stable under quotients of theories. (QC) is in fact already valid in the classifying topos $\psh(\omega^\infty)$ of the Horn theory with the same signature with only axioms (w1) and (w2). In fact, (QC) will be valid in any subtopos containing the generic filter in $\psh(\omega^\infty)$.
+    \item On the other hand, (GR) is characteristic of the classifying topos $\Set[\mbb W]$. From a logical perspective, it holds since geometric formulas in $\mbb W$ have very simple normal forms, i.e. it is either $\bot,\top$, or $\ms p_n$ for some $n\in\omega$. 
+    \item (PG) holds since $\Set[\mbb W] \simeq \psh(\omega)$ is of presheaf type, where the representables are internally projective.
+  \end{itemize}
 \end{remark}
 
-As an easy consequence, we can show the generic model is indeed generic in the following sense:
+\begin{remark}
+  Globally, we will assume the two axioms (QC) and (GR). When we need to invoke the projectivity axiom (PG), we will label it explicitly.
+\end{remark}
 
-\begin{lemma}\label{dnegclose}
-  For any $n : \omega$, $\neg\neg\ass n$.
-\end{lemma}
+\subsection{Elementary properties}
+
+In fact, these two axioms implies that the family of propositions form a model of $\W$ internally, i.e. they form a filter of $\omega$.
+
+\begin{proposition}\label{ismodel}
+  The family of propositions $\set{\ass n}_{n:\ovob}$ is a model of $\W$.
+\end{proposition}
 \begin{proof}
-  By (QC), given $n:\omega$, $\ass n \to \ass\bot = \ass\bot = \emp$. Equivalently, $\neg\neg\ass n$.
+  By (GR), $\emp = \ass n$ for some $n \colon \ovob$, and by (QC) $\ass\bot \to \ass n = 1$, which implies $\ass\bot \to \emp$, thus $\ass\bot = \emp$. This shows (w1) holds. (w2) is a direct consequence of (QC). For (w3), by (GR) again, $\ex n{\ovob} 1 = \ass n$, while $1 = \ass n$ is equivalent to $\ass n$, thus this implies $\bigvee_{n:\ovob}\ass n$ holds.
 \end{proof}
 
-\section{Internal later modality on propositions}
+In fact, this family of propositions should form a \emph{generic} filter. One evidence is the following simple observation:
 
-We can construct an internal later modality from the data of a certain endo-function on $\ovob$:
+\begin{lemma}\label{dnegclose}
+  For any $n:\omega$, $\neg\neg\ass n$.
+\end{lemma}
+\begin{proof}
+  By (QC), given $n:\omega$, $\ass n \to \ass\bot = \ass\bot$, which by~\cref{ismodel} is equivalent to $\emp$. Thus, $\neg\neg\ass n$.
+\end{proof}
 
-\begin{construction}[Later modality on propositions]\label{consprop}
-  Let $\theta \colon \ovob \to \ovob$ be a montone, non-decreasing function. Then the \emph{$\theta$-later modality} $\bx_\theta \colon \Prop \to \Prop$ takes $p:\Prop$ to $\ass{\theta n}$, where $p = \ass n$ by (GR).
+\begin{corollary}\label{wlem}
+  The weak excluded middle holds:
+  \[ \fa p{\Prop} \neg p \vee \neg\neg p. \]
+\end{corollary}
+\begin{proof}
+  Since we are proving a proposition, for any $p:\Prop$ we can choose $n:\ovob$ that $p = \ass n$. Now if $n = \bot$ then $p = \ass\bot = \emp$, thus $\neg p$ holds; if $n \ge 0$, then by~\cref{dnegclose} $\neg\neg p$ holds. Thus, $\neg p \vee \neg\neg p$ holds for any $p:\Prop$.
+\end{proof}
+
+\begin{remark}\label{empdecidable}
+  In other words,~\cref{wlem} shows that $\Prop$ can be written as a coproduct
+  \[ \Prop \simeq \set{\emp} + \Prop_{\neg\neg}. \]
+  This means for $p:\Omega$, $p = \emp$ is \emph{decidable}. In particular, for $n:\ovob$, $\ass n = \emp$ iff $n = \bot$.
+\end{remark}
+
+\begin{proposition}\label{doubleneg}
+  $\neg\neg \colon \Prop \to \Prop$ is equal to $p \mapsto \ass0 \to p$. In particular, it is continuous.
+\end{proposition}
+\begin{proof}
+  We first show that $\neg\neg p = \ass 0 \to p$, for any $p:\Prop$. By (GR) and funext, it suffices to show this for all $\ass n$ for $n:\ovob$. 
+  \begin{itemize}
+    \item When $n = \bot$, by~\cref{ismodel} $\ass\bot = \emp$ and $\neg\neg\ass\bot = \emp$. On the other hand, by (QC) $\ass0 \to \ass\bot=\ass\bot = \emp$. This shows they coincide.
+    \item When $n\ge 0$, then by~\cref{dnegclose} $\neg\neg\ass n$ holds. By (QC) $\ass0 \to \ass n$ also holds, thus again they coincide.
+  \end{itemize}
+  Now since $\ass0 \to (-)$ is a right adjoint, it automatically preserves all meets.
+\end{proof}
+
+\begin{corollary}\label{Kuroda}
+  The Kuroda principle holds: for any $p \colon X \to \Prop$, 
+  \[ \fa xX \neg\neg p(x) \to \neg\neg \fa xX p(x). \]
+\end{corollary}
+\begin{proof}
+  By~\cref{doubleneg}, $\neg\neg$ preserves all limits.
+\end{proof}
+
+\begin{corollary}\label{negnegBoo}
+  The double negation of LEM holds: $\neg\neg\fa p{\Prop}p \vee \neg p$.
+\end{corollary}
+\begin{proof}
+  By~\cref{Kuroda}, it suffices to show for any $p:\Prop$, $\neg\neg(p \vee \neg p)$, or equivalently, $\neg\neg p \vee \neg p$. This holds by~\cref{wlem}.
+\end{proof}
+
+\begin{remark}\label{scatterlogic}
+  \cite{ESAKIA200097} introduced the notion of \emph{$\bot$-scattered} and \emph{scattered} topos, and shows that the statements in \cref{Kuroda} and~\cref{negnegBoo} are in fact equivalent, in which case the topos is called $\bot$-scattered. As a consequence of~\cref{canonicallob} and~\cref{canonicalneg} later, we can in fact show internally that we are working with a \emph{scattered} topos.
+\end{remark}
+
+\begin{lemma}\label{internallyconnected}
+  For any $n:\omega$, $\ass n$ is connected, i.e. $2 \simeq 2^{\ass n}$. 
+\end{lemma}
+\begin{proof}
+  Given any map $\ass n \to 2$, this is equivalent to two propositions $p,q$ that $p \to \ass n$ and $q \to \ass n$ and that $p \wedge q = \emp$. By (GR), we may assume $p = \ass i$ and $q = \ass j$. This way, $\ass i \wedge \ass j = \ass{i \wedge j} = \emp$, which by~\cref{empdecidable}, $i \wedge j = \bot$, equivalently $i = \bot$ or $j = \bot$. Thus, the map $\ass n \to 2$ factors through some $1 \inj 2$, thus $2 \simeq 2^{\ass n}$.
+\end{proof}
+
+In fact, we can show a stronger result:
+
+\begin{lemma}\label{interallyconconnected}
+  For any $n:\omega$, $\N \simeq \N^{\ass n}$.
+\end{lemma}
+\begin{proof}
+  Given $f \colon \ass n \to \N$, again we can define a sequence of propositions $p \colon \N \to \Prop$, where for any $i:\N$,
+  \[ p(i) \coloneq f\inv(\set{i}). \]
+  By construction, $\bigvee_{i:\N}p(i) = \ass n$ and $p(i) \wedge p(j) = \emp$ for all $i \neq j$. The first condition implies that there exists $i:\N$ that $p(i) = \ass n$. The second condition implies that $p(j) = \emp$ for all $j \neq i$. By~\cref{empdecidable}, such $i$ is unique, thus $f$ factors through a unique $\set i \hook \N$.
+\end{proof}
+
+
+\section{Later modality on propositions}
+
+Given the two axioms (QC) and (GR), we can construct \emph{internally} a later modality on propositions, starting from some endo-function on $\ovob$. Later on we will also generalise the construction to the level of general types. In fact, we will construct a \emph{dependent} modality. The modality we construct will always be (well-)pointed and left exact. We will also characterise when it also satisfies \emph{L\"ob induction}.
+
+Interestingly, we will provide both a \emph{positive} and \emph{negative} construction of of the later modality, so that it has both a mapping-out and mapping-in universal property.
+
+\subsection{A positive construction}
+
+\begin{construction}[A positive construction of the later modality on propositions]\label{consprop}
+  Let $\theta \colon \ovob \to \ovob$ be a \emph{montone, inflationary} function: 
+  \begin{itemize}
+    \item For any $n,m:\ovob$ with $n\le m$, $\theta n \le \theta m$;
+    \item For any $n:\ovob$, $n \le \theta n$.
+  \end{itemize}
+  Then the modality $\bbx_\theta \colon \Prop \to \Prop$ takes $p:\Prop$ to
+  \[ \bbx_\theta p \coloneq \bigvee_{n:\ovob} \ass{\theta n} \wedge (\ass n \to p). \]
 \end{construction}
 
-We first show this construction is well-defined.
-
-\begin{proposition}
-  $\bx_\theta \colon \Prop \to \Prop$ is well-defined, i.e. we have a diagram 
+\begin{proposition}\label{modalityonrepre}
+  $\bbx_\theta \colon \Prop \to \Prop$ makes the following diagram commute,
   \[ 
   \begin{tikzcd}
-    \ovob \ar[d, two heads] \ar[r, "\theta"] & \ovob \ar[d, two heads] \\
-    \Prop \ar[r, dashed, "\bx_\theta"'] & \Prop
+    \ovob \ar[d, "\ass-"'] \ar[r, "\theta"] & \ovob \ar[d, "\ass-"] \\
+    \Prop \ar[r, "\bbx_\theta"'] & \Prop
   \end{tikzcd}
   \]
 \end{proposition}
 \begin{proof}
-  Suppose $p = \ass n = \ass m$ for some $n,m : \ovob$, and we need to show $\ass{\theta n} = \ass{\theta m}$ as well. We may assume $m < n$, since the case $m = n$ is trivial. By (QC), $\ass n \to \ass m$ is equivalent to $\ass m$, thus $\ass m$ holds. Since $\theta$ is non-decreasing, by (QC) $\ass{\theta m}$ holds as well, which by monotonicity of $\theta$, $\ass{\theta n}$ holds as well. Thus shis shows $\ass{\theta n} = \ass{\theta m}$. 
+  For any $n:\ovob$, by~\cref{consprop} we have 
+  \begin{align*}
+    \bbx_\theta\ass n 
+    &= \bigvee_{m:\ovob} \ass{\theta m} \wedge (\ass m \to \ass n) \\ 
+    &= \bigvee_{m \le n} \ass{\theta m} \vee \bigvee_{m > n} \ass{\theta m} \wedge \ass n \\ 
+    &= \ass{\theta n} \vee \ass n \\ 
+    &= \ass{\theta n}
+  \end{align*}
+  The first equality is by definition; the second is by (QC); the third by (QC) and the fact that $\theta$ is monotone and inflationary; similarly for the last equality.
 \end{proof}
 
-From now on, fix a monotone and non-decreasing function $\theta \colon \ovob \to \ovob$. 
+\begin{remark}\label{usualmodalitypos}
+  For the usual later modality $\bbx$ in synthetic guarded domain theory as specified in~\cite{birkedal2012first}, it corresponds to the monotone inflation map $n \mapsto n\plo$ on $\ovob$. In particular, it can be internally defined as  
+  \[ \bbx p \coloneq \bigvee_{n:\ovob}\ass{n\plo} \wedge (\ass n \to p). \]
+  \cref{lobprop} will provide an internal proof of L\"ob induction for this operator.
+\end{remark}
 
-\begin{proposition}
-  $\bx_\theta$ is pointed.
+As a start, we can show that the modality $\bbx_\theta$ will always satisfy some desired property:
+
+\begin{proposition}\label{posproplex}
+  For any monotone and inflationary map $\theta \colon \ovob \to \ovob$, $\bbx_\theta$ is pointed and left exact.
 \end{proposition}
 \begin{proof}
-  For any $p:\Prop$, by (GR) let $p = \ass n$. By construction, $\bx_\theta p = \ass{\theta n}$, which by $\theta$ being non-decreasing we have $p \to \bx_\theta p$.
+  To show $\fa p{\Prop}p \to \bbx_\theta p$, by (GR) it suffices to show $\ass n \to \bbx_\theta\ass n$ for all $n:\ovob$. By~\cref{modalityonrepre} and (QC) this holds since $\bbx_\theta\ass n = \ass{\theta n}$ and $\theta$ is inflationary. 
+  
+  For left exactness, by (GR) we may assume $1 = \ass n$, thus by~\cref{modalityonrepre} we have $\bbx_\theta 1 = \bbx_\theta\ass n = \ass{\theta n}$. Since $\theta$ is inflationary, by (QC) this means $\ass{\theta n}$ holds as well, thus $\bbx_\theta 1 = 1$. Proving $\bbx_\theta$ preserves binary meets is similar.
 \end{proof}
 
-\begin{proposition}\label{proplex}
-  $\bx_\theta$ is left exact.
-\end{proposition}
-\begin{proof}
-  For $1$, by (GR) let $1 = \ass n$. Then since $\theta$ is non-decreasing, $\bx_\theta 1 = \ass{\theta n}$ holds as well. Preserving binary meets is easy.
-\end{proof}
+Most importantly, we have a criterion of when $\bbx_\theta$ satisfies L\"ob induction:
 
-\begin{theorem}
-  If $\theta$ is strictly increasing, then $\bx_\theta$ satisfies L\"ob induction,
-  \[ \fa p{\Prop} (\bx_\theta p \to p) \to p. \]
+\begin{theorem}\label{lobprop}
+  If $\theta$ furthermore is strictly inflationary, i.e. $n < \theta n$ for all $n:\ovob$, then $\bbx_\theta$ satisfies L\"ob induction:
+  \[ \fa p{\Prop} (\bbx_\theta p \to p) \to p. \]
 \end{theorem}
 \begin{proof}
-  Take $p:\Prop$, and by (GR) let $p = \ass n$. Assume $\bx_\theta p \to p$, viz. $\ass{\theta n} \to \ass{n}$. Since $\theta$ is strictly increasing, by (QC) this implication is equivalent to $\ass n$, viz. $p$, holds.
+  Take $p:\Prop$, and by (GR) let $p = \ass n$. Assume $\bbx_\theta p \to p$, viz. $\ass{\theta n} \to \ass{n}$. Since $\theta$ is strictly increasing, by (QC) this implication is equivalent to $\ass n$, viz. $p$, holds.
 \end{proof}
 
-\section{Internal later modality on types}
+\subsection{A negative construction}
 
-For any type $X : \Type$, we need a way to relate the function spaces $X^{\ass n}$ for $n:\ovob$ to $X$ itself. It turns out we can write any type as a \emph{coend}:
+On the other hand, we shall also provide a \emph{negative} construction of the later modality. For this we introduce the notion of \emph{flat} maps.
 
-\begin{theorem}
-  For any $X:\Type$, it is isomorphic to the coend 
-  \[ X \cong \int^{n:\ovob} \ass n \times X^{\ass n}. \]
-\end{theorem}
-\begin{proof}
-  This is a consequence of (GR), where we can assume $1 = \ass n$ for some $n:\ovob$. This way, the coend becomes constant, thus is isomorphic to $X$.
-\end{proof}
+% \begin{proposition}[Least number principle for decidable propositions]\label{lnp}
+%   For any subset $P$ of $\ovob$, if $P$ is decidable and merely inhabited:
+%   \begin{itemize}
+%     \item $\fa n{\ovob} P(n) \vee \neg P(n)$
+%     \item $\ex n{\ovob} P(n)$
+%   \end{itemize}
+%   then there exists a smallest $n:\ovob$ that $P(n)$ holds.
+% \end{proposition}
+% \begin{proof}
+%   We prove by induction on $n$ the following proposition:
+%   \[ P(n) \to \sum_{m:\ovob} P(m) \wedge \fa l{\ovob} l < m \to \neg P(l). \]
+%   Note that the consequence is indeed a proposition, since any two terms of it would be equal. The base case $n = 0$ is easy, since the conclusion is witnessed by $0$ itself. For the inductive case $n+1$, consider the \emph{decidable} proposition $\ex{k}{\ovob} k \le n \wedge P(k)$. If it holds, then for some $k \le n$ we have $P(k)$, then the desired conclusion holds by the induction hypothesis; if not, then we can prove $n+1$ itself is the desired conclusion.
+% \end{proof}
 
-\begin{construction}[Later modality on types]\label{constype}
-  Let $\theta \colon \ovob \to \ovob$ be a monotone, non-decreasing map on $\ovob$. The \emph{$\theta$-later modality} $\bx_\theta \colon \Type \to \Type$ is constructed as follows: For any $X : \Type$, 
-  \[ \bx_\theta X \coloneq \int^{n:\ovob}\ass{\theta n} \times X^{\ass n}. \]
+\begin{definition}[Flat map]\label{flat}
+  We say a monotone function $\rho \colon \ovob \to \ovob$ is \emph{flat}, if it is unbounded, i.e. for any $n:\ovob$, there exists $m:\ovob$ that $n < \rho m$. 
+\end{definition}
+
+\begin{definition}\label{dualmapofflat}
+  Given a flat map $\rho$, by the least number principle we have a dual map $\qsi\rho \colon \ovob \to \ovob$ that for any $n:\ovob$, $\qsi\rho n$ is the least $m$ that $n < \rho m$. We also define the \emph{normalised} dual map $\pf\rho$ as $\pf\rho(n) \coloneq \max(\qsi\rho(n),n)$.
+\end{definition}
+
+\begin{remark}
+  By definition, $\pf\rho$ is monotone and inflationary.
+\end{remark}
+
+\begin{construction}[A negative construction of the later modality on propositions]\label{consnegprop}
+  Let $\rho \colon \ovob \to \ovob$ be a \emph{flat} map.
+  Then the modality $\bbx^\rho \colon \Prop \to \Prop$ takes $p:\Prop$ to
+  \[ \bbx^\rho p \coloneq \bigwedge_{n:\ovob} \ass{n} \vee (\ass{\rho n} \to p). \]
 \end{construction}
 
-Again, let us fix a monotone and non-decreasing map $\theta \colon \ovob \to \ovob$.
+\begin{remark}
+  The form of the construction of modality in~\cref{consnegprop} is evidently \emph{dual} to that in~\cref{consprop}.
+\end{remark}
 
-\begin{proposition}\label{twoconscoin}
-  The modality $\bx_\theta \colon \Type \to \Type$ given in~\cref{constype} restricts to the modality $\bx_\theta \colon \Prop \to \Prop$ on propositions given in~\cref{consprop}.
+Again, let us compute the value of $\bbx^\rho$ on the generic propositions.
+
+\begin{proposition}\label{neglateronrep}
+  Let $\rho$ be a flat map and $\pf\rho$ its normalised dual map. For any $n:\ovob$,
+  \[ \bbx^\rho\ass n = \ass{\pf\rho n}. \]
 \end{proposition}
 \begin{proof}
-  By (GR), it suffices to show $\bx_\theta\ass n$, according to~\cref{constype}, will be equal to $\ass{\theta n}$ for all $n:\ovob$. By construction and (QC), we have
+  By (QC),~\cref{consnegprop} and the definition of $\qsi\rho,\pf\rho$ in~\cref{dualmapofflat}, we compute
+  \begin{align*}
+    \bbx^\rho\ass n 
+    &= \bigwedge_{m:\ovob} \ass m \vee (\ass{\rho m} \to \ass n) \\ 
+    &= \bigwedge_{m \ge \qsi\rho n} \ass m \vee \ass n \\
+    &= \ass{\qsi\rho n} \vee \ass n  \\
+    &= \ass{\pf\rho n} \qedhere
+  \end{align*}
+  The first identity holds by definition. The second holds since when $m < \qsi\rho n$, by definition $\rho m \le n$ thus the expression evaluates to 1; and by (QC), when $\rho m > n$, $\ass{\rho m} \to \ass n$ is equivalent to $\ass n$. The last identity holds by definition of $\pf\rho$.
+\end{proof}
+
+\begin{corollary}\label{negispos}
+  For any flat map $\rho$, $\bbx^\rho = \bbx_{\pf\rho}$.
+\end{corollary}
+\begin{proof}
+  By function extensionality, it suffices to show $\bbx^\rho p = \bbx_{\pf\rho}p$ for all $p:\Prop$. Now by (GR) it suffices to show this for all $\ass n$. The remaining holds by~\cref{neglateronrep} and~\cref{modalityonrepre}.
+\end{proof}
+
+\begin{corollary}
+  For any flat map $\rho$, $\bbx^\rho$ is pointed and left exact.
+\end{corollary}
+
+\begin{theorem}\label{canonicallob}
+  If $\rho$ is deflationary, i.e. $\rho n \le n$ for all $n:\ovob$, then $\bbx^\rho$ satisfies L\"ob induction.
+\end{theorem}
+\begin{proof}
+  If $\rho$ is deflationary, then by monotonicity $\pf\rho$ must be strictly inflationary. Thus the claim holds by~\cref{lobprop} and~\cref{negispos}.
+\end{proof}
+
+\begin{remark}\label{canonicalneg}
+  By~\cref{usualmodalitypos} and~\cref{negispos}, we have an alternative construction of the usual later modality $\bbx$. Notice that the identity map $\id \colon \ovob\to\ovob$ is flat, and its normalised dual map is exactly given by $n \mapsto n\plo$. This way, we have an alternative characterisation of $\bbx$ as below,
+  \[ \bbx p \coloneq \bigwedge_{n:\ovob} \ass n \vee (\ass n \to p). \]
+  This nice thing about this formula is that, by (GR), we can avoid mentioning the generic propositions at all,
+  \[ \bbx p = \bigwedge_{q\colon\Prop} q \vee (q \to p). \]
+  This is indeed the formula obtained in~\cite{ESAKIA200097}.
+\end{remark}
+
+
+\section{An investigation of the modalities}
+
+
+Recall that for any proposition $p:\Prop$, it generates both an open modality $\opm p X \coloneq X^P$ and closed modality $\clm p X \coloneq p * X$, where $p*X$ is the \emph{join} of $p$ and $X$ defined as the following pushout,
+\[\begin{tikzcd}
+  {p \times X} & X \\
+  p & {p * X}
+  \arrow[tail, from=1-1, to=1-2]
+  \arrow[from=1-1, to=2-1]
+  \arrow["\gamma", from=1-2, to=2-2]
+  \arrow["\iota"', tail, from=2-1, to=2-2]
+  \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+\end{tikzcd}\]
+Both of them are lex modalities in the sense of~\cite{lmcs:3826}. For any $n:\ovob$, we will also denote the open and closed modalities corresponding to $\ass n$ as $\opm n$ and $\clm n$, respectively. In fact, both of them are idempotent monads. Notice that since by (QC), $\ass n \to \ass{m}$ for any $n \le m$ in $\ovob$, there are thus canonical natural transformations 
+\[ \gamma \colon \opm{m} \nt \opm{n}, \quad \iota \colon \clm{n} \nt \clm{m}. \]
+We also write the units of these modalities as 
+\[ \eta^{\opm n} \colon \id \nt \opm n, \quad \eta^{\clm n} \colon \id \nt \clm n. \]
+For simplicity, we might also just write $\eta^{\opmm}$ and $\eta^{\clmm}$. Notice that $\gamma$ and $\iota$ are in fact natural transformations of \emph{monads}, thus they also commute with the units $\eta^\opmm$ and $\eta^\clmm$.
+
+\begin{remark}\label{opclpresprop}
+  In particular, since both $\opm n$ and $\clm n$ are lex modalities, they preserve propositions. For any proposition $p$, by construction $\opm n p = \ass n \to p$ and $\clm n p = \ass n \vee p$.
+\end{remark}
+
+\begin{remark}\label{modaltypes}
+  As characterised in~\cite{lmcs:3826}, a type $X$ is $\opm n$-modal iff $X \to X^{\ass n}$ is an equivalence; a type $X$ is $\clm n$-modal iff $\ass n$ implies $X$ is contractible. By~\cref{internallyconnected,interallyconconnected}, all finite sets and $\N$ are $\opm n$-modal for $n:\omega$.
+\end{remark}
+
+\begin{lemma}\label{preservemodal1}
+  If $n \ge m$, then $\opm n$ preserves $\clm m$-modal types.
+\end{lemma}
+\begin{proof}
+  Suppose $X$ is $\clm m$-modal. By (QC), if $\ass m$ holds, then $\ass n$ holds as well, thus $\ass m$ implies $\opm nX \simeq X^{\ass n} \simeq X \simeq 1$, thus $\opm nX$ is again $\clm m$-modal.
+\end{proof}
+
+\begin{lemma}[PG]\label{preservemodal2}
+  If $n < m$, then $\clm n$ preserves $\opm m$-modal types.
+\end{lemma}
+\begin{proof}
+  Suppose $X$ is $\opm m$-modal. Consider the type $\clm nX$. To show it is $\opm m$-modal, suppose we have a map $f \colon \ass m \to \clm nX$. Recall from construction that $\clm nX$ is a pushout, thus admits a surjection as below,
+  \[
+  \begin{tikzcd}
+    & \ass n + X \ar[d, two heads] \\
+    \ass m \ar[r, "f"'] \ar[ur, dashed, "\ov f"] & \clm nX
+  \end{tikzcd}
+  \]
+  By (PG), there exists a lift $\ov f \colon \ass m \to \ass n + X$. By~\cref{internallyconnected}, we can do a case distinction:
+  \begin{itemize}
+    \item If $\ov f$ factors through $\ass n$, then $\ass m \to \ass n$. By (QC), $\ass m \to \ass n = \ass n$, thus $\ass n$ holds. This implies $\clm n = \id$, and the claim trivialises.
+    \item If $\ov f$ factors through $X$, then by $X$ being $\opm m$-modal there is a unique point $x:X$ making the following diagram commute,
+    \[
+    \begin{tikzcd}
+      \ass m \ar[r, "\ov f"] \ar[d, hook] & X \\
+      1 \ar[ur, dashed, "x"']
+    \end{tikzcd}
+    \]
+    This way, $\eta^{\clmm}x : \clm nX$ gives an extension of $f$ as well. To show this extension is unique, again we can do a case distinction to test elements in $\clm nX$ coming from $\ass n$ or $X$; the latter case follows from $X$ being $\opm m$-modal, and the former case follows from the fact that $\clm nX$ will be contractible. \qedhere
+  \end{itemize}
+\end{proof}
+
+\begin{lemma}\label{stronglydisjoint}
+  When $m \le n$, then $\opm m$ is strongly disjoint from $\clm n$ in the sense of~\cite{lmcs:3826}, i.e. every $\clm n$-modal type is $\opm m$-connected.
+\end{lemma}
+\begin{proof}
+  Let $X$ be $\clm n$-modal. Since $m \le n$, by (QC) $\ass m \to X\simeq 1$. In particular, this means $\opm mX \simeq X^{\ass m}$ will be contractible, thus $X$ will be $\opm m$-connected.
+\end{proof}
+
+\begin{theorem}\label{modalitycommute}
+  The following properties of the closed and open modalities hold:
+  \[
+  \opm n\clm m =
+  \begin{cases}
+    \opm{\bot} & n \le m \\
+    \clm m\opm n & n > m
+  \end{cases}
+  \]
+\end{theorem}
+\begin{proof}
+  Take $n,m:\ovob$. Suppose $n \le m$. By~\cref{stronglydisjoint} $\opm n$ is strongly disjoint from $\clm m$, thus the composite $\opm n\clm m$, as their meets, is the zero modality $\opm{\bot}$. On the other hand, if $n > m$, then by~\cref{preservemodal1,preservemodal2}, $\opm n$ preserves $\clm m$-modal types and $\clm m$ preserves $\opm n$-modal types. By~\cite{lmcs:3826}, this implies both the composites $\opm n\clm m$ and $\clm m\opm n$ computes the meet of $\opm n$ and $\clm m$. Thus, they commute.
+\end{proof}
+
+\begin{definition}\label{fracture}
+  For any $n,m:\ovob$ and any type $X:\Type$, following~\cite{lmcs:3826} there is a canonical \emph{fracture square} as below,
+  \[
+  \begin{tikzcd}
+    X \ar[d, "\eta^{\clmm}"'] \ar[r, "\eta^{\opmm}"] & \opm m X \ar[d, "\eta^{\clmm}"] \\
+    \clm n X \ar[r, "\clm n\eta^{\opmm}"'] & \clm n\opm m X
+  \end{tikzcd}
+  \]
+  The diagram commutes by naturality of $\clm n$, and we will denote the unique map as 
+  \[ \sigma_{n,m} \colon X \to \clm n\opm mX. \]
+\end{definition}
+
+\begin{remark}
+  By~\cref{stronglydisjoint} and~\cite{lmcs:3826}, when $m \le n$, the fracture square in~\cref{fracture} will be a pullback.
+\end{remark}
+
+\section{Negative construction of later modality for types}
+
+Let us now fix a flat and deflationary map $\rho \colon \ovob \to \ovob$.
+
+\begin{construction}[Negative later modality on types]\label{negmodtype}
+  For any $X\colon\Type$, define $\bx^\rho X$ to be the following end,
+  \[ \bx^\rho X \coloneq \int_{n:\ovob} \clm n \opm{\rho n} X. \]
+  The end is constructed as a limit, where for any $n:\ovob$ there is a projection map
+  \[ \pi_n \colon \bx^\rho X \to \clm n \opm{\rho n}X, \]
+  such that the following diagram commutes for any $n:\ovob$,
+  \[
+  \begin{tikzcd}
+    \bx^\rho X \ar[r, "\pi_n"] \ar[d, "\pi_{n+1}"'] & \clm n \opm{\rho n}X \ar[d, "\iota"] \\ 
+    \clm{n+1}\opm{\rho(n+1)}X \ar[r, "\clm{n+1}\gamma"'] & \clm{n+1}\opm{\rho n}X
+  \end{tikzcd}
+  \]
+  Explicitly, $\bx^\rho X$ can be identified as the following type,
+  \[ \bx^\rho X \coloneq \sum\prth{f : \prod_{n:\ovob} \clm n \opm{\rho n}X} \times \prod_{n:\ovob} \iota_{\opm{\rho n}X}(f_n) = (\clm{n+1}\gamma_{X})(f_{n+1}). \]
+\end{construction}
+
+\begin{remark}
+  Notice that since $\rho\bot = \bot$ by being deflationary, and that $\opm\bot$ is the zero modality taking everything to $1$, we can also omit the $\bot$ index in the end,
+  \[ \bx^\rho X \simeq \int_{n:\omega}\clm n\opm{\rho n}X. \]
+\end{remark}
+
+\begin{remark}[Functoriality of $\bx^\rho$]\label{funcofmodality}
+  Given a map $f \colon X \to Y$, the functoriality of $\bx^\rho$ follows from the functoriality of $\int_{n:\ovob}$ and $\clm n\opm{\rho n}$:
+  \[ \bx^\rho f \coloneq \int_{n:\ovob}\clm n\opm{\rho n}f. \]
+\end{remark}
+
+Our first goal is to show that $\bx^\rho$ coincide with $\bbx^\rho$ when applied to propositions. For this we first show that $\bx^\rho$ is left exact.
+
+\begin{proposition}
+  For any $p:\Prop$, $\bx^\rho p = \bbx^\rho p$.
+\end{proposition}
+\begin{proof}
+  By~\cref{opclpresprop}, $\clm n p$ is simply the disjunction $\ass n \vee p$, thus is again a proposition for any $n:\ovob$. This shows that the identity types in these types are contractible. This way, we may compute that 
+  \begin{align*}
+    \bx^\rho p 
+    &\simeq \sum\prth{f : \prod_{n:\ovob} \clm n \opm{\rho n} p} \times \prod_{n:\ovob} \iota f_n = (\clm{n+1}\gamma)(f_{n+1}). \\
+    &\simeq \prod_{n:\ovob}\ass n \vee (\ass{\rho n} \to p) \\
+    &\simeq \bbx^\rho p \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{corollary}\label{typelob}
+  $\bx^\rho$ satisfies L\"ob induction.
+\end{corollary}
+
+Another quick observation is that $\bx^\rho$ is left exact:
+
+\begin{proposition}\label{modalitypresfinitelimits}
+  $\bx^\rho$ preserves finite limits.
+\end{proposition}
+\begin{proof}
+  This is simply due to the construction of $\bx^\rho$ as $\int_{n:\ovob}\clm n\opm{\rho n}$, where both the modalities $\clm n$ and $\opm{\rho n}$ are left exact, and the limit $\int_{n:\ovob}$ commutes with any limits.
+\end{proof}
+
+\begin{theorem}
+  $\bx^\rho$ is well-pointed.
+\end{theorem}
+\begin{proof}
+  To construct a point $\eta^{\bx^\rho} \colon X \to \bx^\rho X$ for any $X \colon \Type$, we need to provide a map $\eta^{\bx^\rho}_n \colon X \to \clm n \opm{\rho n}X$ for any $n:\ovob$, with a proof for any $n:\ovob$, $\iota\eta^{\bx^\rho}_n = (\clm{n+1}\gamma)\eta^\bx_{n+1}$. We may take $\eta^{\bx^\rho}_n$ to be $\sigma_{n,\rho n}$ as in~\cref{fracture}. The commutativity follows from the following diagram,
+  \[\begin{tikzcd}
+    X & {\opm{\rho(n+1)}X} & {\clm n\opm{\rho(n+1)}X} & {\clm{n+1}\opm{\rho(n+1)}X} \\
+    & {\opm{\rho n}X} & {\clm n \opm{\rho n}X} & {\clm{n+1}\opm{\rho n}X}
+    \arrow["{\eta^{\opmm}}", from=1-1, to=1-2]
+    \arrow["{\eta^{\opmm}}"', from=1-1, to=2-2]
+    \arrow["{\eta^{\clmm}}"', from=1-2, to=1-3]
+    \arrow["{\eta^{\clmm}}", curve={height=-18pt}, from=1-2, to=1-4]
+    \arrow["{\eta^{\opmm}}", from=1-2, to=2-2]
+    \arrow["\iota"', from=1-3, to=1-4]
+    \arrow["{\clm n\gamma}", from=1-3, to=2-3]
+    \arrow["{\clm{n+1}\gamma}", from=1-4, to=2-4]
+    \arrow["{\eta^{\clmm}}"', from=2-2, to=2-3]
+    \arrow["\iota"', from=2-3, to=2-4]
+  \end{tikzcd}\]
+  The left triangle commutes by construction; the two squares commutes by naturality; the side triangle commutes by $\iota$ being a monad map. 
+  
+  For well-pointedness, by~\cref{funcofmodality} the map $\bx^\rho\eta^{\bx^\rho}_X \colon \bx^\rho X \to \bx^\rho\bx^\rho X$ is given by 
+  \[ \bx^\rho\eta^{\bx^\rho}_X = \int_{n:\ovob}\clm n\opm{\rho n}\eta^{\bx^\rho}_X. \]
+  In other words, at component $n:\ovob$, $(\bx^\rho\eta^{\bx^\rho}_X)_n$ is given by the following composite,
+  \[ 
+  \begin{tikzcd}
+    \bx^\rho X \ar[r, "\pi_n"] & \clm n\opm{\rho n}X \ar[r, "\clm n\opm{\rho n}\eta^{\bx^\rho}_X"] \ar[dr, "\pair{\clm n\opm{\rho n}\sigma_{m,\rho m}}_{m}"'] & \clm n\opm{\rho n}\bx^\rho X \ar[d, "\simeq"] \\
+    & & \int_{m}\clm n\opm{\rho n}\clm m\opm{\rho m}X
+  \end{tikzcd}
+  \]
+  On the other hand, $\eta^{\bx^\rho}_{\bx^\rho X}$ at component $n$ is given by the composite
+  \[
+  \begin{tikzcd}
+    \bx^\rho X \ar[r, "\sigma_{n,\rho n}"] \ar[d, "\simeq"'] & \clm n\opm{\rho n}\bx^\rho X \ar[d, "\simeq"] \\ 
+    \int_{m}\clm m\opm{\rho m}X \ar[r, "\int_{m}\sigma_{n,\rho n}"'] & \int_{m}\clm n\opm{\rho n}\clm m\opm{\rho m}X
+  \end{tikzcd}
+  \]
+  To show the two composite coincide, it suffices to show they coincide at each component $m:\ovob$, i.e. for any $n,m$ we want 
+  \[
+  \begin{tikzcd}
+    \bx^\rho X \ar[d, "\pi_m"'] \ar[r, "\pi_n"] & \clm n\opm{\rho n}X \ar[d, "\clm n\opm{\rho n}\sigma_{m,\rho m}"] \\
+    \clm m\opm{\rho m}X \ar[r, "\sigma_{n,\rho n}"'] & \clm n\opm{\rho n}\clm m\opm{\rho m}X
+  \end{tikzcd}
+  \]
+  For this we distinguish two cases:
+  \begin{itemize}
+    \item If $\rho n \le m$, then by~\cref{modalitycommute} $\opm{\rho n}\clm m \simeq \opm{\bot}$, which means the target is contractible. In this case the commutativity is automatic.
+    \item If $m < \rho n \le n$, then by~\cref{modalitycommute} again we have
+    \[ \clm n\opm{\rho n}\clm m\opm{\rho m}X \simeq \clm n\clm m\opm{\rho n}\opm{\rho m}X \simeq \clm n\opm{\rho m}X. \]
+    Now it is easy to see the diagram will be equal to 
+    \[
+    \begin{tikzcd}
+      \bx^\rho X \ar[d, "\pi_m"'] \ar[r, "\pi_n"] & \clm n\opm{\rho n}X \ar[d, "\iota"] \\
+      \clm m\opm{\rho m}X \ar[r, "\clm m\gamma"'] & \clm n\opm{\rho m}X
+    \end{tikzcd}
+    \]
+    which commutes by the construction of the end $\bx^\rho$. \qedhere
+  \end{itemize}
+\end{proof}
+
+% In fact, combining the above facts we can show that $\bx^\rho$ provides guarded fixed-points for arbitrary types:
+
+% \begin{theorem}
+%   For any $X:\Type$, given a map $f \colon \bx^\rho X \to X$ the following type is contractible,
+%   \[ \fix(f) \coloneq \sum_{x:X}f(\eta^{\bx^\rho}x) = x. \]
+% \end{theorem}
+% \begin{proof}
+%   We adopt the proof from~\cite{gratzer2025modal}. We first construct a map 
+%   \[ T : \prod_{r:\fix(f)}\sum_{s:\fix(f)}\bx^\rho(r = s). \]
+%   To construct $T$, we observe that by~\cref{modalitypresfinitelimits}, for any $a,b:A$ the canonical map $\alpha \colon \bx^\rho(a = b) \to \eta^{\bx^\rho}a = \eta^{\bx^\rho}b$ is an equivalence. This way, given $r \coloneq (x,p):\fix(f)$, i.e. $x:X$ and $p:f(\eta^{\bx^\rho}x) = x$, we define $T(x,p) \coloneq (s,t)$ where
+%   \[ s \coloneq (f(\eta^{\bx^\rho}x),\apd_{f\eta^{\bx^\rho}}p). \]
+%   Furthermore, to construct $t : \bx^\rho(r = s)$, by the equivalence $\alpha$ it suffices to construct $\eta^{\bx^\rho}r = \eta^{\bx^\rho}s$.
+%   Since we are proving a proposition, we may assume there exists $n:\omega$ that $\ass n$ holds.
+% \end{proof}
+
+We can also establish some other properties of the later modality $\bx^\rho$.
+
+\begin{lemma}\label{preservetruncation}
+  $\bx^\rho$ preserves $k$-truncated types.
+\end{lemma}
+\begin{proof}
+  For (-2)- and (-1)-types this follows from left exactness. Now $\omega_\bot$ by construction is 0-truncated. By~\cite{lmcs:3826}, both $\clm n$ and $\opm n$ preserves $n$-truncated types, and $n$-truncated types are closed under dependent sums and dependent products.
+\end{proof}
+
+We can also compute the open modality applied to the later modality:
+
+\begin{proposition}\label{openoflater}
+  Let $n:\ovob$. Then for any type $X$, we have an equivalence
+  \[ \opm n\bx^\rho X \simeq \int_{m\le n}\clm m\opm{\rho m}X. \]
+\end{proposition}
+\begin{proof}
+  By construction, we have 
+  \begin{align*}
+    \opm n\bx^\rho X 
+    &\simeq \opm n\int_{m:\omega} \clm m\opm{\rho m} X \\
+    &\simeq \int_{m:\omega}\opm n\clm m\opm{\rho m} X \\ 
+    &\simeq \int_{m<n}\clm m\opm{\rho m}X
+  \end{align*}
+  The first equivalence holds by construction; the second holds since $\opm n$ is a right adjoint, thus preserves arbitrary limits; the third equivalence holds by~\cref{modalitycommute}, where when $m \ge n$ we have $\opm n\clm m = \opm{\bot}$, thus does not contribute to the computation of the limit, and that $\opm n\opm{\rho m} = \opm{\rho m}$ since $\rho m \le m \le n$. 
+\end{proof}
+
+Given a flat and deflationary map $\rho$, let us use $\check\rho$ to denote an alternative map: $\check\rho n$ is the smallest $m$ that $n \le \rho m$. We can then compute the following:
+
+\begin{theorem}
+  If $X$ is $\opm n$-modal, then $\bx X$ is $\opm{\check\rho n\plo}$-modal. 
+\end{theorem}
+\begin{proof}
+  Suppose $X$ is $\opm n$-modal. We show that $\bx^\rho X \simeq \int_{m\le\check\rho n}\clm m\opm{\rho m}X$. For this we note that for any $m > \check\rho n$, i.e. $\rho m \ge n$, since $X$ is $\opm n$-modal, it is also $\opm{\rho m}$-modal. This way, by construction the following diagram commutes,
+  \[
+  \begin{tikzcd}
+    \bx^\rho X \ar[r, "\pi_{\pf\rho n}"] \ar[d, "\pi_{m}"'] & \clm{\check\rho n}\opm{\rho\check\rho n}X \simeq \clm{\check\rho n}X \ar[d, "\iota"] \\ 
+    \clm{m}\opm{\rho m}X \simeq \clm mX \ar[r, "\simeq"'] & \clm{m}\opm{\rho\check\rho n}X \simeq \clm{m}X
+  \end{tikzcd}
+  \]
+  Thus it follows that $\pi_m$ is completely determined by $\pi_{\pf\rho n}$. This implies that 
+  \[ \bx^\rho X \simeq \int_{m\le\check\rho n}\clm m\opm{\rho m}X. \]
+  By~\cref{openoflater}, this is also equivalent to $\opm{\check\rho n+1}\bx^\rho X$.
+\end{proof}
+
+\section{Positive construction of the later modality on types}
+
+In this section we provide a positive construction of the later modality on general types as a constructor $\bx_\theta \colon \Type \to \Type$. We describe it as a higher inductive type, given the parameter $\theta \colon \ovob \to \ovob$ as a monotone, inflationary map on $\ovob$. For this purpose we also introduce another type constructor $\upm p$ for any $p:\Prop$. By construction it is the \emph{left adjoint} of $\opm p$, and is concretely given by $\upm pX \coloneq p \times X$ for any type $X$. As a left adjoint to a modality, $\upm p$ will be \emph{copointed}, which is given by the projection map. And again for $p \to q$, there is a natural transformation 
+\[ \delta \colon \upm p \nt \upm q. \]
+
+\begin{construction}[Positive construction of later modality on types]\label{constype}
+  $\bx_\theta \colon \Type \to \Type$ is constructed as follows: For any $X : \Type$, 
+  \[ \bx_\theta X \coloneq \int^{n:\ovob}\upm{\theta n} \opm{n} X. \]
+  Explicitly, $\bx_\theta X$ is a coend, thus encoded by a higher inductive type. We can write down the higher inductive definition of $\bx_\theta X$: it has two constructors
+  \begin{align*}
+    &\nu : \prod_{n:\ovob} \upm{\theta n} \opm nX \to \bx_\theta X \\ 
+    &\kappa : \prod_{n:\ovob} \prod_{x:\upm{\theta n}\opm{n+1}X} \nu_{n+1}(\delta x) = \nu_n(\upm{\theta n}\gamma x)
+  \end{align*}
+  These constructors are accompanied by the following elimination rules: Given
+  \begin{itemize}
+    \item $E : \bx_\theta X \to \Type$
+    \item $e : \prod_{n:\ovob}\prod_{x:\upm{\theta n}\opm{n}X}E(\nu_nx)$
+    \item $p : \prod_{n:\ovob}\prod_{x:\upm{\theta n}\opm{n+1}X}\kappa_n(x)\#_Ee_{n+1}(\delta x) = e_n(\upm{\theta n}\gamma x)$.
+  \end{itemize}
+  there will be a section $\ind_{E,e,p} : \prod_{x:\bx_\theta X}E(x)$ with the following computation rules: for any $n:\ovob$, $x:\upm{\theta n}\opm nX$ and $y:\upm{\theta n}\opm{n+1}X$,
+  \begin{itemize}
+    \item $\ind_{E,e,p} \nu_n(x) = e_n(x)$
+    \item $\apd_{\ind_{E,e,p}}\kappa_n(y) = p_n(y)$.
+  \end{itemize}
+\end{construction}
+
+\begin{remark}\label{recforcoend}
+  We also have an accompanying recursion principle: Given the data
+  \begin{itemize}
+    \item $E : \Type$
+    \item $e : \prod_{n:\ovob}\upm{\theta n}\opm{n}X \to E$
+    \item $p : \prod_{n:\ovob}\prod_{x:\upm{\theta n}\opm{n+1}X}e_{n+1}(\delta x) = e_n(\upm{\theta n}\gamma x)$
+  \end{itemize}
+  there will be a map $\rec_{E,e,p} \colon \bx_\theta X \to E$ with the following computation rules: for any $n:\ovob$, $x:\upm{\theta n}\opm{n}X$ and $y:\upm{\theta n}\opm{n+1}X$,
+  \begin{itemize}
+    \item $\rec_{E,e,p}\nu_n(x) = e_n(x)$
+    \item $\apd_{\rec_{E,e,p}}(\kappa_n(y)) = p_n(y)$.
+  \end{itemize}
+\end{remark}
+
+Our first goal is to show that the type-theoretic modality given in~\cref{constype} restricts to the propositional modality given in~\cref{consprop}.
+
+\begin{proposition}\label{twoconscoin}
+  For any $p\colon\Omega$, $\bbx_\theta p = \bx_\theta p$.
+\end{proposition}
+\begin{proof}
+  By (GR), it suffices to show this for $\ass n$. By construction and (QC), we have
   \begin{align*}
     \bx_\theta\ass n 
-    &\equiv \int^{m:\ovob}\ass{\theta m} \times \ass n^{\ass m} \\ 
+    &\equiv \int^{m:\ovob}\upm{\theta m}\opm m \ass n \\ 
     &= \bigvee_{m:\ovob}\ass{\theta m} \wedge (\ass m \to \ass n) \\
     &= \bigvee_{m\le n}\ass{\theta m} \vee \bigvee_{m > n} \ass{\theta m} \wedge \ass n \\
     &= \ass{\theta n}
   \end{align*}
-  The last step holds by the fact that $\theta$ is monotone and non-decreasing, thus $\ass{\theta m} \wedge \ass n = \ass n$ for all $m > n$. 
+  By~\cref{modalityonrepre}, this coincides with $\bbx_\theta\ass n$. 
 \end{proof}
 
 \begin{proposition}
   $\bx_\theta$ is left exact.
 \end{proposition}
 \begin{proof}
-  $\bx_\theta$ preserves $1$ by~\cref{twoconscoin} and~\cref{proplex}. For pullback, suppose we have $f \colon Y \to X$ and $g \colon Z \to X$. We then have 
-  \begin{align*}
-    \bx_\theta(Y \times_X Y) 
-    &\equiv \int^{n:\ovob}\ass{\theta n} \times (Y \times_X Z)^{\ass n} \\
-    &\cong \int^{n:\ovob} \ass{\theta n} \times Y^{\ass n} \times_{X^{\ass n}} Z^{\ass n} \\ 
-    &\cong \bx_\theta Y \times_{\bx_\theta X} \bx_\theta Z
-  \end{align*}
-  The final step uses the fact that finite limits commutes with the filtered colimit.
+  By construction $\bx_\theta$ preserves pullback, since both $\upm{m}$ and $\opm m$ do so by construction, and $\int^{m:\ovob}$ as a connected colimit also commutes with pullback. Now by~\cref{twoconscoin} and~\cref{posproplex}, $\bx_\theta$ also preserves 1.
 \end{proof}
 
 \begin{proposition}\label{typewellpoint}
   $\bx_\theta$ is well-pointed.
 \end{proposition}
 \begin{proof}
-  To construct the unit, by (GR) we may assume $1 = \ass n$, thus by the universal property there is a comparison map 
+  To construct the unit, by (GR) we may assume $\ass{\theta n}$ holds for some $n:\ovob$. This way, we get a composite
   \[ 
   \begin{tikzcd}
-    X \ar[r, "\cong"] & \ass n \times X^{\ass n} \ar[r] & \ass{\theta n} \times X^{\ass n} \ar[r] & \bx_\theta X.
+    X \ar[r, "\eta^{\opmm}"] & \opm nX \ar[r, "\simeq"] & \upm{\theta n} \opm nX \ar[r, "\nu_n"] & \bx_\theta X.
   \end{tikzcd}
   \]
-  This is well-defined due to the fact that $\bx_\theta X$ is a coend, and naturality is evident. Checking well-pointedness is routine.
+  To show this is well-defined, we need to show this map is independent of the choice of $n$. Suppose $\theta m$ also holds, and we may also assume $n \le m$. This way, the following diagram commutes,
+  \[\begin{tikzcd}
+    X & \\
+    {\opm mX} & {\opm nX} \\
+    {\upm{\theta n}\opm mX} & {\upm{\theta n}\opm n X} \\
+    {\upm{\theta m}\opm mX} & {\bx_\theta X}
+    \arrow["{\eta^\opmm}"', from=1-1, to=2-1]
+    \arrow["{\eta^\opmm}", from=1-1, to=2-2]
+    \arrow["\gamma"{description}, from=2-1, to=2-2]
+    \arrow["\simeq"', from=2-1, to=3-1]
+    \arrow["\simeq", from=2-2, to=3-2]
+    \arrow["{\upm{\theta n}\gamma}", from=3-1, to=3-2]
+    \arrow["\delta"', from=3-1, to=4-1]
+    \arrow["{\nu_n}", from=3-2, to=4-2]
+    \arrow["{\nu_m}"', from=4-1, to=4-2]
+  \end{tikzcd}\]
+  The triangle commutes by construction; the middle square commutes since the two equivalences are inverse of $\delta$ and follows from the naturality of $\delta$; the square below commutes by construction. To show $\bx_\theta$ is well-pointed, we may assume $\ass{\theta n}$ holds.
 \end{proof}
 
 \begin{corollary}
@@ -435,163 +890,236 @@ Again, let us fix a monotone and non-decreasing map $\theta \colon \ovob \to \ov
   This follows from~\cref{typewellpoint},~\cref{twoconscoin}, and~\cite{RN839}.
 \end{proof}
 
-\section{A non-localic model of guarded recursion}
-
-Consider $\Inj$, the category of finite sets with injections between them. Notice that this category has pullback but not a terminal object. There is an evident functor 
-\[ 1 + - \colon \Inj \to \Inj, \]
-which induces an adjunction
+Now let $\rho$ be a flat and deflationary map. For any type $X$ we can construct a canonical comparison map
+\[ \alpha \colon \bx_{\pf\rho}X \to \bx^\rho X. \]
+For this it suffices to use the recursion principle stated in~\cref{recforcoend}. For any $n:\ovob$, to define $e_n \colon \upm{\pf\rho n}\opm nX \to \bx^\rho X$, we define its transpose
+\[ \qsi e_n \colon \opm nX \to \opm{\pf\rho n}\bx^\rho X \simeq \int_{m:\ovob}\opm{\pf\rho n}\clm m\opm{\rho m}X. \]
+When $\pf\rho n \le m$ by~\cref{modalitycommute} the type $\opm{\pf\rho n}\clm m\opm{\rho n}X$ is contractible, thus the map is automatic; when $\pf\rho n > m$, equivalently when $\rho m \le n$, we have
+\[ \opm{\pf\rho n}\clm m\opm{\rho m}X \simeq \clm m\opm{\pf\rho n}\opm{\rho m}X \simeq \clm m\opm{\rho m}X. \]
+This way, we may take $(\qsi e_n)_m$ to the following composite,
+\[
+\begin{tikzcd}
+  \opm nX \ar[r, "\gamma"] & \opm{\rho m}X \ar[r, "\eta^\clmm"] & \clm m\opm{\rho m}X
+\end{tikzcd}
+\]
+This is well-defined because the following digram commutes,
 \[\begin{tikzcd}
-	{\psh(\Inj)} & {\psh(\Inj)}
-	\arrow[""{name=0, anchor=center, inner sep=0}, "R"', curve={height=12pt}, from=1-1, to=1-2]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "L"', curve={height=12pt}, from=1-2, to=1-1]
-	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+	{\opm nX} & {\opm{\rho m}X} & {\clm m\opm{\rho m}X} \\
+	{\opm{\rho(m+1)}X} & {\clm{m+1}\opm{\rho m}X} \\
+	{\clm{m+1}\opm{\rho(m+1)}X}
+	\arrow["\gamma", from=1-1, to=1-2]
+	\arrow["\gamma"', from=1-1, to=2-1]
+	\arrow["{\eta^{\clmm}}", from=1-2, to=1-3]
+	\arrow["{\eta^{\clmm}}", from=1-2, to=2-2]
+	\arrow["\iota", from=1-3, to=2-2]
+	\arrow["\gamma"', from=2-1, to=1-2]
+	\arrow["{\eta^{\clmm}}"', from=2-1, to=3-1]
+	\arrow["{\clm{m+1}\gamma}"', from=3-1, to=2-2]
 \end{tikzcd}\]
-where $L$ is given by precomposition with $1+-$ and $R$ is obtained via right Kan extension. Since $L$ is also continuous, this gives us a geometric morphism 
-\[ R \colon \psh(\Inj) \to \psh(\Inj). \]
 
-\begin{proposition}\label{self-indexing}
-  We have a self-indexed path family 
-  % https://q.uiver.app/#q=WzAsMixbMCwwLCJcXHBzaChcXEluaikiXSxbMSwwLCJcXHBzaChcXEluaikiXSxbMCwxLCJSIiwwLHsiY3VydmUiOi0yfV0sWzAsMSwiIiwyLHsiY3VydmUiOjIsImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMywiXFx0aGV0YSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XV0=
-  \[\begin{tikzcd}
-    {\psh(\Inj)} & {\psh(\Inj)}
-    \arrow[""{name=0, anchor=center, inner sep=0}, "R", curve={height=-12pt}, from=1-1, to=1-2]
-    \arrow[""{name=1, anchor=center, inner sep=0}, curve={height=12pt}, equals, from=1-1, to=1-2]
-    \arrow["\theta", between={0.2}{0.8}, Rightarrow, from=0, to=1]
-  \end{tikzcd}\]
-\end{proposition}
-\begin{proof}
-  It suffices to provide a natural transformation $\theta \colon L \nt \id$. But such a natural transformation is induced by the natural inclusion $\id \nt 1 + -$. 
-\end{proof}
 
 \begin{theorem}
-  The self-indexing family in~\cref{self-indexing} is contractive, which means the internal modality associated to this self-indexing family satisfies L\"ob induction.
+  For any type $X$, the canonical map $\alpha \colon \bx_{\pf\rho}X \to \bx^\rho X$ is an equivalence.
 \end{theorem}
 \begin{proof}
-  To show contractivity, it suffices to observe that for any representable $\yon_n$, there exists some $k$ that $L^k\yon_n \cong \emp$. Now we first show that 
-  \[ L\yon_n \cong n \cdot \yon_{n-1}. \]
-  For any $i\in n$, let $\hat n^i$ denote $n - \set i$. By construction we have 
-  \[ L\yon_n(m) \cong \Inj(m+1,n) \cong \sum_{i:n}\Inj(m,\hat n^i) \cong n \cdot \yon_{n-1}(m). \]
-  It is worth explicitly specifying the last isomorphism: given a pair $(i,f\colon m \inj n-1)$, the induced injection $(i,f) \colon m+1 \inj n$ is given by
-  \[
-  (i,f)(j) =
-  \begin{cases} 
-    f(j) & j < m \wedge f(j) < i \\ 
-    f(j)+1 & j < m \wedge f(j) \ge i \\
-    i & j = m 
-  \end{cases}
-  \]
-  This isomorphism is natural: Given any $f \colon l \inj m$, we verify
-  % https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXEluaihtKzEsbikiXSxbMSwxLCJcXEluaihsKzEsbikiXSxbMCwxLCJsIFxcdGltZXMgXFxJbmoobCxuLTEpIl0sWzAsMCwibSBcXHRpbWVzIFxcSW5qKG0sbi0xKSJdLFswLDEsIi0gXFxjaXJjIChmKzEpIl0sWzIsMSwiXFxjb25nIiwyXSxbMywyLCJmIFxcdGltZXMgKC1cXGNpcmMgZikiLDJdLFszLDAsIlxcY29uZyJdXQ==
-  \[\begin{tikzcd}
-    {n \times \Inj(m,n-1)} & {\Inj(m+1,n)} \\
-    {n \times \Inj(l,n-1)} & {\Inj(l+1,n)}
-    \arrow["\cong", from=1-1, to=1-2]
-    \arrow["{n \times (-\circ f)}"', from=1-1, to=2-1]
-    \arrow["{- \circ (f+1)}", from=1-2, to=2-2]
-    \arrow["\cong"', from=2-1, to=2-2]
-  \end{tikzcd}\]
-  For any pair $(i,g)$ with $i\in m$ and $g\colon m \inj n-1$, and for $j\in l+1$ we have 
-  \begin{align*}
-    (i,g)((f+1)(j)) 
-    &= 
-    \begin{cases}
-      gf(j) & j < l \wedge gf(j) < i \\
-      gf(j) + 1  & j < l \wedge gf(j) \ge i \\
-      i & j = l 
-    \end{cases} \\ 
-    &= (i,gf)(j)
-  \end{align*}
-  This shows that the isomorphism is natural, thus $L\yon_n \cong n \cdot \yon_{n-1}$. This way, since $L$ preserves colimits, it follows that 
-  \[ L^{n+1}\yon_n \cong \emp, \]
-  which completes the proof.
+  TBW.
 \end{proof}
 
-\section{Another interesting example}
+\section{Construction of fixed points}
 
-Consider $\psh(\Fin)$, where $\Fin$ is the category of finite sets, and consider the functor 
-\[ 1 + - \colon \Fin \to \Fin, \]
-and consider the functor $L \colon \psh(\Fin) \to \psh(\Fin)$ given by
-\[ LX(n) \cong X(n+1). \]
-$L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin) \to \psh(\Fin)$. To compute the right adjoint, it suffices to compute what $L$ does on representables. 
+To rewrite the proof in~\cite{gratzer2025modal} that the propositional L\"ob induction implies the construction of arbitrary fixed-points on types.
 
-\begin{lemma}\label{LFinonrep}
-  For any $n\in\Fin$, we have 
-  \[ L\yon_n \cong n \cdot \yon_n, \]
-  where $n\cdot-$ denotes the tensor of the finite set $n$ with the presheaf $\yon_n$. 
-\end{lemma}
-\begin{proof}
-  By construction, for any $m\in\Fin$,
-  \[ (L\yon_n)(m) \cong n^{m+1} \cong n \times n^m \cong n \times \yon_n(m). \]
-  This shows that $L\yon_n \cong n \cdot \yon_n$.
-\end{proof}
+\section{Dependent modality}
 
-\begin{proposition}
-  For any $X\in\psh(\Fin)$, we have 
-  \[ (R X)(n) \cong X(n)^n, \]
-  where for any $f \colon n \to m$, the action on $f$ takes $a\in X(m)^m$ to the following composite,
+For this we now look at the canonical later modality $\bx$ induced by $\rho \coloneq \id$. We will study the induced dependent modalities $\bx\Prop \to \Prop$ and $\bx\Type \to \Type$. 
+
+% In this case we can first characterise the subobjects classified by $\bx$:
+
+% \begin{lemma}\label{bxclassify}
+%   For any $p:\Prop$, $\bx p$ holds iff for any $q:\Prop$ with $p \to q$, $q = p \vee q = 1$, i.e.
+%   \[ p/\Prop = \set{p,1}. \]
+% \end{lemma}
+% \begin{proof}
+%   For the if direction, by (GR), suppose $p = \ass n$. Then $\bx p$ holds means $\ass{n\plo}$ holds. Take any $q$ that $p \to q$. By (GR), $q = \ass m$. If $m < n$ then by (QC) $\ass m$ holds, thus $q = 1$. If $m \ge n$, then $q = \ass n$ or $\ass{n+1} \to q$ which implies $q = 1$.
+
+%   For the only if direction, since $p \to \bx p$, then $\bx p = p$ or $\bx p = 1$. In the former case, by L\"ob induction we have $p$ holds, thus $\bx p$ also holds. 
+% \end{proof}
+
+\subsection{The dependent modality on propositions}
+
+\begin{proposition}\label{openmodofprop}
+  For any $p:\Prop$, $\opm p\Prop \simeq \Prop/p$, where under this equivalence we have
   \[
   \begin{tikzcd}
-    n \ar[d, "f"'] \ar[r, dashed, "a \cdot f"] & X(n) \\ 
-    m \ar[r, "a"'] & X(m) \ar[u, "-\cdot f"'] 
+    \Prop \ar[d, "\eta^\opmm"'] \ar[dr, "-\wedge p"] \\ 
+    \opm p\Prop \ar[r, "\simeq"'] & \Prop/p
   \end{tikzcd}
   \]
 \end{proposition}
 \begin{proof}
-  This follows from~\cref{LFinonrep}, where by construction 
-  \[ (R X)(n) \cong \psh(\Fin)(L\yon n,X) \cong \psh(\Fin)(n\cdot\yon_n,X) \cong X(n)^n. \]
-  The action on morphisms in $\Fin$ follows from routine computation.
+  By construction, for any $p:\Prop$ we have 
+  \[ \opm p\Prop \simeq \Prop^p \simeq \mc P(p) \simeq \Prop/p. \]
+  Under this equivalence, $\eta^\opmm$ becomes taking conjunction with $p$. 
 \end{proof}
 
-\begin{proposition}
-  $R$ is well-pointed.
+\begin{remark}
+  Notice that~\cref{openmodofprop} holds generally, with nothing to do with our axiomatisation.
+\end{remark}
+
+By the positive construction of the modality, we have 
+\[ \bx\Prop \simeq \int^{n:\omega}\upm{n+1}\opm n\Prop. \]
+By construction, for any type $X$,
+\[ (\bx\Omega \to X) \simeq \int_{n:\omega} \upm{n+1}\opm{n}\Prop \to X \simeq \int_{n:\omega} \opm n\Prop \to \opm{n+1}X. \]
+In particular, we have
+\[ (\bx\Prop \to \Prop) \simeq \int_{n:\omega}\opm n\Prop \to \opm{n+1}\Prop. \]
+By~\cref{openmodofprop}, $\opm n\Prop \simeq \Prop/\ass n$ for all $n:\omega$, and the map $\bx \colon \Prop \to \Prop$ restricts to maps 
+\[ \bx \colon \opm n\Prop \simeq \Prop/\ass n \to \Prop/\ass{n\plo} \simeq \opm{n+1}\Prop. \]
+We denote the induced dependent modality as
+\[ \later \colon \bx\Prop \to \Prop. \]
+We first observe that it is the classifying map of the canonical point in $\bx\Prop$:
+
+\begin{proposition}\label{laterclassify}
+  The following square is a pullback 
+  \[
+  \begin{tikzcd}
+    \bx 1 \ar[d, "\bx\top"'] \ar[r, "\simeq"] \ar[dr, pullback] & 1 \ar[d, "\top"] \\
+    \bx\Prop \ar[r, "\later"'] & \Prop
+  \end{tikzcd}
+  \]
 \end{proposition}
 \begin{proof}
-  The point is easy to provide, where for any $X\in\psh(\Fin)$, the unit $\eta_X \colon X \to R X$ is given by the constant function for any $n\in\Fin$,
-  \[ \eta_X \coloneq c_- \colon X(n) \to X(n)^n. \]
-  Naturality is evident. For well-pointedness, this is routine to check.
+  Suppose we have $\star:\ass{n\plo}$ and $p:\Prop/\ass n$. If $\later_n(\star, p) = \bx p$ holds, then by (GR) let $p = \ass m$. It follows that $\ass{m\plo}$ holds, thus $\ass{m+1}$ holds. This way, by construction $\nu_n(\star,p) = \nu_m(\star,p) = \bx\top$.
+\end{proof}
+
+\begin{proposition}\label{lateremb}
+  $\later \colon \bx\Prop \to \Prop$ is an embedding.
+\end{proposition}
+\begin{proof}
+  We can relativise the argument in~\cref{laterclassify}.
+\end{proof}
+
+\begin{proposition}\label{computesucc}
+  The following diagram commutes,
+  \[
+  \begin{tikzcd}
+    \Prop \ar[dr, "\bx"] \ar[d, "\eta^\bx"'] \\
+    \bx\Prop \ar[r, "\later"'] & \Prop
+  \end{tikzcd}
+  \]
+\end{proposition}
+\begin{proof}
+  This follows by construction.
 \end{proof}
 
 \begin{theorem}
-  $R \colon \psh(\Fin) \to \psh(\Fin)$ restricts to identity $\id \colon \Omega \to \Omega$ on propositions.
+  $\later \colon \bx\Prop \to \Prop$ factors through $\Prop_{\neg\neg}$. In fact, it is an equivalence $\bx\Prop \simeq \Prop_{\neg\neg}$. In particular, $\Omega \simeq 1 + \bx\Omega$.
 \end{theorem}
 \begin{proof}
-  For any $n\in\Fin$, let $p\in\Omega(n)$ be a sieve on $n$ in $\Fin$. Over $\yon_n$, the fibred modality $R$ acting on $p$ is given by the pullback 
-  \[
-  \begin{tikzcd}
-    \bx_{\yon_n} p \ar[d, hook] \ar[r] & R p \ar[d, hook] \\ 
-    \yon_n \ar[r, "\eta"'] & R\yon_n
-    \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-  \end{tikzcd}
-  \]
-  By construction, for any $f \colon m \to n$, $f\in\bx_{\yon_n}p$ iff 
+  Notice that the image of $\later$ are always of the form $\bx p$ for some $p$, and all $\bx p$ are $\neg\neg$-closed. By~\cref{computesucc}, $\later$ is surjective on $\Prop_{\neg\neg}$. By~\cref{lateremb} $\later$ is also an embedding, thus it is an equivalence onto $\Prop_{\neg\neg}$. The remaining follows from~\cref{wlem}.
 \end{proof}
+
+\subsection{The dependent modality on types}
+
+TBW.
+
+
+% \section{A non-localic model of guarded recursion}
+
+% Consider $\Inj$, the category of finite sets with injections between them. Notice that this category has pullback but not a terminal object. There is an evident functor 
+% \[ 1 + - \colon \Inj \to \Inj, \]
+% which induces an adjunction
+% \[\begin{tikzcd}
+% 	{\psh(\Inj)} & {\psh(\Inj)}
+% 	\arrow[""{name=0, anchor=center, inner sep=0}, "R"', curve={height=12pt}, from=1-1, to=1-2]
+% 	\arrow[""{name=1, anchor=center, inner sep=0}, "L"', curve={height=12pt}, from=1-2, to=1-1]
+% 	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+% \end{tikzcd}\]
+% where $L$ is given by precomposition with $1+-$ and $R$ is obtained via right Kan extension. Since $L$ is also continuous, this gives us a geometric morphism 
+% \[ R \colon \psh(\Inj) \to \psh(\Inj). \]
+
+% \begin{proposition}\label{self-indexing}
+%   We have a self-indexed path family 
+%   % https\colon//q.uiver.app/#q=WzAsMixbMCwwLCJcXHBzaChcXEluaikiXSxbMSwwLCJcXHBzaChcXEluaikiXSxbMCwxLCJSIiwwLHsiY3VydmUiOi0yfV0sWzAsMSwiIiwyLHsiY3VydmUiOjIsImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMywiXFx0aGV0YSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XV0=
+%   \[\begin{tikzcd}
+%     {\psh(\Inj)} & {\psh(\Inj)}
+%     \arrow[""{name=0, anchor=center, inner sep=0}, "R", curve={height=-12pt}, from=1-1, to=1-2]
+%     \arrow[""{name=1, anchor=center, inner sep=0}, curve={height=12pt}, equals, from=1-1, to=1-2]
+%     \arrow["\theta", between={0.2}{0.8}, Rightarrow, from=0, to=1]
+%   \end{tikzcd}\]
+% \end{proposition}
+% \begin{proof}
+%   It suffices to provide a natural transformation $\theta \colon L \nt \id$. But such a natural transformation is induced by the natural inclusion $\id \nt 1 + -$. 
+% \end{proof}
+
+% \begin{theorem}
+%   The self-indexing family in~\cref{self-indexing} is contractive, which means the internal modality associated to this self-indexing family satisfies L\"ob induction.
+% \end{theorem}
+% \begin{proof}
+%   To show contractivity, it suffices to observe that for any representable $\yon_n$, there exists some $k$ that $L^k\yon_n \simeq \emp$. Now we first show that 
+%   \[ L\yon_n \simeq n \cdot \yon_{n-1}. \]
+%   For any $i\in n$, let $\hat n^i$ denote $n - \set i$. By construction we have 
+%   \[ L\yon_n(m) \simeq \Inj(m+1,n) \simeq \sum_{i\colon n}\Inj(m,\hat n^i) \simeq n \cdot \yon_{n-1}(m). \]
+%   It is worth explicitly specifying the last isomorphism: given a pair $(i,f\colon m \inj n-1)$, the induced injection $(i,f) \colon m+1 \inj n$ is given by
+%   \[
+%   (i,f)(j) =
+%   \begin{cases} 
+%     f(j) & j < m \wedge f(j) < i \\ 
+%     f(j)+1 & j < m \wedge f(j) \ge i \\
+%     i & j = m 
+%   \end{cases}
+%   \]
+%   This isomorphism is natural: Given any $f \colon l \inj m$, we verify
+%   % https\colon//q.uiver.app/#q=WzAsNCxbMSwwLCJcXEluaihtKzEsbikiXSxbMSwxLCJcXEluaihsKzEsbikiXSxbMCwxLCJsIFxcdGltZXMgXFxJbmoobCxuLTEpIl0sWzAsMCwibSBcXHRpbWVzIFxcSW5qKG0sbi0xKSJdLFswLDEsIi0gXFxjaXJjIChmKzEpIl0sWzIsMSwiXFxjb25nIiwyXSxbMywyLCJmIFxcdGltZXMgKC1cXGNpcmMgZikiLDJdLFszLDAsIlxcY29uZyJdXQ==
+%   \[\begin{tikzcd}
+%     {n \times \Inj(m,n-1)} & {\Inj(m+1,n)} \\
+%     {n \times \Inj(l,n-1)} & {\Inj(l+1,n)}
+%     \arrow["\simeq", from=1-1, to=1-2]
+%     \arrow["{n \times (-\circ f)}"', from=1-1, to=2-1]
+%     \arrow["{- \circ (f+1)}", from=1-2, to=2-2]
+%     \arrow["\simeq"', from=2-1, to=2-2]
+%   \end{tikzcd}\]
+%   For any pair $(i,g)$ with $i\in m$ and $g\colon m \inj n-1$, and for $j\in l+1$ we have 
+%   \begin{align*}
+%     (i,g)((f+1)(j)) 
+%     &= 
+%     \begin{cases}
+%       gf(j) & j < l \wedge gf(j) < i \\
+%       gf(j) + 1  & j < l \wedge gf(j) \ge i \\
+%       i & j = l 
+%     \end{cases} \\ 
+%     &= (i,gf)(j)
+%   \end{align*}
+%   This shows that the isomorphism is natural, thus $L\yon_n \simeq n \cdot \yon_{n-1}$. This way, since $L$ preserves colimits, it follows that 
+%   \[ L^{n+1}\yon_n \simeq \emp, \]
+%   which completes the proof.
+% \end{proof}
 
 % \section{The theory of sequential propositions}
 
 % Let $\ov\omega$ be the poset of extended natural numbers $\N \cup \set{\infty}$. As a poset it is a meet-semi-lattice, thus corresponds to an essentially algebraic theory, which we call $\mbb P$. Since it is a lattice, it is also localic, and can be presented as a theory with infinitely many propositional letters $p_0,p_1,\cdots$, with infinitely many sequents as axioms
 % \[ p_0 \vdash p_1 \vdash p_2 \vdash \cdots \]
 % We also consider a geometric quotient $\pw$ of $\mbb P$, which is obtained by adding an additional geometric sequent
-% \[ \top \vdash \bigvee_{n:\N}p_n. \]
+% \[ \top \vdash \bigvee_{n\colon\N}p_n. \]
 
 % The classifying topos $\Set[\mbb P]$ is given by the presheaf category
 % \[ \Set[\mbb P] \simeq \psh(\ov\omega). \]
 % Inside, the universal model $\um{\omega}$ is given by the sequence of representables,
-% \[ \um{\omega} := \yon_0 \hook \yon_1 \hook \cdots \]
+% \[ \um{\omega} \colon= \yon_0 \hook \yon_1 \hook \cdots \]
 % The classifying topos for $\pw$ is again of presheaf type, given by
 % \[ \Set[\pw] \simeq \psh(\omega). \]
-% As a subtopos $\psh(\omega) \hook \psh(\ov\omega)$, since $\bigvee_{n:\N}n = \infty$ is a universal effective colimit in $\ov\omega$, all representables are still sheaves in $\psh(\omega)$. Thus, the universal model $\um{\omega}$ is again the generic model in $\psh(\omega)$. Below we will mainly work with the sheaf subtopos $\psh(\omega)$, and we will denote it as $\mc S$.
+% As a subtopos $\psh(\omega) \hook \psh(\ov\omega)$, since $\bigvee_{n\colon\N}n = \infty$ is a universal effective colimit in $\ov\omega$, all representables are still sheaves in $\psh(\omega)$. Thus, the universal model $\um{\omega}$ is again the generic model in $\psh(\omega)$. Below we will mainly work with the sheaf subtopos $\psh(\omega)$, and we will denote it as $\mc S$.
 
 % \begin{proposition}\label{endoposet}
 %   Let $\ov\omega\prt$ be the poset $\ov\omega$ with a bottom element added, and $\mb{Inf}(\omega,\ov\omega\prt)$ denote the poset of unbounded monotone functions from $\omega$ to $\ov\omega\prt$. Then we have
 %   \[ \Topoi(\mc S,\mc S) \simeq \mmod{\pw}(\mc S) \simeq \mb{Inf}(\omega,\omega\prt). \]
 % \end{proposition}
 % \begin{proof}
-%   The first equivalence is due to the universal property of the classifying topos. We note that a model of $\pw$ in $\mc S$ is a sequence of increasing propositions whose union is $1$. Furthermore, we know that in $\mc S$ we have $\sub(1) \cong \ov\omega\prt$, since a proposition can either be $\yon_k$ for some $k$, or $0,1$. This explains the second equivalence.
+%   The first equivalence is due to the universal property of the classifying topos. We note that a model of $\pw$ in $\mc S$ is a sequence of increasing propositions whose union is $1$. Furthermore, we know that in $\mc S$ we have $\sub(1) \simeq \ov\omega\prt$, since a proposition can either be $\yon_k$ for some $k$, or $0,1$. This explains the second equivalence.
 % \end{proof}
 
-% We can describe the correspondence more concretely: For any $\mf F \in \mmod{\pw}(\mc S)$, it is a sequence of propositions in $\mc S$
+% We can describe the correspondence more concretely\colon For any $\mf F \in \mmod{\pw}(\mc S)$, it is a sequence of propositions in $\mc S$
 % \[ \mf F_0 \hook \mf F_1 \hook \cdots \]
-% such that $\bigvee_{n:\N}\mf F_n = 1$. It induces a geometric morphism
+% such that $\bigvee_{n\colon\N}\mf F_n = 1$. It induces a geometric morphism
 % \[\begin{tikzcd}
 %   {\psh(\omega)} & {\psh(\omega)}
 %   \arrow[""{name=0, anchor=center, inner sep=0}, "\prev", curve={height=-12pt}, from=1-1, to=1-2]
@@ -599,24 +1127,24 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 %   \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
 % \end{tikzcd}\]
 % The right adjoint is easy to define, which is given by
-% \[ \latt X(k) \cong \mc S(\mf F_k,X) \cong X(f(k)), \]
-% where here we view $f : \omega \to \ov\omega\prt$ as $\mf F$ under the equivalence in \Cref{endoposet}, and we define the value of $X$ on $\bot,\infty$ to be
-% \[ X(\bot) := 1, \quad X(\infty) := \lt_{n:\N}X(n). \]
+% \[ \latt X(k) \simeq \mc S(\mf F_k,X) \simeq X(f(k)), \]
+% where here we view $f \colon \omega \to \ov\omega\prt$ as $\mf F$ under the equivalence in \Cref{endoposet}, and we define the value of $X$ on $\bot,\infty$ to be
+% \[ X(\bot) \colon= 1, \quad X(\infty) \colon= \lt_{n\colon\N}X(n). \]
 
 % The left adjoint $\prev$ is a left Kan extension,
-% \[ \prev X \cong \ct_{x\in X(n)}\mf F_n. \]
-% However, we also have a more concrete description of $\prev$: For any $k\in\N$, we define
-% \[ k^p := \min\scomp{n:\N}{k \le f(n)}. \]
-% This is well-defined exactly because $\bigvee_{n:\N}\mf F_n = 1$. 
+% \[ \prev X \simeq \ct_{x\in X(n)}\mf F_n. \]
+% However, we also have a more concrete description of $\prev$\colon For any $k\in\N$, we define
+% \[ k^p \colon= \min\scomp{n\colon\N}{k \le f(n)}. \]
+% This is well-defined exactly because $\bigvee_{n\colon\N}\mf F_n = 1$. 
 
 % \begin{lemma}\label{prevpointwise}
 %   For any presheaf $X \in\mc S$,
-%   \[ \prev X(k) \cong X(k^p). \]
+%   \[ \prev X(k) \simeq X(k^p). \]
 % \end{lemma}
 % \begin{proof}
 %   By construction, since colimits in $\mc S$ are computed pointwise,
-%   \[ \prev X(k) \cong \ct_{x\in X(n)}\mc S(\yon_k,\mf F_n). \]
-%   Notice that $\mc S(\yon_k,\mf F_n) \cong 1$ when $k \le f(n)$, and is empty otherwise. This makes $X(k^p)$ terminal in the above colimit.
+%   \[ \prev X(k) \simeq \ct_{x\in X(n)}\mc S(\yon_k,\mf F_n). \]
+%   Notice that $\mc S(\yon_k,\mf F_n) \simeq 1$ when $k \le f(n)$, and is empty otherwise. This makes $X(k^p)$ terminal in the above colimit.
 % \end{proof}
 
 % \begin{example}
@@ -625,7 +1153,7 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 
 % \begin{example}
 %   Consider the model $\um{\omega}[-1]$ defined by 
-%   \[ \um{\omega}[-1] := 0 \hook \yon_0 \hook \yon_1 \hook \cdots \]
+%   \[ \um{\omega}[-1] \colon= 0 \hook \yon_0 \hook \yon_1 \hook \cdots \]
 %   The adjoint pair $\prev \dashv \latt$ induced by $\um{\omega}[-1]$ is the usual modalities used in synthetic guarded domain theory~\cite{birkedal2012first}.
 % \end{example}
 
@@ -634,11 +1162,11 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 % \end{definition}
 
 % Under the equivalence in \Cref{endoposet}, a subgeneric model $\mf F$ induces the following natural transformations,
-% \[ \sigma : \prev \nt \id, \quad \eta : \id \nt \latt. \]
-% Using $\eta$, we can in fact turn $\latt$ into an $\mc S$-indexed functor:
+% \[ \sigma \colon \prev \nt \id, \quad \eta \colon \id \nt \latt. \]
+% Using $\eta$, we can in fact turn $\latt$ into an $\mc S$-indexed functor\colon
 
 % \begin{proposition}
-%   Let $\latt_X : \mc S/X \to \mc S/X$ sends $f : Y \to X$ to the following pullback,
+%   Let $\latt_X \colon \mc S/X \to \mc S/X$ sends $f \colon Y \to X$ to the following pullback,
 %   \[ 
 %   \begin{tikzcd}
 %     \latt_XY \ar[d, "\latt_Xf"'] \ar[dr, pullback] \ar[r] & \latt Y \ar[d, "\latt f"] \\ 
@@ -670,51 +1198,51 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 % \section{Quasi-coherence}
 
 % Let $\mc C$ be a category. We write $\wh{\mc C}$ as the category of pro-functors on $\mc C$,
-% \[ \wh{\mc C} :=  \]
+% \[ \wh{\mc C} \colon=  \]
 % Let $\mbb C$ denote the theory of flat functors on $\mc C$. The classifying topos for $\mbb C$ is simply the presheaf category $\psh(\mc C)$. $\mbb C$-models are simply
 % \[ \mmod{\mbb C} \simeq \mb{Flat}(\mc C,\Set) \simeq \mb{Ind}(\mc C\op). \]
 % It is also interesting to look at $\mbb C$-models in $\psh(\mc C)$,
 % \[ \mmod{\mbb C}(\psh(\mc C)) \simeq \mb{Flat}(\mc C,\psh(\mc C)) \simeq [\mc C\op,\mmod{\mbb C}]. \]
 % There is in fact a generic $\mbb C$-model in $\psh(\mc C)$, which is nothing but the Yoneda embedding, 
-% \[ \yon : \mc C \to \psh(\mc C). \]
+% \[ \yon \colon \mc C \to \psh(\mc C). \]
 
 % \begin{remark}
-%   We adopt the convention that subscripts will be \emph{covariant}, and superscripts will be \emph{contravariant}. This way, $\yon_c$ will be $\mc C(-,c)$, and $\yon^c$ will be $\mc C(c,-)$. We can either view $\yon$ as a flat functor $\yon_- : \mc C \to \psh(\mc C)$, or a $\mc C\op$-indexed family of flat functors $\yon^- : \mc C\op \to \mb{Flat}(\mc C,\Set)$.
+%   We adopt the convention that subscripts will be \emph{covariant}, and superscripts will be \emph{contravariant}. This way, $\yon_c$ will be $\mc C(-,c)$, and $\yon^c$ will be $\mc C(c,-)$. We can either view $\yon$ as a flat functor $\yon_- \colon \mc C \to \psh(\mc C)$, or a $\mc C\op$-indexed family of flat functors $\yon^- \colon \mc C\op \to \mb{Flat}(\mc C,\Set)$.
 % \end{remark}
 
 
-% We also have an internal perspective. A $\mbb C$-model in $\psh(\mc C)$ is a flat diagram over the constant internal category $\Delta\mc C$. Since $\Delta\mc C$ is constant, there is a bijective correspondence between internal diagrams over $\Delta\mc C$ and functors $\mc C \to \psh(\mc C)$. We organise the internal perspective into a $\psh(\mc C)$-enriched category $\Diag_{\Delta\mc C}$ of internal diagrams over $\Delta\mc C$. Given two diagrams $F,G : \mc C \to \psh(\mc C)$, we define
-% \[ \Diag_{\Delta\mc C}(F,G) := \int_{c\in\mc C}G_c^{F_c}. \]
+% We also have an internal perspective. A $\mbb C$-model in $\psh(\mc C)$ is a flat diagram over the constant internal category $\Delta\mc C$. Since $\Delta\mc C$ is constant, there is a bijective correspondence between internal diagrams over $\Delta\mc C$ and functors $\mc C \to \psh(\mc C)$. We organise the internal perspective into a $\psh(\mc C)$-enriched category $\Diag_{\Delta\mc C}$ of internal diagrams over $\Delta\mc C$. Given two diagrams $F,G \colon \mc C \to \psh(\mc C)$, we define
+% \[ \Diag_{\Delta\mc C}(F,G) \colon= \int_{c\in\mc C}G_c^{F_c}. \]
 % In other words, for any $d\in\mc D$ we have 
 % \begin{align*}
 %   \Diag_{\Delta\mc C}(F,G)(d) 
-%   &\cong \psh(\mc C)(\yon_d,\int_{c\in\mc C}G_c^{F_c}) \\ 
-%   &\cong \int_{c\in\mc C}\psh(\mc C)(F_c,G_c^{\yon_d}) \\
-%   &\cong [\mc C,\psh(\mc C)](F,G^{\yon_d})
+%   &\simeq \psh(\mc C)(\yon_d,\int_{c\in\mc C}G_c^{F_c}) \\ 
+%   &\simeq \int_{c\in\mc C}\psh(\mc C)(F_c,G_c^{\yon_d}) \\
+%   &\simeq [\mc C,\psh(\mc C)](F,G^{\yon_d})
 % \end{align*}
 % Here $G^{\yon_d}$ is the constant power of the diagram $G$. In this case, we know that the underlying category of $\Diag_{\Delta\mc C}$ are the usual presheaves,
 % \[ \geo{\Diag_{\Delta\mc C}} \simeq [\mc C,\psh(\mc C)]. \]
 
-% More generally, we have:
+% More generally, we have\colon
 
 % \begin{proposition}
 %   $\Diag_{\Delta\mc C}$ is both tensored and powered over $\psh(\mc C)$.
 % \end{proposition}
 % \begin{proof}
 %   For any $X\in\psh(\mc C)$, we define $X \times F$ to be the constant tensor,
-%   \[ (X \times F)(c) \cong X \times F(c). \]
+%   \[ (X \times F)(c) \simeq X \times F(c). \]
 %   This way, we have
 %   \begin{align*}
 %     \Diag_{\Delta\mc C}(X \times F,G)
-%     &\cong \int_{c\in\mc C}G(c)^{X \times F(c)} \\
-%     &\cong \int_{c\in\mc C}(G(c)^{F(c)})^X \\
-%     &\cong \prth{\int_{c\in\mc C}G(c)^{F(c)}}^X \\
-%     &\cong \Diag_{\Delta\mc C}(F,G)^X
+%     &\simeq \int_{c\in\mc C}G(c)^{X \times F(c)} \\
+%     &\simeq \int_{c\in\mc C}(G(c)^{F(c)})^X \\
+%     &\simeq \prth{\int_{c\in\mc C}G(c)^{F(c)}}^X \\
+%     &\simeq \Diag_{\Delta\mc C}(F,G)^X
 %   \end{align*}
 %   The third equivalence has used the fact that $(-)^X$ is a right adjoint, hence preserves end. Completely similarly, we may define the power $G^X$ to be the constant power.
 % \end{proof}
 
-% This way, we may further consider a theory $\ut{\mbb C}$ internal to $\psh(\mc C)$, which is the theory of $\um{\mbb C}$-algebras. For this first recall the $\psh(\mc C)$-enriched slice category $\um{\mbb C}/\Diag_{\Delta\mc C}$, where for two diagrams $F,G$ with $f : \um{\mbb C} \to F$ and $g : \um{\mbb C} \to G$,
+% This way, we may further consider a theory $\ut{\mbb C}$ internal to $\psh(\mc C)$, which is the theory of $\um{\mbb C}$-algebras. For this first recall the $\psh(\mc C)$-enriched slice category $\um{\mbb C}/\Diag_{\Delta\mc C}$, where for two diagrams $F,G$ with $f \colon \um{\mbb C} \to F$ and $g \colon \um{\mbb C} \to G$,
 % \[
 % \begin{tikzcd}
 %   \um{\mbb C}/\Diag_{\Delta\mc C}(F,G) \ar[r] \ar[d] \ar[dr, pullback] & \Diag_{\Delta\mc C}(F,G) \ar[d, "{\Diag_{\Delta\mc C}(f,G)}"] \\ 
@@ -723,53 +1251,53 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 % \]
 
 % We use $\mmod{\ut{\mbb C}}$ to denote the $\psh(\mc C)$-enriched category of $\ut{\mbb C}$-models in $\psh(\mc C)$. A $\ut{\mbb C}$-model is simply a flat diagram $F$ over $\Delta\mc C$ equipped with an internal transformation $\um{\mbb C} \to F$. Given two $\ut{\mbb C}$-models $F,G$, the enriched hom is given by
-% \[ \mmod{\ut{\mbb C}}(F,G)(c) \cong  \]
+% \[ \mmod{\ut{\mbb C}}(F,G)(c) \simeq  \]
 
 % and write $\geo{\mmod{\ut{\mbb C}}}$ as its underlying category. By construction,
 % \[ \geo{\mmod{\ut{\mbb C}}} \simeq \um{\mbb C}/[\mc C\op,\mmod{\mbb C}]. \]
 % For $V,W \in \mmod{\ut{\mbb C}}$, the enriched hom is given by
-% \[ \mmod{\ut{\mbb C}}(V,W)(c) \cong \psh(\mc C)(\yon_c,\mmod{\ut{\mbb C}}(V,W)) \cong  \]
+% \[ \mmod{\ut{\mbb C}}(V,W)(c) \simeq \psh(\mc C)(\yon_c,\mmod{\ut{\mbb C}}(V,W)) \simeq  \]
 
 
 % When $\mc C$ is left exact, $\mmod{\mc C}$ is locally finitely presentable, thus in particular complete and cocomplete. From now on we assume $\mc C$ is left exact. 
 
 % \begin{lemma}\label{genpresfincolimi}
 %   The generic model $\um{\mbb C}$ as a functor 
-%   \[ \um{\mbb C} : \mc C\op \to \mmod{\mbb C} \]
+%   \[ \um{\mbb C} \colon \mc C\op \to \mmod{\mbb C} \]
 %   takes finite limits in $\mc C$ to finite colimits in $\mmod{\mbb C}$.
 % \end{lemma}
 % \begin{proof}
-%   Suppose we have a finite limit $c \cong \lt_{i\in I}c_i$ in $\mc C$. For any $F\in\mmod{\mbb C}$, by Yoneda
+%   Suppose we have a finite limit $c \simeq \lt_{i\in I}c_i$ in $\mc C$. For any $F\in\mmod{\mbb C}$, by Yoneda
 %   \begin{align*}
 %     \mmod{\mbb C}(\noy^{c},F)
-%     &\cong F(c) \\
-%     &\cong \lt_{i\in I}F(c_i) \\ 
-%     &\cong \lt_{i\in I}\mmod{\mbb C}(\noy^{c_i},F) \\ 
-%     &\cong \mmod{\mbb C}(\ct_{i\in I}\noy^{c_i},F) \qedhere
+%     &\simeq F(c) \\
+%     &\simeq \lt_{i\in I}F(c_i) \\ 
+%     &\simeq \lt_{i\in I}\mmod{\mbb C}(\noy^{c_i},F) \\ 
+%     &\simeq \mmod{\mbb C}(\ct_{i\in I}\noy^{c_i},F) \qedhere
 %   \end{align*}
 % \end{proof}
 
 % If $\mc C$ is left exact, then since $\mmod{\mbb C}$ is cocomplete, we can define a functor
-% \[ \qsi - : \mmod{\mbb C} \to \geo{\mmod{\ut{\mbb C}}}, \]
+% \[ \qsi - \colon \mmod{\mbb C} \to \geo{\mmod{\ut{\mbb C}}}, \]
 % sending each flat functor $F \in \Lex(\mc C,\Set)$ to the $\um{\mbb C}$-algebra
-% \[ \qsi{F} := \ut{\mbb C} \sqcup \Delta F. \]
+% \[ \qsi{F} \colon= \ut{\mbb C} \sqcup \Delta F. \]
 % here $\sqcup$ is the coproduct in $\mmod{\mbb C}(\psh(\mc C)) \simeq [\mc C\op,\mmod{\mbb C}]$, which is induced by the pointwise coproduct in $\mmod{\mbb C}$. In other words, for any $c\in\mc C$,
-% \[ \qsi F(c) \cong \noy^c \sqcup F. \]
-% We have the following result:
+% \[ \qsi F(c) \simeq \noy^c \sqcup F. \]
+% We have the following result\colon
 
 % \begin{proposition}
 %   For a left exact category $\mc C$, there is a reflective adjunction
-%   \[ \qsi- \dashv (-)(1) : \mmod{\mbb C} \to \geo{\mmod{\ut{\mbb C}}}, \]
+%   \[ \qsi- \dashv (-)(1) \colon \mmod{\mbb C} \to \geo{\mmod{\ut{\mbb C}}}, \]
 % \end{proposition}
 % \begin{proof}
 %   For any $F\in\mmod{\mbb C}$ and $G \in \geo{\mmod{\ut{\mbb C}}}$, we have 
 %   \begin{align*}
 %     \geo{\mmod{\ut{\mbb C}}}(\qsi F,G) 
-%     &\cong [\mc C\op,\mmod{\mbb C}](\Delta F,G) \\ 
-%     &\cong \int_{c\in\mc C}\mmod{\mbb C}(F,G(c)) \\ 
-%     &\cong \mmod{\mbb C}(F,G(1))
+%     &\simeq [\mc C\op,\mmod{\mbb C}](\Delta F,G) \\ 
+%     &\simeq \int_{c\in\mc C}\mmod{\mbb C}(F,G(c)) \\ 
+%     &\simeq \mmod{\mbb C}(F,G(1))
 %   \end{align*}
-%   The first isomorphism holds by our construction of $\qsi F$; the second holds by the end-formula for natural transformation; the last one holds since the end is mute on $F$, hence is equivalent to a limit indexed by $\mc C\op$, which is equivalently evaluation on $1$ since $1$ is initial in $\mc C\op$. Now we know that $\qsi F(1) \cong \noy^1 \sqcup F \cong F$, since by \Cref{genpresfincolimi} $\noy^1$ is initial in $\mmod{\mbb C}$. This implies the adjunction is reflective.
+%   The first isomorphism holds by our construction of $\qsi F$; the second holds by the end-formula for natural transformation; the last one holds since the end is mute on $F$, hence is equivalent to a limit indexed by $\mc C\op$, which is equivalently evaluation on $1$ since $1$ is initial in $\mc C\op$. Now we know that $\qsi F(1) \simeq \noy^1 \sqcup F \simeq F$, since by \Cref{genpresfincolimi} $\noy^1$ is initial in $\mmod{\mbb C}$. This implies the adjunction is reflective.
 % \end{proof}
 
 % \begin{proposition}
@@ -777,38 +1305,38 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 % \end{proposition}
 % \begin{proof}
 %   Given any $\um{\mbb C}$-algebra $G$ and $X\in\psh(\mc C)$, define the power $G^X$ as
-%   \[ G^X := \]
+%   \[ G^X \colon= \]
 % \end{proof}
 
 % \begin{definition}
 %   For any $\ut{\mbb C}$-model $G$ in $\psh(\mc C)$, we define its \emph{spectrum} as the internal set of $\um{\mbb C}$-algebra homomorphisms,
-%   \[ \spec G := \mmod{\ut{\mbb C}}(G,\ut{\mbb C}). \]
+%   \[ \spec G \colon= \mmod{\ut{\mbb C}}(G,\ut{\mbb C}). \]
 % \end{definition}
 
 % \begin{lemma}
 %   For any $c\in\mc C$, we have 
-%   \[ \spec\qsi{\noy^c} \cong \yon_c. \]
+%   \[ \spec\qsi{\noy^c} \simeq \yon_c. \]
 % \end{lemma}
 % \begin{proof}
 %   For any $d\in\mc C$, we have the following natural isomorphisms,
 %   \begin{align*}
 %     \spec\qsi{\noy^c}(d)
-%     &\cong \psh(\mc C)(\yon_d,\mmod{\ut{\mbb C}}(\qsi{\noy^c},\um{\mbb C})) \\ 
-%     &\cong \geo{\mmod{\ut{\mbb C}}}(\qsi{\noy^c},\um{\mbb C}^{\yon_d}) \\
-%     &\cong \mmod{\mbb C}(\noy^c,\um{\mbb C}^{\yon_d}(1)) \\
-%     &\cong \um{\mbb C}(d)(c) \\ 
-%     &\cong \mc C(d,c)
+%     &\simeq \psh(\mc C)(\yon_d,\mmod{\ut{\mbb C}}(\qsi{\noy^c},\um{\mbb C})) \\ 
+%     &\simeq \geo{\mmod{\ut{\mbb C}}}(\qsi{\noy^c},\um{\mbb C}^{\yon_d}) \\
+%     &\simeq \mmod{\mbb C}(\noy^c,\um{\mbb C}^{\yon_d}(1)) \\
+%     &\simeq \um{\mbb C}(d)(c) \\ 
+%     &\simeq \mc C(d,c)
 %   \end{align*}
-%   It follows that $\spec\qsi{\noy^c} \cong \yon_c$.
+%   It follows that $\spec\qsi{\noy^c} \simeq \yon_c$.
 % \end{proof}
 
 % \begin{theorem}
 %   For any $c\in\mc C$, the canonical map is an isomorphism in $\geo{\mmod{\ut{\mbb C}}}$,
-%   \[ \qsi{\noy^c} \to \um{\mbb C}^{\spec\qsi{\noy^c}} \cong \um{\mbb C}^{\yon_c}. \]
+%   \[ \qsi{\noy^c} \to \um{\mbb C}^{\spec\qsi{\noy^c}} \simeq \um{\mbb C}^{\yon_c}. \]
 % \end{theorem}
 % \begin{proof}
 %   For any $d\in\mc C$, we have 
-%   \[ \um{\mbb C}^{\yon_c}(d) \cong  \]
+%   \[ \um{\mbb C}^{\yon_c}(d) \simeq  \]
 % \end{proof}
 
 % \section{Guarded recursion internally}
@@ -817,14 +1345,14 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 
 % \begin{definition}
 %   We say a filter $\mf F$ is \emph{sup-generic}, if $\um{\omega} \subseteq \mf F$. The \emph{spectrum} of a sup-generic filter $\mf F$ is simply given by
-%   \[ \spec \mf F := \mf F \subseteq \um{\omega}. \]
+%   \[ \spec \mf F \colon= \mf F \subseteq \um{\omega}. \]
 %   Equivalently, since $\mf F$ is sup-generic, this is $\mf F = \um{\omega}$.
 % \end{definition}
 
 % \begin{proposition}\label{qc}
 %   For any sup-generic filter $\mf F$, we have
 %   \[ \mf F = \um{\omega}^{\spec\mf F}. \]
-%   In other words for any $n : \omega$,
+%   In other words for any $n \colon \omega$,
 %   \[ n \in \mf F \eff \mf F = \um{\omega} \to n \in \um{\omega}. \]
 % \end{proposition}
 % \begin{proof}
@@ -846,7 +1374,7 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 %   which identifies $\SFil(\omega)\op$ as a reflective sub-poset of $\Prop$.
 % \end{theorem}
 % \begin{proof}
-%   For any proposition $\varphi : \Prop$ and sup-generic filter $\mf F$, if $\varphi \to \spec\mf F$, then 
+%   For any proposition $\varphi \colon \Prop$ and sup-generic filter $\mf F$, if $\varphi \to \spec\mf F$, then 
 %   \begin{align*}
 %     n \in \mf F 
 %     &\eff \spec\mf F \to n \in \um{\omega} \\
@@ -870,15 +1398,15 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 % \end{proof}
 
 % \begin{example}
-%   For any $n : \omega$, the proposition $n \in \um{\omega}$ is affine, because
+%   For any $n \colon \omega$, the proposition $n \in \um{\omega}$ is affine, because
 %   \[ n \in \um{\omega} \eff \mf P_n \subseteq \um{\omega}, \]
 %   where $\mf P_n$ is the principle filter defined by
-%   \[ \mf P_n := \scomp{k : \omega}{n \le k}. \]
+%   \[ \mf P_n \colon= \scomp{k \colon \omega}{n \le k}. \]
 % \end{example}
 
 % \begin{example}
-%   For any $k : \omega$, we can define a new sup-generic filter $\um{\omega}[k]$: For $n : \omega$,
-%   \[ n \in \um{\omega}[k] := n+k \in \um{\omega}. \]
+%   For any $k \colon \omega$, we can define a new sup-generic filter $\um{\omega}[k]$\colon For $n \colon \omega$,
+%   \[ n \in \um{\omega}[k] \colon= n+k \in \um{\omega}. \]
 %   Now if $n \in \um{\omega}$, then $n + k \in \um{\omega}$ which implies $n \in \um{\omega}[k]$, thus $\um{\omega} \subseteq \um{\omega}[k]$. This way,
 %   \[ \spec\um{\omega}[k] \eff \um{\omega}[k] \subseteq \um{\omega} \eff \fa n\omega n+k \in \um{\omega} \to n \in \um{\omega}. \]
 % \end{example}
@@ -894,7 +1422,7 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 %   Any affine proposition is $\neg\neg$-closed.
 % \end{proposition}
 % \begin{proof}
-%   Suppose we have a sup-generic filter $\mf F$ and $\mf F \not\subseteq \um{\omega}$. By \Cref{qc}, we know that for any $n :\omega$,
+%   Suppose we have a sup-generic filter $\mf F$ and $\mf F \not\subseteq \um{\omega}$. By \Cref{qc}, we know that for any $n \colon\omega$,
 %   \[ n \in \mf F \eff \mf F \subseteq \um{\omega} \to n \in \um{\omega}, \]
 %   which by assumption implies that $n\in\mf F$ for all $n:\omega$, i.e. $\mf F = \omega$. This way, $\omega \not\subseteq \um{\omega}$. 
 % \end{proof}
@@ -902,7 +1430,7 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 
 
 % \begin{lemma}
-%   For any $n,m : \omega$, $n \in \um{\omega} \to m \in \um{\omega}$ iff $m \in \um{\omega} \vee n \le m$.
+%   For any $n,m \colon \omega$, $n \in \um{\omega} \to m \in \um{\omega}$ iff $m \in \um{\omega} \vee n \le m$.
 % \end{lemma}
 % \begin{proof}
 %   The if direction is trivial. For the only if direction, since $n\in\um{\omega}$ and $m \in \um{\omega}$ are both affine by \Cref{affineprop}, due to the adjunction in \Cref{filandprop} we have
@@ -916,22 +1444,22 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 % \end{proof}
 
 
-% Furthermore, the topos $\mc S$ can be viewed as an internal way to doing \emph{forcing} on $\omega$: 
+% Furthermore, the topos $\mc S$ can be viewed as an internal way to doing \emph{forcing} on $\omega$\colon 
 
 % \begin{definition}
-%   For any $n : \omega$ and $\varphi : \Prop$, we define the forcing relation
-%   \[ n \Vdash \varphi := n\in\um{\omega} \to \varphi. \]
+%   For any $n \colon \omega$ and $\varphi \colon \Prop$, we define the forcing relation
+%   \[ n \Vdash \varphi \colon= n\in\um{\omega} \to \varphi. \]
 % \end{definition}
 
-% This inspires the following construction:
+% This inspires the following construction\colon
 
 % \begin{construction}
-%   Any filter $\mf F$ induces two modalities on $\Prop$, where for $\varphi : \Prop$
-%   \[ \prev\varphi := \bigvee_{n \Vdash \varphi} n \in \mf F, \quad \latt\varphi := . \]
+%   Any filter $\mf F$ induces two modalities on $\Prop$, where for $\varphi \colon \Prop$
+%   \[ \prev\varphi \colon= \bigvee_{n \Vdash \varphi} n \in \mf F, \quad \latt\varphi \colon= . \]
 % \end{construction}
 
 % \begin{lemma}
-%   For all $n : \omega$, $\prev\um_n = \mf F_n$.
+%   For all $n \colon \omega$, $\prev\um_n = \mf F_n$.
 % \end{lemma}
 % \begin{proof}
 %   Notice that $\um_n \to \um_n$, thus $\mf F_n \to \bigvee_{\um_m\to\um_m}\mf F_m = \prev\um_n$. On the other hand, for any $m$ that $\um_m \to \um_n$, we have $m \le n$. Thus, $\mf F_m \to \mf F_n$, and $\prev\um_n = \bigvee_{\um_m \to \um_n}\mf F_m \to \mf F_n$.
@@ -941,7 +1469,7 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 %   The two modalities are adjoint to each other $\prev \dashv \latt$.
 % \end{proposition}
 % \begin{proof}
-%   For any $\varphi,\psi : \Prop$, we have 
+%   For any $\varphi,\psi \colon \Prop$, we have 
 %   \begin{align*}
 %     \prev\varphi \le \psi 
 %     &\eff \fa k\N (\um_n \to \varphi) \to (\mf F_n \to \psi). \\
@@ -960,7 +1488,7 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 % \end{proof}
 
 % \begin{theorem}
-%   For any $\varphi : \Prop$, we have 
+%   For any $\varphi \colon \Prop$, we have 
 %   \[ \varphi \vee \neg\varphi \vee \ex n\N \varphi = \um_n. \]
 % \end{theorem}
 % \begin{proof}
@@ -970,8 +1498,8 @@ $L$ is cocontinuous, thus in particular has a right adjoint $R \colon \psh(\Fin)
 
 
 % \begin{definition}
-%   By an $\um{\omega}$-algebra we mean an increasing proposition $p : \N \to \Prop$ such that $\um{\omega} \le p$. The \emph{spectrum} of $p$ is defined to be
-%   \[ \spec p := \fa n\N p_n \le \um_n \eq p = \um{\omega}. \]
+%   By an $\um{\omega}$-algebra we mean an increasing proposition $p \colon \N \to \Prop$ such that $\um{\omega} \le p$. The \emph{spectrum} of $p$ is defined to be
+%   \[ \spec p \colon= \fa n\N p_n \le \um_n \eq p = \um{\omega}. \]
 % \end{definition}
 
 
