@@ -1,0 +1,157 @@
+\documentclass[acmsmall,nonacm,screen]{acmart}
+\usepackage{multicol}
+\usepackage{mathpartir}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\prn{\lparen}{\rparen}
+\DeclarePairedDelimiter\brk{[}{]}
+\DeclarePairedDelimiter\brc{\lbrace}{\rbrace}
+\DeclarePairedDelimiter\bbrk{\llbracket}{\rrbracket}
+
+\usepackage{ebproof}
+\usepackage{ebproof-rules}
+\usepackage{iblock}
+
+\ebproofnewrulestyle{admissible}{
+	rule style = dashed,
+	rule dash length=0.2em,
+	rule dash space=0.1em
+}
+
+\usepackage{zref-clever}
+\zcsetup{cap}
+
+\zcRefTypeSetup{section}{
+	Name-sg = \S,
+	Name-pl = \S\S,
+	name-sg = \S,
+	name-pl = \S\S,
+}
+
+\NewDocumentCommand\addzchooks{m}{
+	\AddToHook{env/#1/begin}{%
+		\zcsetup{countertype={theorem=#1}}%
+	}
+}
+
+\AtEndPreamble{%
+	\theoremstyle{acmdefinition}
+	\newtheorem{remark}[theorem]{Remark}
+	\newtheorem{construction}[theorem]{Construction}
+
+	\addzchooks{proposition}
+	\addzchooks{theorem}
+	\addzchooks{lemma}
+	\addzchooks{conjecture}
+	\addzchooks{example}
+	\addzchooks{remark}
+	\addzchooks{corollary}
+	\addzchooks{definition}
+	\addzchooks{construction}
+}
+
+
+\usetikzlibrary{nfold}
+\tikzset{
+	elbow style/.style={scale=0.7, line width=0.5pt},
+	pics/elbow se/.style={code={
+		\draw[elbow style, #1] (-0.3cm,0.6cm) -- ++(-0.3cm,0) -- ++(0,-0.3cm);
+	}},
+	elbow se/.style={
+		append after command={
+			\pgfextra{\pic at (\tikzlastnode) {elbow se={#1}};}
+		}
+	},
+	elbow se/.default={},
+	pics/elbow nw/.style={code={
+		\draw[elbow style, #1] (0.3cm,-0.6cm) -- ++(0.3cm,0) -- ++(0,0.3cm);
+	}},
+	elbow nw/.style={
+		append after command={
+			\pgfextra{\pic at (\tikzlastnode) {elbow nw={#1}};}
+		}
+	},
+	elbow nw/.default={},
+	pics/elbow ne/.style={code={
+		\draw[elbow style, #1] (-0.3cm,-0.6cm) -- ++(-0.3cm,0) -- ++(0,0.3cm);
+	}},
+	elbow ne/.style={
+		append after command={
+			\pgfextra{\pic at (\tikzlastnode) {elbow ne={#1}};}
+		}
+	},
+	elbow ne/.default={},
+	pics/elbow sw/.style={code={
+		\draw[elbow style, #1] (0.3cm,0.6cm) -- ++(0.3cm,0) -- ++(0,-0.3cm);
+	}},
+	elbow sw/.style={
+		append after command={
+			\pgfextra{\pic at (\tikzlastnode) {elbow sw={#1}};}
+		}
+	},
+	elbow sw/.default={},
+}
+
+\tikzset{
+	curve/.style = {
+		settings = {#1},
+		to path = {
+			(\tikztostart)
+			.. controls ($(\tikztostart)!\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+				 and ($(\tikztostart)!1-\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+			.. (\tikztotarget)
+			\tikztonodes
+		}
+	},
+	settings/.code = {
+		\tikzset{quiver/.cd,#1}
+		\def\pv##1{\pgfkeysvalueof{/tikz/quiver/##1}}
+	},
+	quiver/.cd,
+	pos/.initial = 0.35,
+	height/.initial = 0
+}
+
+%% JMS: not sure about the title.
+\title{Step-indexing and adequacy with definable modalities}
+
+\author{Lingyuan Ye}
+\email{ly386@cam.ac.uk}
+\orcid{0000-0002-8983-0099}
+\affiliation{%
+	\department{Computer Laboratory}
+	\institution{University of Cambridge}
+	\city{Cambridge}
+	\country{United Kingdom}
+}
+
+\author{Jonathan Sterling}
+\email{js2878@cl.cam.ac.uk}
+\orcid{0000-0002-0585-5564}
+\affiliation{%
+	\department{Computer Laboratory}
+	\institution{University of Cambridge}
+	\city{Cambridge}
+	\country{United Kingdom}
+}
+
+\begin{document}
+
+\begin{abstract}
+	Guarded recursion or \emph{step-indexing} is a ubiquitous technique for defining operationally based models and program logics for languages featuring polymorphism and higher-order store, such as Iris. In principle these constructions could be carried out synthetically in the topos of trees, but this interpretation does not allow the statement of crucial global properties including \emph{adequacy} that concern the infinite behaviour of recursively defined predicates. For this reason, mechanised systems like Iris tend to ignore the category theory and explicitly unravel the presheaf semantics of guarded recursion to the level of sets, where the adequacy property lives.
+	%
+	Until now, the synthetic camp has offered only one alternative design that would properly account for adequacy: a range of sophisticated multi-modal type theories that include a \emph{necessity modality} in which global properties can be faithfully stated and verified. Unfortunately, modalities of this kind cannot be retrofitted onto a stock proof assistant like Rocq, and so a state-of-the-art synthetic approach to step-indexing has remained a non-starter for deployment in production program logics.
+	
+	We propose a new axiomatisation of synthetic guarded recursion in which (1) all the needful modalities are \emph{definable}, and (2) adequacy properties can be faithfully stated and proved. Our axiomatisation can be interpreted soundly in the topos of trees, but it also admits an enlarged interpretation in the \emph{Freyd cover} of the topos of trees in which internal statements of adequacy are realised as the intended global properties they represent. Our axiomatisation can be expressed as a library in any stock dependently typed proof assistant.
+\end{abstract}
+
+\maketitle
+
+
+
+\bibliography{mybib}
+\bibliographystyle{ACM-Reference-Format}
+\end{document}
+
