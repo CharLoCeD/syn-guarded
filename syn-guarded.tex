@@ -22,6 +22,7 @@
 
 \usetikzlibrary{spath3}
 \tikzcdset{pullback/.style = {"\lrcorner"{anchor = center, pos = 0.125}, draw = none}}
+\tikzcdset{pushout/.style = {"\lrcorner"{anchor = center, rotate=180, pos = 0.125}, draw = none}}
 \tikzset{between/.style n args={2}{/tikz/spath/at end path construction={
     \tikzset{spath/split at keep middle={current}{#1}{#2}}
 }}}
@@ -1022,6 +1023,45 @@ We first observe that it is the classifying map of the canonical point in $\bx\P
 
 TBW.
 
+\section{The internal logic of the scone}
+
+Notice that the scone of the topos of trees $\psh(\omega)$ is again a presheaf topos,
+\[ \mb{Scone}(\psh(\omega)) \simeq \psh(\omega^\infty). \]
+In this section we investigate the internal logic of this scone. We will denote the open and closed modality associated with the generic proposition as $\opm{\omega}$ and $\clm{\omega}$, respectively. In particular, we have 
+\[ \clm{\omega} \simeq \ct_{n:\omega}\clm n, \quad \opm{\omega} \simeq \lt_{n:\omega}\opm n. \]
+
+We would also lift the internal later modality to the scone. Externally, we want a modality $\bx_\infty$ on $\psh(\omega^\infty)$ that behaves like $\bx$ on the open subtopos $\psh(\omega)$, and remains identity on its closed complement. Concretely, for any presheaf $X\in\psh(\omega^\infty)$, we would want
+\[ \bx_\infty X = (X_\infty \to \cdots \to X_1 \to X_0 \to 1). \]
+Internally, we can use the glueing construction to define $\bx_\infty$:
+
+\begin{definition}[The later modality in the scone]
+  The later modality $\bx_\infty$ in the scone for any $X:\Type$ is given by the following pullback,
+  \[
+  \begin{tikzcd}
+    \bx_\infty X \ar[r] \ar[d] \ar[dr, pullback] & \bx\opm{\omega}X \ar[d] \\
+    \clm{\omega} X \ar[r] & \clm{\omega}(\bx\opm{\omega}X)
+  \end{tikzcd}
+  \]
+  where $\bx$ has the same definition as before.
+\end{definition}
+
+\begin{proposition}
+  For any type $X : \Type$, $\clm{\omega}X \simeq \clm{\omega}(\bx_\infty X)$.
+\end{proposition}
+\begin{proof}
+  This almost immediately follows from definition, since by applying $\clm{\omega}$ to the glueing definition of $\bx_\infty$, we have 
+  \[
+  \begin{tikzcd}
+    \clm{\omega}(\bx_\infty X) \ar[r] \ar[d, "\simeq"'] \ar[dr, pullback] & \clm{\omega}(\bx\opm{\omega}X) \ar[d, "\simeq"] \\
+    \clm{\omega} X \ar[r] & \clm{\omega}(\bx\opm{\omega}X)
+  \end{tikzcd}
+  \]
+  The square is a pullback since $\clm{\omega}$ is idempotent and left exact.
+\end{proof}
+
+\begin{remark}
+  Similarly one can show that $\bx_\infty$ commutes with $\opm{\omega}$.
+\end{remark}
 
 % \section{A non-localic model of guarded recursion}
 
